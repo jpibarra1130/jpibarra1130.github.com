@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
@@ -63,3 +69,17 @@
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -100px;
+  /* Pad bottom by footer height */
+  padding: 0 0 100px;
+}
+
+.footer {
+  height: 100px;
+}
