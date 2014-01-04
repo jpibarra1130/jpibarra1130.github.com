@@ -9,7 +9,7 @@ pygments: true
 # so be sure to set them if your theme uses them.
 #
 title : Paolo Ibarra's Blog
-tagline: Thoughts brought about my daily interaction with life.
+tagline: Thoughts brought about by my daily interaction with life.
 author :
   name : Juan Paolo Ibarra
   email : juanpaolo.ibarra@gmail.com
@@ -80,18 +80,19 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : disqus
-    disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      appid : 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
+    provider: false
+    # provider : disqus
+    # disqus :
+    #   short_name : jekyllbootstrap
+    # livefyre :
+    #   site_id : 123
+    # intensedebate :
+    #   account : 123abc
+    # facebook :
+    #   appid : 123
+    #   num_posts: 5
+    #   width: 580
+    #   colorscheme: light
 
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
