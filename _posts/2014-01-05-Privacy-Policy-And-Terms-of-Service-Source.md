@@ -4,7 +4,7 @@ layout: post
 title: "Privacy Policy and Terms of Service Source"
 ---
 
-I did not realize that creating your website wherein you intend to get contributions for people could be a little difficult. I was about to release it when I realized I don\'t even have a Terms of Service, and Privacy Policy.
+I did not realize that creating your website wherein you intend to get contributions from people could be a little complicated. I was about to release it when I realized I don\'t even have a Terms of Service, nor a Privacy Policy.
 
 Where do you get those anyway? Is it something you make up? Do I need to hire a lawyer (omg) for this?
 
