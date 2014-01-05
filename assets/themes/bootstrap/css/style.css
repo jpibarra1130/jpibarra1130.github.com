@@ -32,10 +32,21 @@ body {
   margin: 10px 0;
   text-align: left; }
 
+.post-full {
+  padding: 0 15px 0 15px;
+}
+
 /* post-full*/
-.post-full .date {
+.post-full .summary {
   margin-bottom: 20px;
   font-weight: bold; }
+
+/* post-full*/
+.post-full .author {
+   color: #A2A2A2;
+   font-weight: normal;
+ }
+
 
 /* tag_box */
 .tag_box {
@@ -109,4 +120,3 @@ body {
   color: black;
   font-size: 1.0em;
 }
-
