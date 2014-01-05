@@ -95,3 +95,18 @@ body {
   font-family: "Old Standard TT";
   font-size: 0.5em;
 }
+
+.post-summary ul {
+  list-style-type: none;
+}
+
+.post-summary ul span {
+  color: #A2A2A2;
+  font-size: 0.9em;
+}
+
+.post-summary ul a {
+  color: black;
+  font-size: 1.0em;
+}
+
