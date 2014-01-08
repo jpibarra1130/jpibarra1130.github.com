@@ -1,6 +1,6 @@
 ---
 layout: page
 title: Paolo's Blog
-tagline: I'm getting old and I need a way to remember
+tagline: External Hard Drive
 ---
 {% include JB/setup %}
