@@ -108,6 +108,7 @@ body {
 
 .post-summary ul {
   list-style-type: none;
+  padding: 0;
 }
 
 .post-summary ul span {
