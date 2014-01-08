@@ -111,9 +111,14 @@ body {
   padding: 0;
 }
 
-.post-summary ul span {
+.post-summary li {
+  padding-bottom: 20px;
+}
+
+.post-summary ul div {
   color: #A2A2A2;
   font-size: 0.9em;
+  float: right;
 }
 
 .post-summary ul a {
