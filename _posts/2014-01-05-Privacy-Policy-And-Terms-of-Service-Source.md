@@ -1,5 +1,4 @@
 ---
-permalink: "/2010/10/15/privacy-policy-and-terms-of-service-source"
 layout: post
 title: "Privacy Policy and Terms of Service Source"
 ---
