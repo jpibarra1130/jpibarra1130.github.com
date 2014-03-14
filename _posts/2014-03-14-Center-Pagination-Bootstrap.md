@@ -9,7 +9,7 @@ I was looking for a way to center the pagination on my main page. I am currently
       <%= will_paginate @models, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 1, previous_label: "«" , next_label: "»" %>
     </div>
 
-I managed to center the ul tag which contains the page numbers by specifying the width, then setting margin to '0 auto'
+Please note that the will_paginate part will be transformed into ``ul``. I managed to center the ``ul`` block which contains the page numbers by specifying the width, then setting margin to '0 auto'
 
     .center {
       width: 275px;
