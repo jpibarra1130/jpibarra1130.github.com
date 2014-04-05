@@ -14,7 +14,7 @@ I think it's trickier to extract the video ID from the vimeo URL. There are mult
 > http://vimeo.com/channels/vimeogirls/12345
 > http://vimeo.com/groups/shortfilms/videos/12345
 
-I tailored this [gist](https://gist.github.com/wwdboer/4943672) by wwdboer in Ruby to extract the correct id from a given vimeo URL.
+I tailored this [gist](https://gist.github.com/wwdboer/4943672) by wwdboer in [Ruby](https://gist.github.com/jpibarra1130/9993586) to extract the correct id from a given vimeo URL.
 
     def self.vimeo_id(url)
       match = url.match(/https?:\/\/(?:[\w]+\.)*vimeo\.com(?:[\/\w]*\/?)?\/(?<id>[0-9]+)[^\s]*/)
