@@ -3,7 +3,7 @@ layout: post
 title: "Playing Around with Go"
 ---
 
-I've been interested recently with using Go thanks to a few friends of mine who have been raving about how good it was. I finally decided to explore it a few weeks ago. I started off with trying out the [Golang tour](http://tour.golang.org). After that, I've proceeded reading around the documentation. I must say that the documentation for Go is quite comprehensive.
+I've been interested recently with using Golang thanks to a few friends of mine who have been raving about how good it is. I've tried it before through their interactive console, [Golang tour](http://tour.golang.org). After that, I've proceeded reading around the documentation. And I find the documentation quite comprehensive.
 
 Last week, I was discussing a possible project I wanted to start with my friend. I thought it would be interesting to use Go to create the API for this. Prior to starting this project, we've decided to play around with the languages we plan to use. I was assigned the backend component and decided to use Golang for it. I wanted to create a simple API so that I will be able to explore the following areas:
 
@@ -144,6 +144,7 @@ For the dependency management, I used godep. You just need to install [godep](ht
 
 Testing
 -------------
+
 I will update this post once I actually explored enough of testing Go.
 
 
