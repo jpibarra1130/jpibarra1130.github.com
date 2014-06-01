@@ -11,7 +11,7 @@ Last week, I was discussing a possible project I wanted to start with my friend.
 2. Create DB migrations
 3. Map the db to structs
 4. Handle dependency management
-5. Test (which I am still figuring out as of writing)
+5. Testing (which I am still figuring out as of writing)
 
 It proved out to be quite simpler than I imagined.
 
@@ -136,5 +136,15 @@ You can read more about the gorp related functionalities [here](https://github.c
     }
 
 Now, do a ```go build``` and run the generated file. If you go to ```localhost:3000``` you should be able to see the json posts from your db. Please make sure to run all the necessary imports to avoid errors.
+
+Handle dependency management
+-------------
+
+For the dependency management, I used godep. You just need to install [godep](https://github.com/tools/godep) and run ```godep save``` to generate all the existing dependencies.
+
+Testing
+-------------
+I will update this post once I actually explored enough of testing Go.
+
 
 If you want to see the final simple-api-go for your reference, you can clone or fork [simple-api-go](https://github.com/jpibarra1130/simple-api-go).
