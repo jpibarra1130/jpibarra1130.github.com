@@ -119,7 +119,7 @@ Once you have the struct setup, you need to create a new function which will con
       return posts
     }
 
-You can read more about the gorp related functionalities [gorp](https://github.com/coopernurse/gorp). Once you have this up and running, you just need to update your PostsHandler to something like this to incorporate the function we just created which gets the data from the db.
+You can read more about the gorp related functionalities [here](https://github.com/coopernurse/gorp). Once you have this up and running, you just need to update your ```PostsHandler``` to incorporate the function we just created.
 
     func PostsHandler(w http.ResponseWriter, r *http.Request) {
       out, err := json.Marshal(GetPosts())
@@ -135,6 +135,6 @@ You can read more about the gorp related functionalities [gorp](https://github.c
       w.Write([]byte(out))
     }
 
-Now, do a ```go build``` and run the generated file. If you go to ```localhost:3000``` you should be able to see the posts json response. Please make sure to run all the necessary imports.
+Now, do a ```go build``` and run the generated file. If you go to ```localhost:3000``` you should be able to see the json posts from your db. Please make sure to run all the necessary imports to avoid errors.
 
 If you want to see the final simple-api-go for your reference, you can clone or fork [simple-api-go](https://github.com/jpibarra1130/simple-api-go).
