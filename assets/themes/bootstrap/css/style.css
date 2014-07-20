@@ -130,3 +130,17 @@ body {
   color: black;
   font-size: 1.0em;
 }
+
+.home {
+  background-color: darkgrey;
+  color: white;
+  width: 60px;
+  height: 40px;
+  padding: 10px 10px 10px 10px;
+  border-bottom-right-radius: 5px;
+}
+
+.home a {
+  text-decoration: none;
+  color: white;
+}
