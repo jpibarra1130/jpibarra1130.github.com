@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Playing Around with Go"
+description: "A simple API written in Go/Golang"
 ---
 
 I've been interested recently with using Golang thanks to a few friends of mine who have been raving about how good it is. I've tried it before through their interactive console, [Golang tour](http://tour.golang.org). After that, I've proceeded reading around the documentation. And I find the documentation quite comprehensive.

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Learning Ruby Through a Book"
+description: "Learning a Ruby through a book"
 ---
 
 I have been working on Ruby on Rails on and off for close to a year now. And just recently, I have thought about this idea for a website and opted to use Ruby on Rails for it. Along the way, I realized that my knowledge about Ruby is still not broad enough, and quite scattered. I know how certain methods or classes act but there are still a lot of things I don't understand about it. I decided that I wanted to learn more about the language, and really **understand** it.

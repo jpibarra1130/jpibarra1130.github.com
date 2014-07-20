@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Securing My Cloud Server"
+description: "How to secure a private cloud server"
 ---
 
 I'm finally on the deployment stage of my app. I have been working on this application on and off for a few months now. I was hoping to deploy it on January 1 but an impromptu trip stopped me from doing so. But nevertheless, here I am and deploying it.

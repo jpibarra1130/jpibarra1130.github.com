@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Ubuntu: Locale Issue"
+description: "Fix the issue with locale for Ubuntu"
 ---
 
 I was encountering a locale issue on my Ubuntu server earlier. The error looks something like this:

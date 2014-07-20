@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Retrieving Vimeo ID"
+description: "Retrieving Vimeo ID"
 ---
 
 I have a usecase in my side project wherein I needed to get the thumbnail for a vimeo video. Getting this is relatively easy through vimeo's [Video Request API](http://developer.vimeo.com/apis/simple#video-request).
