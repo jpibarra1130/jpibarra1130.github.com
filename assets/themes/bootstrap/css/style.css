@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Old+Standard+TT);
-@import url(https://fonts.googleapis.com/css?family=Cutive+Mono);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
 
 html,
 body {
@@ -25,7 +25,7 @@ body {
 .post > h3.title span.date {
   position: absolute;
   right: 0;
-  font-size: 0.9em; }
+  font-size: 1.9em; }
 
 .post > .more {
   margin: 10px 0;
@@ -98,7 +98,8 @@ body {
 }
 
 .page-title {
-  font-family: "Cutive Mono";
+  font-family: "Roboto Slab";
+  font-size: 3.2em;
 }
 
 .page-title span {
@@ -128,7 +129,7 @@ body {
 
 .post-summary ul a {
   color: black;
-  font-size: 1.0em;
+  font-size: 1.3em;
 }
 
 .home {
@@ -138,9 +139,17 @@ body {
   height: 40px;
   padding: 10px 10px 10px 10px;
   border-bottom-right-radius: 5px;
+  float: left;
 }
 
 .home a {
   text-decoration: none;
   color: white;
+}
+
+.header-image {
+  width: 100%;
+  max-height: 63%;
+  display:block;
+  margin:auto;
 }
