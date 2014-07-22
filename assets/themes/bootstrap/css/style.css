@@ -122,15 +122,19 @@ body {
   display: block;
 }
 
-.post-summary ul div {
-  color: #A2A2A2;
-  font-size: 0.9em;
-  float: right;
+.post-summary-title {
+  word-wrap: break-word;
+  display: inline-block;
 }
 
 .post-summary ul a {
   color: black;
   font-size: 1.3em;
+}
+
+.post-summary > ul > li > span {
+  display: inline-block;
+  float: right;
 }
 
 .home {
@@ -159,5 +163,14 @@ body {
 @media (max-width: 480px) {
   .post-summary {
     padding: 0 10px 0 10px;
+  }
+
+  .post-summary > ul > li {
+    padding: 0 10px 0 10px;
+    font-size: .9em;
+  }
+
+  .post-summary-title {
+    max-width: 200px;
   }
 }
