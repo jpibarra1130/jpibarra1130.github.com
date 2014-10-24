@@ -1,6 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Old+Standard+TT);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
-
 html,
 body {
   height: 100%;
@@ -9,7 +6,7 @@ body {
 
 /* Custom container */
 .container {
-  max-width: 700px; }
+  max-width: 1024px; }
 
 .container > hr {
   margin: 30px 0; }
@@ -33,7 +30,7 @@ body {
 
 .post-full {
   padding: 0 15px 0 15px;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 /* post-full*/
@@ -152,6 +149,11 @@ body {
   color: white;
 }
 
+.header {
+  max-width: 550px;
+  margin:auto;
+}
+
 .header-image {
   width: 100%;
   height: 55%;
@@ -159,6 +161,13 @@ body {
   display:block;
   margin:auto;
 }
+
+.top {
+  /* we can declare multiple colors, which will be evenly spaced by default */
+  background-color: #25E08C;
+  height: 5px;
+}
+
 
 @media (max-width: 480px) {
   .post-summary {
@@ -172,4 +181,35 @@ body {
   .post-summary-title {
     max-width: 180px;
   }
+}
+
+.logo {
+  font-family: "Code Light";
+  font-size: 3em;
+  font-weight: bolder;
+  color: #FF8A9E;
+}
+
+.logo > span {
+  font-family: "Code Bold";
+  color: black;
+}
+
+@font-face {
+  font-family: 'Code Light';
+  src: url("/assets/themes/bootstrap/fonts/CODE Light.otf");
+}
+
+@font-face {
+  font-family: 'Code Bold';
+  src: url("/assets/themes/bootstrap/fonts/CODE Bold.otf");
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url("/assets/themes/bootstrap/fonts/segoe_ui_light.ttf");
+}
+
+body {
+  font-family: 'Segoe UI';
 }

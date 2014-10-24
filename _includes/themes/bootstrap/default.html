@@ -22,9 +22,11 @@
   </head>
 
   <body>
-    <div class="home">
-      <a href="/">Home</a>
-    </div>
+    {% if page.path contains '_posts' %}
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+    {% endif %}
     <div id="wrap">
       <div class="container">
         {{ content }}
