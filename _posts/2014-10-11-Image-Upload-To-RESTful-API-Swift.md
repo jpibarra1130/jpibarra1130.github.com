@@ -2,6 +2,7 @@
 layout: post
 title: "Using Swift in an iOS Application to Upload an Image to a RESTful API"
 description: "Using Swift in iOS app to Upload an Image to a RESTful API"
+tags: [swift, ios]
 ---
 
 Last time, I wrote a post about how to create a [RESTful API using Rails and Paperclip](http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/). The second part of my task is to figure out a way on how to upload an image taken from my phone's Camera using Swift.

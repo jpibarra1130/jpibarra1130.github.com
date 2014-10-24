@@ -2,6 +2,7 @@
 layout: post
 title: "Image Upload Using Rails API and Paperclip"
 description: "Image uploading using a RESTful API via Rails and Paperclip"
+tags: [ruby, rails, paperclip]
 ---
 
 I am working on a mini-project with my friends and part of it requires us to make a RESTful API. We opted to use Ruby on Rails for the backend since we have a tight schedule and using this stack would simplify the development. For my first task, I need to create an endpoint which will allow me to upload an image together with the object's properties.

@@ -2,6 +2,7 @@
 layout: post
 title: "Java: Download Dialog for the Browser"
 description: "Showing the Download Dialog for Downloading File using Java"
+tags: [java]
 ---
 
 If ever you've encountered this requirement where you need to make the download dialog from the browser show up when a user is downloading a file from your Java-backed website, the solution is this:

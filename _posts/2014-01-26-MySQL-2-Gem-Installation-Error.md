@@ -2,6 +2,7 @@
 layout: post
 title: "MySQL 2 Gem Installation Error"
 description: "Fix the MySQL 2 Gem installation issue"
+tags: [sysadmin, ruby, mysql]
 ---
 
 I've encountered this error a few times before whenever I had a need to setup a new machine for my projects.

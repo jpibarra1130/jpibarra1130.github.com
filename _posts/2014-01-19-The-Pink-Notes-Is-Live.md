@@ -2,6 +2,7 @@
 layout: post
 title: "Thepinknotes.com is live!"
 description: "Released thepinknotes.com"
+tags: [happiness]
 ---
 
 It is finally live! My first ever website. There's something absolutely wonderful in seeing your own idea go live. I have done freelancing jobs before where I had to create something from scratch. And I am working at a company right now developing different features. But I got to tell you this, seeing your own idea live gives you a different kind of high. Because you can finally say that you created something of your own.

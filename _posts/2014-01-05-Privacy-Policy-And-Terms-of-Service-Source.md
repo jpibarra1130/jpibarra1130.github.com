@@ -2,6 +2,7 @@
 layout: post
 title: "Privacy Policy and Terms of Service Source"
 description: "Privacy Policy and Terms of Service"
+tags: [website, admin]
 ---
 
 I did not realize that creating your website wherein you intend to get contributions from people could be a little complicated. I was about to release it when I realized I don\'t even have a Terms of Service, nor a Privacy Policy.

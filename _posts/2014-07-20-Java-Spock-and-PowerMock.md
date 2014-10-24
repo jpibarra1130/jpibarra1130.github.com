@@ -2,6 +2,7 @@
 layout: post
 title: "Java, Spock, and PowerMock"
 description: "Making PowerMock work with Spock for mocking a Java Static method"
+tags: [java, spock, powermock, test]
 ---
 
 The thing I hate about Java is that at times, it's just so verbose. And if you're writing tests, it gets too time-consuming. Just the number of boilerplate you need makes it a little annoying to use.

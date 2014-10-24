@@ -2,6 +2,7 @@
 layout: post
 title: "Revisiting Git SVN"
 description: "Setting up a shallow clone for Git-SVN"
+tags: [git]
 ---
 
 There might come a time when you'll be assigned to a project that is still using SVN. This happened to me a few weeks ago. Because of one reason or another, the project won't be migrated to Git in the near future. I've been using Git for years now, and I love how easy it is to use. Branching, merging, and working even when you don't have a connection are just some of the things I love about Git. That is why I still want to use it.
