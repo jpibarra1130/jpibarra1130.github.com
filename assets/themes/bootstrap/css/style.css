@@ -115,7 +115,7 @@ body {
 }
 
 .post-summary li {
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   display: block;
 }
 
@@ -193,6 +193,15 @@ body {
 .logo > span {
   font-family: "Code Bold";
   color: black;
+}
+
+.tag {
+  /*background-color: #89CADE;*/
+  /*border-radius: 4px;*/
+  color: #0071CD;
+  padding: 1px 10px 0px 0px;
+  font-weight: bold;
+  font-size: .9em;
 }
 
 @font-face {
