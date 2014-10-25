@@ -1,7 +1,6 @@
 
 http://paoloibarra.com/atom.xml
 http://paoloibarra.com/index.html
-http://paoloibarra.com/pages.html
 http://paoloibarra.com/rss.xml
 http://paoloibarra.com/sitemap.txt
 http://paoloibarra.com/tags/website/index.html
