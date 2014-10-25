@@ -17,6 +17,7 @@ exclude:
 - categories.html
 - archive.html
 - tags.html
+- pages.html
 
 highlighter: true
 markdown: kramdown
