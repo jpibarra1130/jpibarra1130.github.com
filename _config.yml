@@ -14,6 +14,9 @@ exclude:
 - Gemfile
 - Gemfile.lock
 - History.markdown
+- categories.html
+- archive.html
+- tags.html
 
 highlighter: true
 markdown: kramdown
