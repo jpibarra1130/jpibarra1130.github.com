@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
- 
+
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2014-10-25T17:08:16+08:00</updated>
+ <updated>2014-10-25T17:48:48+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
@@ -716,5 +716,5 @@ LANG=en_US.UTF-8
 </content>
  </entry>
  
- 
+
 </feed>

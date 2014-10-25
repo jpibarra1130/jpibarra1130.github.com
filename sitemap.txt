@@ -1,12 +1,27 @@
 
-http://paoloibarra.com/archive.html
 http://paoloibarra.com/atom.xml
-http://paoloibarra.com/categories.html
 http://paoloibarra.com/index.html
 http://paoloibarra.com/pages.html
 http://paoloibarra.com/rss.xml
 http://paoloibarra.com/sitemap.txt
-http://paoloibarra.com/tags.html
+http://paoloibarra.com/tags/website/index.html
+http://paoloibarra.com/tags/admin/index.html
+http://paoloibarra.com/tags/ruby/index.html
+http://paoloibarra.com/tags/sysadmin/index.html
+http://paoloibarra.com/tags/ubuntu/index.html
+http://paoloibarra.com/tags/happiness/index.html
+http://paoloibarra.com/tags/mysql/index.html
+http://paoloibarra.com/tags/css/index.html
+http://paoloibarra.com/tags/git/index.html
+http://paoloibarra.com/tags/go/index.html
+http://paoloibarra.com/tags/java/index.html
+http://paoloibarra.com/tags/spock/index.html
+http://paoloibarra.com/tags/powermock/index.html
+http://paoloibarra.com/tags/test/index.html
+http://paoloibarra.com/tags/rails/index.html
+http://paoloibarra.com/tags/paperclip/index.html
+http://paoloibarra.com/tags/swift/index.html
+http://paoloibarra.com/tags/ios/index.html
 
 http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift
 http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip
