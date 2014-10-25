@@ -20,6 +20,9 @@ task :build do
   system "git checkout master"
   system "cp -r _site/* ."
   system "rm -r _site"
+  system "git add ."
+  system "git commit -m \"Regenerated site.\" -s"
+  system "git push origin master"
   p "Finished building."
 end
 
