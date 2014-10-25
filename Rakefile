@@ -18,7 +18,7 @@ task :build do
   p "Checkout sources"
   system "jekyll build"
   system "git checkout master"
-  system "cp -r _site/* ."
+  system "cp -r _site/. ."
   system "rm -r _site"
   system "git add ."
   system "git commit -m \"Regenerated site.\" -s"
