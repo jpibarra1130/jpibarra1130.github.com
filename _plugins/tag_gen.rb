@@ -17,11 +17,9 @@ module Jekyll
     safe true
 
     def generate(site)
-      if site.layouts.key? 'tag_index'
-        dir = 'tags'
-        site.tags.keys.each do |tag|
-          write_tag_index(site, File.join(dir, tag), tag)
-        end
+      dir = 'tags'
+      site.tags.keys.each do |tag|
+        write_tag_index(site, File.join(dir, tag), tag)
       end
     end
 
