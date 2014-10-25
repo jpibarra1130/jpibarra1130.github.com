@@ -3,10 +3,10 @@
 <channel>
         <title>Paolo Ibarra's Blog</title>
         <description>Paolo Ibarra's Blog - Juan Paolo Ibarra</description>
-        <link>http://jpibarra1130.github.io</link>
-        <link>http://jpibarra1130.github.io</link>
-        <lastBuildDate>2014-10-25T12:14:44+08:00</lastBuildDate>
-        <pubDate>2014-10-25T12:14:44+08:00</pubDate>
+        <link>http://paoloibarra.com</link>
+        <link>http://paoloibarra.com</link>
+        <lastBuildDate>2014-10-25T13:24:33+08:00</lastBuildDate>
+        <pubDate>2014-10-25T13:24:33+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -49,8 +49,8 @@ task.resume() // this is needed to start the task
 
 &lt;p&gt;After the request has completed, the block I passed via the completionHandler will be executed. From there, I was able to evaluate the response. So that’s how I was able to send the image taken from my phone’s camera to the server.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/10/11/Image-Upload-To-RESTful-API-Swift</link>
-                <guid>http://jpibarra1130.github.io/2014/10/11/Image-Upload-To-RESTful-API-Swift</guid>
+                <link>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</link>
+                <guid>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</guid>
                 <pubDate>2014-10-11T00:00:00+08:00</pubDate>
         </item>
 
@@ -130,8 +130,8 @@ end
 
 &lt;p&gt;So there you have it, a controller that handles image upload.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</link>
-                <guid>http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</guid>
+                <link>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</link>
+                <guid>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</guid>
                 <pubDate>2014-09-27T00:00:00+08:00</pubDate>
         </item>
 
@@ -147,8 +147,8 @@ response.flushBuffer();
 
 &lt;p&gt;You simply need to set the &lt;em&gt;Header&lt;/em&gt; and &lt;em&gt;Content Type&lt;/em&gt;. I was handling a bug last week, wherein the download dialog was working intermittently. After looking at the code, it was because the &lt;em&gt;Content Type&lt;/em&gt; and &lt;em&gt;Header&lt;/em&gt; were set &lt;strong&gt;AFTER&lt;/strong&gt; the response was written. Shifting the write response part after setting those two attributes fixed the issue.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/08/31/Java-Browser-Download-Dialog</link>
-                <guid>http://jpibarra1130.github.io/2014/08/31/Java-Browser-Download-Dialog</guid>
+                <link>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</link>
+                <guid>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</guid>
                 <pubDate>2014-08-31T00:00:00+08:00</pubDate>
         </item>
 
@@ -217,8 +217,8 @@ public class FlightFormSpec extends Specification {
 
 &lt;p&gt;I hope that this article does help other people who were stuck at trying to mock static methods using Spock.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/07/20/Java-Spock-and-PowerMock</link>
-                <guid>http://jpibarra1130.github.io/2014/07/20/Java-Spock-and-PowerMock</guid>
+                <link>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</link>
+                <guid>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</guid>
                 <pubDate>2014-07-20T00:00:00+08:00</pubDate>
         </item>
 
@@ -372,8 +372,8 @@ func GetPosts() []Post {
 
 &lt;p&gt;If you want to see the final simple-api-go for your reference, you can clone or fork &lt;a href=&quot;https://github.com/jpibarra1130/simple-api-go&quot;&gt;simple-api-go&lt;/a&gt;.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/06/01/Playing-around-with-Go</link>
-                <guid>http://jpibarra1130.github.io/2014/06/01/Playing-around-with-Go</guid>
+                <link>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</link>
+                <guid>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</guid>
                 <pubDate>2014-06-01T00:00:00+08:00</pubDate>
         </item>
 
@@ -464,8 +464,8 @@ git commit -m &quot;My first commit&quot;
 
 &lt;p&gt;And there you have it, a working git-svn.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/04/24/Revisiting-Git-SVN</link>
-                <guid>http://jpibarra1130.github.io/2014/04/24/Revisiting-Git-SVN</guid>
+                <link>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</link>
+                <guid>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</guid>
                 <pubDate>2014-04-24T00:00:00+08:00</pubDate>
         </item>
 
@@ -494,8 +494,8 @@ end
 
 &lt;p&gt;This method will return the id if present, and &lt;code&gt;nil&lt;/code&gt; if not.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/04/05/Retrieving-Vimeo-Id</link>
-                <guid>http://jpibarra1130.github.io/2014/04/05/Retrieving-Vimeo-Id</guid>
+                <link>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</link>
+                <guid>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</guid>
                 <pubDate>2014-04-05T00:00:00+08:00</pubDate>
         </item>
 
@@ -518,8 +518,8 @@ end
 
 &lt;p&gt;This worked for me.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/03/14/Center-Pagination-Bootstrap</link>
-                <guid>http://jpibarra1130.github.io/2014/03/14/Center-Pagination-Bootstrap</guid>
+                <link>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</link>
+                <guid>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</guid>
                 <pubDate>2014-03-14T00:00:00+08:00</pubDate>
         </item>
 
@@ -543,8 +543,8 @@ Make sure that `gem install mysql2 -v &#39;0.3.14&#39;` succeeds before bundling
 
 &lt;p&gt;Hopefully, I won’t have to search around google when I encounter this again to save myself (or you) a few minutes.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/26/MySQL-2-Gem-Installation-Error</link>
-                <guid>http://jpibarra1130.github.io/2014/01/26/MySQL-2-Gem-Installation-Error</guid>
+                <link>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</link>
+                <guid>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</guid>
                 <pubDate>2014-01-26T00:00:00+08:00</pubDate>
         </item>
 
@@ -570,8 +570,8 @@ sciences, and I decided that’s what I wanted to do.”&lt;/p&gt;
   &lt;p&gt;Excerpt From: Isaacson, Walter. “Steve Jobs.”&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/19/The-Pink-Notes-Is-Live</link>
-                <guid>http://jpibarra1130.github.io/2014/01/19/The-Pink-Notes-Is-Live</guid>
+                <link>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</link>
+                <guid>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</guid>
                 <pubDate>2014-01-19T00:00:00+08:00</pubDate>
         </item>
 
@@ -607,8 +607,8 @@ LANG=en_US.UTF-8
 &lt;/code&gt;&lt;/pre&gt;
 
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/15/Ubuntu-Locale-Issue</link>
-                <guid>http://jpibarra1130.github.io/2014/01/15/Ubuntu-Locale-Issue</guid>
+                <link>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</link>
+                <guid>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</guid>
                 <pubDate>2014-01-15T00:00:00+08:00</pubDate>
         </item>
 
@@ -681,8 +681,8 @@ LANG=en_US.UTF-8
 
 &lt;p&gt;Because I was able to change to the &lt;em&gt;root&lt;/em&gt; user I think I have finished the first few steps to securing my server. Now, I can proceed with actually deploying my application!&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/12/Securing-My-Cloud-Server</link>
-                <guid>http://jpibarra1130.github.io/2014/01/12/Securing-My-Cloud-Server</guid>
+                <link>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</link>
+                <guid>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</guid>
                 <pubDate>2014-01-12T00:00:00+08:00</pubDate>
         </item>
 
@@ -696,8 +696,8 @@ LANG=en_US.UTF-8
 
 &lt;p&gt;Kudos to the authors of the book for organising and explaining the concepts effectively.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/08/Learning-Ruby-Throught-a-Book</link>
-                <guid>http://jpibarra1130.github.io/2014/01/08/Learning-Ruby-Throught-a-Book</guid>
+                <link>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</link>
+                <guid>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</guid>
                 <pubDate>2014-01-08T00:00:00+08:00</pubDate>
         </item>
 
@@ -709,8 +709,8 @@ LANG=en_US.UTF-8
 
 &lt;p&gt;After googling a while, I came across Wordpress&#39; &lt;a href=&quot;http://en.wordpress.com/tos/&quot;&gt;Terms of Service&lt;/a&gt; which they have shared with us. I also saw Automattic&#39;s &lt;a href=&quot;http://automattic.com/privacy/&quot;&gt;Privacy Policy&lt;/a&gt;. I reckon I need to tweak this more but at least, this would be a good start.&lt;/p&gt;
 </description>
-                <link>http://jpibarra1130.github.io/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</link>
-                <guid>http://jpibarra1130.github.io/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</guid>
+                <link>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</link>
+                <guid>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</guid>
                 <pubDate>2014-01-05T00:00:00+08:00</pubDate>
         </item>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>Paolo Ibarra's Blog</title>
- <link href="http://jpibarra1130.github.io/" rel="self"/>
- <link href="http://jpibarra1130.github.io"/>
- <updated>2014-10-25T12:14:44+08:00</updated>
- <id>http://jpibarra1130.github.io</id>
+ <link href="http://paoloibarra.com/" rel="self"/>
+ <link href="http://paoloibarra.com"/>
+ <updated>2014-10-25T13:24:33+08:00</updated>
+ <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Using Swift in an iOS Application to Upload an Image to a RESTful API</title>
-   <link href="http://jpibarra1130.github.io/2014/10/11/Image-Upload-To-RESTful-API-Swift"/>
+   <link href="http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift"/>
    <updated>2014-10-11T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/10/11/Image-Upload-To-RESTful-API-Swift</id>
+   <id>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</id>
    <content type="html">&lt;p&gt;Last time, I wrote a post about how to create a &lt;a href=&quot;http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/&quot;&gt;RESTful API using Rails and Paperclip&lt;/a&gt;. The second part of my task is to figure out a way on how to upload an image taken from my phone’s Camera using Swift.&lt;/p&gt;
 
 &lt;p&gt;To send the request, I used NSMutableURLRequest to handle the JSON request&lt;/p&gt;
@@ -58,9 +58,9 @@ task.resume() // this is needed to start the task
  
  <entry>
    <title>Image Upload Using Rails API and Paperclip</title>
-   <link href="http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip"/>
+   <link href="http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip"/>
    <updated>2014-09-27T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</id>
+   <id>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</id>
    <content type="html">&lt;p&gt;I am working on a mini-project with my friends and part of it requires us to make a RESTful API. We opted to use Ruby on Rails for the backend since we have a tight schedule and using this stack would simplify the development. For my first task, I need to create an endpoint which will allow me to upload an image together with the object’s properties.&lt;/p&gt;
 
 &lt;p&gt;I used &lt;a href=&quot;https://github.com/thoughtbot/paperclip&quot;&gt;Paperclip&lt;/a&gt; to help manage the image file. I was stumped on how to accomplish this task for a while because this was the first time I’d be writing an endpoint that allowed me to upload an image. After researching for a while, I saw this &lt;a href=&quot;http://blag.7tonlnu.pl/blog/2014/01/22/uploading-images-to-a-rails-app-via-json-api/&quot;&gt;blog&lt;/a&gt; which showed me how to upload a file.&lt;/p&gt;
@@ -139,9 +139,9 @@ end
  
  <entry>
    <title>Java: Download Dialog for the Browser</title>
-   <link href="http://jpibarra1130.github.io/2014/08/31/Java-Browser-Download-Dialog"/>
+   <link href="http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog"/>
    <updated>2014-08-31T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/08/31/Java-Browser-Download-Dialog</id>
+   <id>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</id>
    <content type="html">&lt;p&gt;If ever you’ve encountered this requirement where you need to make the download dialog from the browser show up when a user is downloading a file from your Java-backed website, the solution is this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;response.setContentType(&quot;text/csv&quot;);
@@ -156,9 +156,9 @@ response.flushBuffer();
  
  <entry>
    <title>Java, Spock, and PowerMock</title>
-   <link href="http://jpibarra1130.github.io/2014/07/20/Java-Spock-and-PowerMock"/>
+   <link href="http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock"/>
    <updated>2014-07-20T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/07/20/Java-Spock-and-PowerMock</id>
+   <id>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</id>
    <content type="html">&lt;p&gt;The thing I hate about Java is that at times, it’s just so verbose. And if you’re writing tests, it gets too time-consuming. Just the number of boilerplate you need makes it a little annoying to use.&lt;/p&gt;
 
 &lt;p&gt;I was playing around with &lt;a href=&quot;https://github.com/spockframework/spock&quot;&gt;Spock&lt;/a&gt; as a way to make test writing in Java much more fun. The problem is, the project I am currently working on is using a lot of static classes. So that’s one big hurdle I had to face.&lt;/p&gt;
@@ -226,9 +226,9 @@ public class FlightFormSpec extends Specification {
  
  <entry>
    <title>Playing Around with Go</title>
-   <link href="http://jpibarra1130.github.io/2014/06/01/Playing-around-with-Go"/>
+   <link href="http://paoloibarra.com/2014/06/01/Playing-around-with-Go"/>
    <updated>2014-06-01T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/06/01/Playing-around-with-Go</id>
+   <id>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</id>
    <content type="html">&lt;p&gt;I’ve been interested recently with using Golang thanks to a few friends of mine who have been raving about how good it is. I’ve tried it before through their interactive console, &lt;a href=&quot;http://tour.golang.org&quot;&gt;Golang tour&lt;/a&gt;. After that, I’ve proceeded reading around the documentation. And I find the documentation quite comprehensive.&lt;/p&gt;
 
 &lt;p&gt;Last week, I was discussing a possible project I wanted to start with my friend. I thought it would be interesting to use Go to create the API for this. Prior to starting this project, we’ve decided to play around with the languages we plan to use. I was assigned the backend component and decided to use Golang for it. I wanted to create a simple API so that I will be able to explore the following areas:&lt;/p&gt;
@@ -381,9 +381,9 @@ func GetPosts() []Post {
  
  <entry>
    <title>Revisiting Git SVN</title>
-   <link href="http://jpibarra1130.github.io/2014/04/24/Revisiting-Git-SVN"/>
+   <link href="http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN"/>
    <updated>2014-04-24T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/04/24/Revisiting-Git-SVN</id>
+   <id>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</id>
    <content type="html">&lt;p&gt;There might come a time when you’ll be assigned to a project that is still using SVN. This happened to me a few weeks ago. Because of one reason or another, the project won’t be migrated to Git in the near future. I’ve been using Git for years now, and I love how easy it is to use. Branching, merging, and working even when you don’t have a connection are just some of the things I love about Git. That is why I still want to use it.&lt;/p&gt;
 
 &lt;p&gt;If you are in a similar situation, don’t despair! There is git-svn which you can use for this. Thanks to this &lt;a href=&quot;http://www.janosgyerik.com/practical-tips-for-using-git-with-large-subversion-repositories/&quot;&gt;source&lt;/a&gt;, I was able to set up my local running git-svn.&lt;/p&gt;
@@ -473,9 +473,9 @@ git commit -m &quot;My first commit&quot;
  
  <entry>
    <title>Retrieving Vimeo ID</title>
-   <link href="http://jpibarra1130.github.io/2014/04/05/Retrieving-Vimeo-Id"/>
+   <link href="http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id"/>
    <updated>2014-04-05T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/04/05/Retrieving-Vimeo-Id</id>
+   <id>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</id>
    <content type="html">&lt;p&gt;I have a usecase in my side project wherein I needed to get the thumbnail for a vimeo video. Getting this is relatively easy through vimeo’s &lt;a href=&quot;http://developer.vimeo.com/apis/simple#video-request&quot;&gt;Video Request API&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I think it’s trickier to extract the video ID from the vimeo URL. There are multiple valid Vimeo URLs. Based on this &lt;a href=&quot;http://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url&quot;&gt;link&lt;/a&gt;, here are a few of the valid links:&lt;/p&gt;
@@ -503,9 +503,9 @@ end
  
  <entry>
    <title>Centering Bootstrap Pagination</title>
-   <link href="http://jpibarra1130.github.io/2014/03/14/Center-Pagination-Bootstrap"/>
+   <link href="http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap"/>
    <updated>2014-03-14T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/03/14/Center-Pagination-Bootstrap</id>
+   <id>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</id>
    <content type="html">&lt;p&gt;I was looking for a way to center the pagination on my main page. I am currently using bootstrap 3, and I have integrated it in my app using &lt;a href=&quot;https://github.com/bootstrap-ruby/will_paginate-bootstrap&quot;&gt;will_paginate-bootstrap&lt;/a&gt;. To center this, I wrapped the section for pagination into a div.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;center&quot;&amp;gt;
@@ -527,9 +527,9 @@ end
  
  <entry>
    <title>MySQL 2 Gem Installation Error</title>
-   <link href="http://jpibarra1130.github.io/2014/01/26/MySQL-2-Gem-Installation-Error"/>
+   <link href="http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error"/>
    <updated>2014-01-26T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/26/MySQL-2-Gem-Installation-Error</id>
+   <id>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</id>
    <content type="html">&lt;p&gt;I’ve encountered this error a few times before whenever I had a need to setup a new machine for my projects.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;An error occurred while installing mysql2 (0.3.14), and Bundler cannot continue.
@@ -552,9 +552,9 @@ Make sure that `gem install mysql2 -v &#39;0.3.14&#39;` succeeds before bundling
  
  <entry>
    <title>Thepinknotes.com is live!</title>
-   <link href="http://jpibarra1130.github.io/2014/01/19/The-Pink-Notes-Is-Live"/>
+   <link href="http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live"/>
    <updated>2014-01-19T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/19/The-Pink-Notes-Is-Live</id>
+   <id>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</id>
    <content type="html">&lt;p&gt;It is finally live! My first ever website. There’s something absolutely wonderful in seeing your own idea go live. I have done freelancing jobs before where I had to create something from scratch. And I am working at a company right now developing different features. But I got to tell you this, seeing your own idea live gives you a different kind of high. Because you can finally say that you created something of your own.&lt;/p&gt;
 
 &lt;p&gt;I have always wanted to create a product or an application but I somehow managed to talk myself out of doing so. Either I ended up convincing myself that my idea wasn’t good enough, or that it might be too complicated that I wasn’t ready to do it. I talked to my CEO once and he got me thinking when he said that it should be easier for me to create a product because I should know how to build stuff. I realized that my overthinking is just holding me back. If there’s something complicated that I find in the product I was thinking of, then it’s fine, I’ll manage to simplify it. If there’s a difficult bug I encounter, then I’ll do the same thing I’ve done with all other issues I have encountered - find a solution for it. At the end of the day, I realized you just have to go for it. Think of one thing you are passionate in and try to intersect it with technology.&lt;/p&gt;
@@ -579,9 +579,9 @@ sciences, and I decided that’s what I wanted to do.”&lt;/p&gt;
  
  <entry>
    <title>Ubuntu: Locale Issue</title>
-   <link href="http://jpibarra1130.github.io/2014/01/15/Ubuntu-Locale-Issue"/>
+   <link href="http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue"/>
    <updated>2014-01-15T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/15/Ubuntu-Locale-Issue</id>
+   <id>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</id>
    <content type="html">&lt;p&gt;I was encountering a locale issue on my Ubuntu server earlier. The error looks something like this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;unsupported locale setting
@@ -616,9 +616,9 @@ LANG=en_US.UTF-8
  
  <entry>
    <title>Securing My Cloud Server</title>
-   <link href="http://jpibarra1130.github.io/2014/01/12/Securing-My-Cloud-Server"/>
+   <link href="http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server"/>
    <updated>2014-01-12T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/12/Securing-My-Cloud-Server</id>
+   <id>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</id>
    <content type="html">&lt;p&gt;I’m finally on the deployment stage of my app. I have been working on this application on and off for a few months now. I was hoping to deploy it on January 1 but an impromptu trip stopped me from doing so. But nevertheless, here I am and deploying it.&lt;/p&gt;
 
 &lt;p&gt;I was thinking of using Heroku because of the ease of deployment. But I wanted to try my hand in setting up my own cloud server that was why I ended up getting my own remote server. I ended up choosing &lt;a href=&quot;http://www.simplercloud.com&quot;&gt;SimplerCloud&lt;/a&gt; as per the recommendation of a former colleague. It would make sense for me to use it since my target audience is in SEA, and because the machine is located in Singapore it will lessen the latency. I ordered the Extra Small with 1GB Ram, 20GB SSD, 1 Core which was running on Ubuntu Saucy (13.10).&lt;/p&gt;
@@ -690,9 +690,9 @@ LANG=en_US.UTF-8
  
  <entry>
    <title>Learning Ruby Through a Book</title>
-   <link href="http://jpibarra1130.github.io/2014/01/08/Learning-Ruby-Throught-a-Book"/>
+   <link href="http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book"/>
    <updated>2014-01-08T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/08/Learning-Ruby-Throught-a-Book</id>
+   <id>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</id>
    <content type="html">&lt;p&gt;I have been working on Ruby on Rails on and off for close to a year now. And just recently, I have thought about this idea for a website and opted to use Ruby on Rails for it. Along the way, I realized that my knowledge about Ruby is still not broad enough, and quite scattered. I know how certain methods or classes act but there are still a lot of things I don’t understand about it. I decided that I wanted to learn more about the language, and really &lt;strong&gt;understand&lt;/strong&gt; it.&lt;/p&gt;
 
 &lt;p&gt;I thought that the best way to go about it is to search for the most recently published book about Ruby, and read it. I ended up choosing &lt;a href=&quot;http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491&quot;&gt;Programming Ruby 1.9 &amp;amp; 2.0: The Pragmatic Programmers’ Guide (The Facets of Ruby)&lt;/a&gt; for this.&lt;/p&gt;
@@ -705,9 +705,9 @@ LANG=en_US.UTF-8
  
  <entry>
    <title>Privacy Policy and Terms of Service Source</title>
-   <link href="http://jpibarra1130.github.io/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source"/>
+   <link href="http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source"/>
    <updated>2014-01-05T00:00:00+08:00</updated>
-   <id>http://jpibarra1130.github.io/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</id>
+   <id>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</id>
    <content type="html">&lt;p&gt;I did not realize that creating your website wherein you intend to get contributions from people could be a little complicated. I was about to release it when I realized I don&#39;t even have a Terms of Service, nor a Privacy Policy.&lt;/p&gt;
 
 &lt;p&gt;Where do you get those anyway? Is it something you make up? Do I need to hire a lawyer (omg) for this?&lt;/p&gt;
