@@ -5,5 +5,5 @@ Thumbs.db
 
 !.gitkeep
 
-.rbenv-version
-.rvmrc
+.ruby-version
+.ruby-gemset
