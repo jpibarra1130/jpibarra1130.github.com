@@ -15,7 +15,7 @@ exclude:
 - Gemfile.lock
 - History.markdown
 
-pygments: true
+highlighter: true
 markdown: kramdown
 
 # Themes are encouraged to use these universal variables
