@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Learning Ruby Through a Book</title>
-    <meta name="description" content="Learning a Ruby through a book">
+    <title>Migrating your Rails App from MySQL to PostgreSQL</title>
+    <meta name="description" content="Migrating rails application from MySQL to PostgreSQL ">
     <meta name="author" content="Juan Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,23 +28,59 @@
         
 <div class="page-header">
   
-    <h1 class="page-title">Learning Ruby Through a Book </h1>
+    <h1 class="page-title">Migrating your Rails App from MySQL to PostgreSQL </h1>
   
 </div>
 
 <div class="row post-full">
   <div class="col-md12">
     <div class="summary">
-      <span class="date">January 08, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+      <span class="date">November 01, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
     </div>
     <div class="content">
-      <p>I have been working on Ruby on Rails on and off for close to a year now. And just recently, I have thought about this idea for a website and opted to use Ruby on Rails for it. Along the way, I realized that my knowledge about Ruby is still not broad enough, and quite scattered. I know how certain methods or classes act but there are still a lot of things I don’t understand about it. I decided that I wanted to learn more about the language, and really <strong>understand</strong> it.</p>
+      <p>My friends and I had decided to use PostgreSQL instead of MySQL because we were all interested in trying it out. Since this was a relatively new project with pretty straight-forward use cases, we decided that there shouldn’t be any harm in trying it out. The next step was to proceed to migrate our application from MySQL to PostgreSQL. And it had proven to be quite simple.</p>
 
-<p>I thought that the best way to go about it is to search for the most recently published book about Ruby, and read it. I ended up choosing <a href="http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491">Programming Ruby 1.9 &amp; 2.0: The Pragmatic Programmers’ Guide (The Facets of Ruby)</a> for this.</p>
+<p>The first thing I did was to replace the gem in our Gemfile from <code>mysql2</code> to <code>pg</code></p>
 
-<p>In my opinion, this has been an effective way of learning Ruby. I have only finished a few chapters but I am able to learn new things about the language, and understand why certain features “magically” work.</p>
+<pre><code>gem 'pg'
+</code></pre>
 
-<p>Kudos to the authors of the book for organising and explaining the concepts effectively.</p>
+<p>The next part was updating our <code>database.yml</code>. I only had to update the <code>adapter</code> and <code>encoding</code> part of our YAML file.</p>
+
+<pre><code>development:
+  adapter: postgresql
+  encoding: unicode
+  database: db_name
+  pool: 5
+  username: &lt;username&gt;
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: diwata_test
+  pool: 5
+  username: &lt;username&gt;
+  password:
+  host: localhost
+</code></pre>
+
+<p>Once the database.yml was updated, I ran:</p>
+
+<pre><code>rake db:create:all
+</code></pre>
+
+<p>… to create all the database the app needed. Subsequently, I also ran</p>
+
+<pre><code>rake db:migrate
+</code></pre>
+
+<p>… to create the necessary tables in the database.</p>
+
+<p>To make sure that everything was ok, I ran <code>rspec</code> to know whether all the tests were passing. And sure enough, all the tests passed.</p>
+
+<p>Now, our application is using PostgreSQL.</p>
 
     </div>
 
@@ -59,7 +95,13 @@
 
   
      
+    	<li><a href="/tags.html#rails-ref">rails <span>2</span></a></li>
+     
     	<li><a href="/tags.html#ruby-ref">ruby <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#postgresql-ref">postgresql <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#postgres-ref">postgres <span>1</span></a></li>
     
   
 
@@ -71,11 +113,11 @@
     <hr>
       <ul class="pagination">
       
-        <li class="prev"><a href="/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source" title="Privacy Policy and Terms of Service Source">&larr; Previous</a></li>
+        <li class="prev"><a href="/2014/10/11/Image-Upload-To-RESTful-API-Swift" title="Using Swift in an iOS Application to Upload an Image to a RESTful API">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/2014/01/12/Securing-My-Cloud-Server" title="Securing My Cloud Server">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     <hr>
@@ -104,7 +146,7 @@
 </div>
 
 <script type="text/javascript">
-  mixpanel.track("Learning Ruby Through a Book")
+  mixpanel.track("Migrating your Rails App from MySQL to PostgreSQL")
 </script>
 
       </div>

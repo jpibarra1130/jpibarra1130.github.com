@@ -4,13 +4,64 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2014-10-25T23:10:12+08:00</updated>
+ <updated>2014-11-01T09:16:26+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Migrating your Rails App from MySQL to PostgreSQL</title>
+   <link href="http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL"/>
+   <updated>2014-11-01T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</id>
+   <content type="html">&lt;p&gt;My friends and I had decided to use PostgreSQL instead of MySQL because we were all interested in trying it out. Since this was a relatively new project with pretty straight-forward use cases, we decided that there shouldn’t be any harm in trying it out. The next step was to proceed to migrate our application from MySQL to PostgreSQL. And it had proven to be quite simple.&lt;/p&gt;
+
+&lt;p&gt;The first thing I did was to replace the gem in our Gemfile from &lt;code&gt;mysql2&lt;/code&gt; to &lt;code&gt;pg&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &#39;pg&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next part was updating our &lt;code&gt;database.yml&lt;/code&gt;. I only had to update the &lt;code&gt;adapter&lt;/code&gt; and &lt;code&gt;encoding&lt;/code&gt; part of our YAML file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;development:
+  adapter: postgresql
+  encoding: unicode
+  database: db_name
+  pool: 5
+  username: &amp;lt;username&amp;gt;
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: diwata_test
+  pool: 5
+  username: &amp;lt;username&amp;gt;
+  password:
+  host: localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once the database.yml was updated, I ran:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rake db:create:all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;… to create all the database the app needed. Subsequently, I also ran&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;… to create the necessary tables in the database.&lt;/p&gt;
+
+&lt;p&gt;To make sure that everything was ok, I ran &lt;code&gt;rspec&lt;/code&gt; to know whether all the tests were passing. And sure enough, all the tests passed.&lt;/p&gt;
+
+&lt;p&gt;Now, our application is using PostgreSQL.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Using Swift in an iOS Application to Upload an Image to a RESTful API</title>
