@@ -4,13 +4,33 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2014-11-01T09:16:26+08:00</updated>
+ <updated>2014-11-25T02:00:54+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Using Swift to Immediately Update UICollectionView with API Result</title>
+   <link href="http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update"/>
+   <updated>2014-11-25T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</id>
+   <content type="html">&lt;p&gt;I was puzzled a few days ago when the UICollectionView I was looking at didn’t automatically get updated even after calling &lt;code&gt;reloadData()&lt;/code&gt;. After much googling, I found this post in &lt;a href=&quot;http://stackoverflow.com/questions/14804359/uicollectionview-doesnt-update-immediately-when-calling-reloaddata-but-randoml&quot;&gt;stackoverflow&lt;/a&gt; which explained what caused it.&lt;/p&gt;
+
+&lt;p&gt;It wasn’t because my API was slow nor was it because of some Swift issue I wasn’t aware of. It was because the task was added in a background queue. To fix this, you just need to make sure that the block you want to get updated immediately was running on the main thread.&lt;/p&gt;
+
+&lt;p&gt;This was resolved by wrapping &lt;code&gt;reloadData()&lt;/code&gt; in a dispatch_async with the queue for the main thread passed as the argument. We can retrieve the main thread queue through &lt;a href=&quot;https://developer.apple.com/library/mac/documentation/Performance/Reference/GCD_libdispatch_Ref/index.html#//apple_ref/doc/uid/TP40008079-CH2-SW11&quot;&gt;dispatch_get_main_queue&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dispatch_async(dispatch_get_main_queue(), {
+    self.collectionView.reloadData()
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After adding that, my UICollectionView gets updated immediately after receiving the result from the API.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Migrating your Rails App from MySQL to PostgreSQL</title>

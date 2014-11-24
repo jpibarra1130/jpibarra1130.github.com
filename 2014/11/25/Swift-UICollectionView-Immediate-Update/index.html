@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Using Swift in an iOS Application to Upload an Image to a RESTful API</title>
-    <meta name="description" content="Using Swift in iOS app to Upload an Image to a RESTful API">
+    <title>Using Swift to Immediately Update UICollectionView with API Result</title>
+    <meta name="description" content="Using Swift to Immediately Update UICollectionView with API Result">
     <meta name="author" content="Juan Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,52 +28,28 @@
         
 <div class="page-header">
   
-    <h1 class="page-title">Using Swift in an iOS Application to Upload an Image to a RESTful API </h1>
+    <h1 class="page-title">Using Swift to Immediately Update UICollectionView with API Result </h1>
   
 </div>
 
 <div class="row post-full">
   <div class="col-md12">
     <div class="summary">
-      <span class="date">October 11, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+      <span class="date">November 25, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
     </div>
     <div class="content">
-      <p>Last time, I wrote a post about how to create a <a href="http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/">RESTful API using Rails and Paperclip</a>. The second part of my task is to figure out a way on how to upload an image taken from my phone’s Camera using Swift.</p>
+      <p>I was puzzled a few days ago when the UICollectionView I was looking at didn’t automatically get updated even after calling <code>reloadData()</code>. After much googling, I found this post in <a href="http://stackoverflow.com/questions/14804359/uicollectionview-doesnt-update-immediately-when-calling-reloaddata-but-randoml">stackoverflow</a> which explained what caused it.</p>
 
-<p>To send the request, I used NSMutableURLRequest to handle the JSON request</p>
+<p>It wasn’t because my API was slow nor was it because of some Swift issue I wasn’t aware of. It was because the task was added in a background queue. To fix this, you just need to make sure that the block you want to get updated immediately was running on the main thread.</p>
 
-<pre><code>var request = NSMutableURLRequest(URL: NSURL(string: url))
-request.HTTPMethod = "POST"
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("application/json", forHTTPHeaderField: "Accept")
-</code></pre>
+<p>This was resolved by wrapping <code>reloadData()</code> in a dispatch_async with the queue for the main thread passed as the argument. We can retrieve the main thread queue through <a href="https://developer.apple.com/library/mac/documentation/Performance/Reference/GCD_libdispatch_Ref/index.html#//apple_ref/doc/uid/TP40008079-CH2-SW11">dispatch_get_main_queue</a>.</p>
 
-<p>To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:</p>
-
-<pre><code>var imageData = UIImagePNGRepresentation(image)
-var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
-</code></pre>
-
-<p>After doing this, I’ve put the encoded image into a Dictionary in the appropriate parameter. I serialized it into a JSON representation which I assigned to the HTTPBody.</p>
-
-<pre><code>var params = ["image":[ "content_type": "image/jpeg", "filename":"test.jpg", "file_data": base64String]]
-request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(0), error: &amp;err)!
-</code></pre>
-
-<p>I used the shared session object to create a task to send the request.</p>
-
-<pre><code>var session = NSURLSession.sharedSession()
-var task = session.dataTaskWithRequest(request.toMutableURLRequest(), completionHandler: { data, response, error -&gt; Void in
-    var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-    var err: NSError?
-
-    // process the response
+<pre><code>dispatch_async(dispatch_get_main_queue(), {
+    self.collectionView.reloadData()
 })
-
-task.resume() // this is needed to start the task
 </code></pre>
 
-<p>After the request has completed, the block I passed via the completionHandler will be executed. From there, I was able to evaluate the response. So that’s how I was able to send the image taken from my phone’s camera to the server.</p>
+<p>After adding that, my UICollectionView gets updated immediately after receiving the result from the API.</p>
 
     </div>
 
@@ -102,11 +78,11 @@ task.resume() // this is needed to start the task
     <hr>
       <ul class="pagination">
       
-        <li class="prev"><a href="/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip" title="Image Upload Using Rails API and Paperclip">&larr; Previous</a></li>
+        <li class="prev"><a href="/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL" title="Migrating your Rails App from MySQL to PostgreSQL">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL" title="Migrating your Rails App from MySQL to PostgreSQL">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     <hr>
@@ -135,7 +111,7 @@ task.resume() // this is needed to start the task
 </div>
 
 <script type="text/javascript">
-  mixpanel.track("Using Swift in an iOS Application to Upload an Image to a RESTful API")
+  mixpanel.track("Using Swift to Immediately Update UICollectionView with API Result")
 </script>
 
       </div>
