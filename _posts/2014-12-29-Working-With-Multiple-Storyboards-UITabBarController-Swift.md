@@ -22,7 +22,7 @@ To make this setup work, I had to create a main UITabBarController where I added
 
             var secondStoryboard:UIStoryboard = UIStoryboard(name: "SecondStoryboard", bundle: nil)
             var secondViewController:UIViewController = secondStoryboard.instantiateViewControllerWithIdentifier
-              ("SecondNavigation") as UIViewController
+              ("SecondViewNavigation") as UIViewController
 
             self.viewControllers = [firstViewController, secondViewController]
         }
