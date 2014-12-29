@@ -2,7 +2,7 @@
 layout: post
 title: "Using Swift to Immediately Update UICollectionView with API Result"
 description: "Using Swift to Immediately Update UICollectionView with API Result"
-tags: [swift, ios]
+tags: [swift, ios, uicollectionview]
 ---
 
 I was puzzled a few days ago when the UICollectionView I was looking at didn't automatically get updated even after calling ```reloadData()```. After much googling, I found this post in [stackoverflow](http://stackoverflow.com/questions/14804359/uicollectionview-doesnt-update-immediately-when-calling-reloaddata-but-randoml) which explained what caused it.
