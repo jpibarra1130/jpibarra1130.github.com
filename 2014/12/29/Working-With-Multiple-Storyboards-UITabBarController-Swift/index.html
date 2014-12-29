@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Working with Multiple Storyboard in a UITabBarController using Swift</title>
+    <meta name="description" content="Working with Multiple Storyboard in a UITabBarController using Swift">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Working with Multiple Storyboard in a UITabBarController using Swift </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">December 29, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I am still working with my two friends on an iOS app. Now that the application is starting to get bigger, we realized that working with one main storyboard is not sustainable. We decided to separate the features into several storyboards. Our development became more manageable after doing this.</p>
+
+<p>Our application is using a UITabBarController. We separated each tab to a storyboard and linked these back into the UITabBarController. We are using Swift as the main language for development.</p>
+
+<p>To make this setup work, I had to create a main UITabBarController where I added the storyboards. The UITabBarController implementation looks something like this.</p>
+
+<pre><code>class MainTabBarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        var firstStoryboard:UIStoryboard = UIStoryboard(name: "FirstStoryboard", bundle: nil)
+        var firstViewController:UIViewController = firstStoryboard.instantiateViewControllerWithIdentifier
+          ("FirstViewNavigation") as UIViewController
+
+        var secondStoryboard:UIStoryboard = UIStoryboard(name: "SecondStoryboard", bundle: nil)
+        var secondViewController:UIViewController = secondStoryboard.instantiateViewControllerWithIdentifier
+          ("SecondNavigation") as UIViewController
+
+        self.viewControllers = [firstViewController, secondStoryboard]
+    }
+
+    ...
+}
+</code></pre>
+
+<p>I had to update the AppDelegate to extend from UITabBarControllerDelegate. Also, I needed to instantiate the UITabBarController I created above and make it the root view controller. The AppDelegate would look something like below</p>
+
+<pre><code>@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
+
+    var window: UIWindow?
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+      [NSObject: AnyObject]?) -&gt; Bool {
+        // Override point for customization after application launch.
+
+        self.window!.rootViewController = MainTabBarController();
+        self.window!.makeKeyAndVisible()
+
+        return true
+    }
+
+    ...
+  }
+</code></pre>
+
+<p>After doing this, our app is now using multiple storyboards linked to the UITabBarController. It took me a bit of time to get it working as I found it hard to find resources on the internet which did something similar. I hope this helps someone out there looking to make something similar work with Swift, and iOS 8.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#swift-ref">swift <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#ios-ref">ios <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#uitabbarcontroller-ref">uitabbarcontroller <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/11/25/Swift-UICollectionView-Immediate-Update" title="Using Swift to Immediately Update UICollectionView with API Result">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mixpanel.track("Working with Multiple Storyboard in a UITabBarController using Swift")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
