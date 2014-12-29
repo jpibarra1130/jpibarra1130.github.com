@@ -5,8 +5,8 @@
         <description>Paolo Ibarra's Blog - Juan Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2014-12-29T22:43:00+08:00</lastBuildDate>
-        <pubDate>2014-12-29T22:43:00+08:00</pubDate>
+        <lastBuildDate>2014-12-29T22:45:36+08:00</lastBuildDate>
+        <pubDate>2014-12-29T22:45:36+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -29,9 +29,9 @@
 
         var secondStoryboard:UIStoryboard = UIStoryboard(name: &quot;SecondStoryboard&quot;, bundle: nil)
         var secondViewController:UIViewController = secondStoryboard.instantiateViewControllerWithIdentifier
-          (&quot;SecondNavigation&quot;) as UIViewController
+          (&quot;SecondViewNavigation&quot;) as UIViewController
 
-        self.viewControllers = [firstViewController, secondStoryboard]
+        self.viewControllers = [firstViewController, secondViewController]
     }
 
     ...

@@ -55,9 +55,9 @@
 
         var secondStoryboard:UIStoryboard = UIStoryboard(name: "SecondStoryboard", bundle: nil)
         var secondViewController:UIViewController = secondStoryboard.instantiateViewControllerWithIdentifier
-          ("SecondNavigation") as UIViewController
+          ("SecondViewNavigation") as UIViewController
 
-        self.viewControllers = [firstViewController, secondStoryboard]
+        self.viewControllers = [firstViewController, secondViewController]
     }
 
     ...

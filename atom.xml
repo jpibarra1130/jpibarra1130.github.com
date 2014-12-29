@@ -4,7 +4,7 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2014-12-29T22:43:00+08:00</updated>
+ <updated>2014-12-29T22:45:36+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
@@ -34,9 +34,9 @@
 
         var secondStoryboard:UIStoryboard = UIStoryboard(name: &quot;SecondStoryboard&quot;, bundle: nil)
         var secondViewController:UIViewController = secondStoryboard.instantiateViewControllerWithIdentifier
-          (&quot;SecondNavigation&quot;) as UIViewController
+          (&quot;SecondViewNavigation&quot;) as UIViewController
 
-        self.viewControllers = [firstViewController, secondStoryboard]
+        self.viewControllers = [firstViewController, secondViewController]
     }
 
     ...
