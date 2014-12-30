@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Image Upload Using Rails API and Paperclip</title>
+    <meta name="description" content="Image uploading using a RESTful API via Rails and Paperclip">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Image Upload Using Rails API and Paperclip </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">September 27, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I am working on a mini-project with my friends and part of it requires us to make a RESTful API. We opted to use Ruby on Rails for the backend since we have a tight schedule and using this stack would simplify the development. For my first task, I need to create an endpoint which will allow me to upload an image together with the object’s properties.</p>
+
+<p>I used <a href="https://github.com/thoughtbot/paperclip">Paperclip</a> to help manage the image file. I was stumped on how to accomplish this task for a while because this was the first time I’d be writing an endpoint that allowed me to upload an image. After researching for a while, I saw this <a href="http://blag.7tonlnu.pl/blog/2014/01/22/uploading-images-to-a-rails-app-via-json-api/">blog</a> which showed me how to upload a file.</p>
+
+<p>The main idea is to encode the file to Base64, and set the correct attributes (content-type, filename) so we can parse it in the server-side correctly.</p>
+
+<p>A sample request would look something like this:</p>
+
+<pre><code>/api/v1/items/create.json
+</code></pre>
+
+<p>Request Payload:</p>
+
+<pre><code>{
+  "image":
+    {
+      filename: "original_filename.jpg",
+      content: "&lt;Base64Encoded data&gt;",
+      content_type: "&lt;image content type&gt;" # e.g. image/jpeg
+    }
+}
+</code></pre>
+
+<p>Your controller should be able to process this.</p>
+
+<pre><code>class API::V1::ItemsController &lt; ApplicationController
+
+  def create
+    result = { status: "failed" }
+
+    begin
+      params[:image] = parse_image_data(params[:image]) if params[:image]
+      item = Item.new
+      item.image = params[:image]
+
+      if item.save
+        result[:status] = "success"
+      end
+    rescue Exception =&gt; e
+      Rails.logger.error "#{e.message}"
+    end
+
+    render json: result.to_json
+  ensure
+    clean_tempfile
+  end
+
+  # This part is actually taken from http://blag.7tonlnu.pl/blog/2014/01/22/uploading-images-to-a-rails-app-via-json-api. I tweaked it a bit by manually setting the tempfile's content type because somehow putting it in a hash during initialization didn't work for me.
+  def parse_image_data(image_data)
+    @tempfile = Tempfile.new('item_image')
+    @tempfile.binmode
+    @tempfile.write Base64.decode64(image_data[:content])
+    @tempfile.rewind
+
+    uploaded_file = ActionDispatch::Http::UploadedFile.new(
+      tempfile: @tempfile,
+      filename: image_data[:filename]
+    )
+
+   uploaded_file.content_type = image_data[:content_type]
+    uploaded_file
+  end
+
+  def clean_tempfile
+    if @tempfile
+      @tempfile.close
+      @tempfile.unlink
+    end
+  end
+end
+</code></pre>
+
+<p>So there you have it, a controller that handles image upload.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#ruby-ref">ruby <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#rails-ref">rails <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#paperclip-ref">paperclip <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/08/31/Java-Browser-Download-Dialog" title="Java: Download Dialog for the Browser">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2014/10/11/Image-Upload-To-RESTful-API-Swift" title="Using Swift in an iOS Application to Upload an Image to a RESTful API">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Image Upload Using Rails API and Paperclip")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

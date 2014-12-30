@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ubuntu: Locale Issue</title>
+    <meta name="description" content="Fix the issue with locale for Ubuntu">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Ubuntu: Locale Issue </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">January 15, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I was encountering a locale issue on my Ubuntu server earlier. The error looks something like this:</p>
+
+<pre><code>unsupported locale setting
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/CommandNotFound/util.py", line 24, in crash_guard
+    callback()
+  File "/usr/lib/command-not-found", line 69, in main
+    enable_i18n()
+  File "/usr/lib/command-not-found", line 40, in enable_i18n
+    locale.setlocale(locale.LC_ALL, '')
+  File "/usr/lib/python3.3/locale.py", line 541, in setlocale
+    return _setlocale(category, locale)
+locale.Error: unsupported locale setting
+</code></pre>
+
+<p>This was caused by these missing locale settings: LC_ALL and LANG. One way to solve this is by adding an export line for these variables on ~/.bash_profile or ~/.bashrc file.</p>
+
+<pre><code>export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+</code></pre>
+
+<p>But because I don’t want to be doing this for all my (future) users, I had to look for a config file which would have a system-wide effect.</p>
+
+<p>I found out about <a href="https://help.ubuntu.com/community/EnvironmentVariables#A.2BAC8-etc.2BAC8-environment">/etc/environment</a> which is used for system-wide environment setting. I managed to solve the issue by appending these in that file.</p>
+
+<pre><code>LC_ALL=en_US.UTF-8
+LANG=en_US.UTF-8
+</code></pre>
+
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#sysadmin-ref">sysadmin <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#ubuntu-ref">ubuntu <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/01/12/Securing-My-Cloud-Server" title="Securing My Cloud Server">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2014/01/19/The-Pink-Notes-Is-Live" title="Thepinknotes.com is live!">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Ubuntu: Locale Issue")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

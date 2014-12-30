@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Migrating your Rails App from MySQL to PostgreSQL</title>
+    <meta name="description" content="Migrating rails application from MySQL to PostgreSQL ">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Migrating your Rails App from MySQL to PostgreSQL </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">November 01, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>My friends and I had decided to use PostgreSQL instead of MySQL because we were all interested in trying it out. Since this was a relatively new project with pretty straight-forward use cases, we decided that there shouldn’t be any harm in trying it out. The next step was to proceed to migrate our application from MySQL to PostgreSQL. And it had proven to be quite simple.</p>
+
+<p>The first thing I did was to replace the gem in our Gemfile from <code>mysql2</code> to <code>pg</code></p>
+
+<pre><code>gem 'pg'
+</code></pre>
+
+<p>The next part was updating our <code>database.yml</code>. I only had to update the <code>adapter</code> and <code>encoding</code> part of our YAML file.</p>
+
+<pre><code>development:
+  adapter: postgresql
+  encoding: unicode
+  database: db_name
+  pool: 5
+  username: &lt;username&gt;
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: diwata_test
+  pool: 5
+  username: &lt;username&gt;
+  password:
+  host: localhost
+</code></pre>
+
+<p>Once the database.yml was updated, I ran:</p>
+
+<pre><code>rake db:create:all
+</code></pre>
+
+<p>… to create all the database the app needed. Subsequently, I also ran</p>
+
+<pre><code>rake db:migrate
+</code></pre>
+
+<p>… to create the necessary tables in the database.</p>
+
+<p>To make sure that everything was ok, I ran <code>rspec</code> to know whether all the tests were passing. And sure enough, all the tests passed.</p>
+
+<p>Now, our application is using PostgreSQL.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#rails-ref">rails <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#ruby-ref">ruby <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#postgresql-ref">postgresql <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#postgres-ref">postgres <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/10/11/Image-Upload-To-RESTful-API-Swift" title="Using Swift in an iOS Application to Upload an Image to a RESTful API">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2014/11/25/Swift-UICollectionView-Immediate-Update" title="Using Swift to Immediately Update UICollectionView with API Result">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Migrating your Rails App from MySQL to PostgreSQL")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

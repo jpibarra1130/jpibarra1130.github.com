@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Using Swift in an iOS Application to Upload an Image to a RESTful API</title>
+    <meta name="description" content="Using Swift in iOS app to Upload an Image to a RESTful API">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Using Swift in an iOS Application to Upload an Image to a RESTful API </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">October 11, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>Last time, I wrote a post about how to create a <a href="http://jpibarra1130.github.io/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/">RESTful API using Rails and Paperclip</a>. The second part of my task is to figure out a way on how to upload an image taken from my phone’s Camera using Swift.</p>
+
+<p>To send the request, I used NSMutableURLRequest to handle the JSON request</p>
+
+<pre><code>var request = NSMutableURLRequest(URL: NSURL(string: url))
+request.HTTPMethod = "POST"
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("application/json", forHTTPHeaderField: "Accept")
+</code></pre>
+
+<p>To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:</p>
+
+<pre><code>var imageData = UIImagePNGRepresentation(image)
+var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
+</code></pre>
+
+<p>After doing this, I’ve put the encoded image into a Dictionary in the appropriate parameter. I serialized it into a JSON representation which I assigned to the HTTPBody.</p>
+
+<pre><code>var params = ["image":[ "content_type": "image/jpeg", "filename":"test.jpg", "file_data": base64String]]
+request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(0), error: &amp;err)!
+</code></pre>
+
+<p>I used the shared session object to create a task to send the request.</p>
+
+<pre><code>var session = NSURLSession.sharedSession()
+var task = session.dataTaskWithRequest(request.toMutableURLRequest(), completionHandler: { data, response, error -&gt; Void in
+    var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+    var err: NSError?
+
+    // process the response
+})
+
+task.resume() // this is needed to start the task
+</code></pre>
+
+<p>After the request has completed, the block I passed via the completionHandler will be executed. From there, I was able to evaluate the response. So that’s how I was able to send the image taken from my phone’s camera to the server.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#swift-ref">swift <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#ios-ref">ios <span>3</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip" title="Image Upload Using Rails API and Paperclip">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL" title="Migrating your Rails App from MySQL to PostgreSQL">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Using Swift in an iOS Application to Upload an Image to a RESTful API")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

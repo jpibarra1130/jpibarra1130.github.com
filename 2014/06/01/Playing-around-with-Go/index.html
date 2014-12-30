@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Playing Around with Go</title>
+    <meta name="description" content="A simple API written in Go/Golang">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Playing Around with Go </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">June 01, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I’ve been interested recently with using Golang thanks to a few friends of mine who have been raving about how good it is. I’ve tried it before through their interactive console, <a href="http://tour.golang.org">Golang tour</a>. After that, I’ve proceeded reading around the documentation. And I find the documentation quite comprehensive.</p>
+
+<p>Last week, I was discussing a possible project I wanted to start with my friend. I thought it would be interesting to use Go to create the API for this. Prior to starting this project, we’ve decided to play around with the languages we plan to use. I was assigned the backend component and decided to use Golang for it. I wanted to create a simple API so that I will be able to explore the following areas:</p>
+
+<ol>
+  <li>Create an HTTP endpoint</li>
+  <li>Create DB migrations</li>
+  <li>Map the db to structs</li>
+  <li>Handle dependency management</li>
+  <li>Testing (which I am still figuring out as of writing)</li>
+</ol>
+
+<p>It proved out to be quite simpler than I imagined.</p>
+
+<h2 id="create-an-http-endpoint">Create an HTTP endpoint</h2>
+
+<p>The first thing I did was to figure out a way to make it run, and see something printed out on my browser which is the first goal.</p>
+
+<p>To create the HTTP endpoint, I’ve decided to use <a href="https://github.com/gorilla/mux">gorilla-mux</a>. You need to go to $GOPATH/src/github.com/user/simple-api-go. Create a file named <code>simple_api.go</code>. Make sure to install gorilla-mux first before you run this.</p>
+
+<pre><code>import (
+  "encoding/json"
+  "github.com/gorilla/mux"
+  "log"
+  "net/http"
+)
+
+func main() {
+  r := mux.NewRouter()
+  r.HandleFunc("/", PostsHandler).Methods("GET")
+
+  http.Handle("/", r)
+
+  log.Println("Server started. Listening...")
+  http.ListenAndServe(":3000", nil)
+}
+
+func PostsHandler(w http.ResponseWriter, r *http.Request) {
+  w.Write([]byte("hello world"))
+}
+</code></pre>
+
+<p>Once you save this, run <code>go build</code>. This will generate an executable file <code>simple_api_go</code> in the main folder. Simply run this, and go to <code>localhost:3000</code>. You should be able to see ‘hello world’.</p>
+
+<h2 id="create-db-migrations">Create DB migrations</h2>
+
+<p>The next step is to see how I’ll be able to manage DB migrations in this project. I was googling around a possible library to use. I ended up using <a href="https://bitbucket.org/liamstask/goose">Goose</a>. Once you have this installed, create a database for simple-api-go. Create <code>db/dbconf.yml</code> in your simple-api-go and fill it in with the necessary information. I am currently using MySQL. Myd dbconf.yml looks something like this:</p>
+
+<pre><code>development:
+  driver: mymysql
+    open: tcp:localhost:3306*simple-api-go-development/user/password
+</code></pre>
+
+<p>To create a simple migration, you need to run this</p>
+
+<pre><code>goose create CreatePosts
+</code></pre>
+
+<p>This will generate a migration file inside <code>db/migrations/</code>. Edit the generated migration, and add this simple script.</p>
+
+<pre><code>-- +goose Up
+CREATE TABLE posts (
+    id int NOT NULL,
+    title text,
+    body text,
+    PRIMARY KEY(id)
+);
+
+-- +goose Down
+DROP TABLE posts;
+</code></pre>
+
+<p>After that, run <code>goose up</code>. This will run the script above. The database you have created should now have the the <code>posts</code> table. Read more about goose <a href="https://bitbucket.org/liamstask/goose">here</a>.</p>
+
+<h2 id="map-the-db-to-structs">Map the db to structs</h2>
+<p>Now, I needed to find out a way to easily access the info from the database. To do this, I’ve decided to use <a href="https://github.com/coopernurse/gorp">gorp</a>. First thing you need to do is update simple_api.go and create a struct Post with the gorp annotations.</p>
+
+<pre><code>type Post struct {
+  Id    int    `db:"id"`
+  Title string `db:"title"`
+  Body  string `db:"body"`
+}
+</code></pre>
+
+<p>Once you have the struct setup, you need to create a new function which will connect to the database to retrieve the information:</p>
+
+<pre><code>// global options. available to any subcommands. This was taken from goose library
+var flagPath = flag.String("path", "db", "folder containing db info")
+var flagEnv = flag.String("env", "development", "which DB environment to use")
+
+func GetPosts() []Post {
+
+  // I've decided to use the goose config file so that I won't have multiple db configs
+  conf, err := goose.NewDBConf(*flagPath, *flagEnv)
+
+  if err != nil {
+    log.Fatal(err)
+    return nil
+  }
+
+  log.Printf("Connecting to %v, %v", conf.Driver.Name, conf.Driver.OpenStr)
+
+  db, err := sql.Open(conf.Driver.Name, conf.Driver.OpenStr)
+
+  dbmap := &amp;gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
+  defer dbmap.Db.Close()
+
+  var posts []Post
+  _, err = dbmap.Select(&amp;posts, "select id, title, body from posts order by id")
+
+  if err != nil {
+    log.Printf("Error: ", err)
+    return nil
+  }
+
+  return posts
+}
+</code></pre>
+
+<p>You can read more about the gorp related functionalities <a href="https://github.com/coopernurse/gorp">here</a>. Once you have this up and running, you just need to update your <code>PostsHandler</code> to incorporate the function we just created.</p>
+
+<pre><code>func PostsHandler(w http.ResponseWriter, r *http.Request) {
+  out, err := json.Marshal(GetPosts())
+
+  if err != nil {
+    log.Fatal(err)
+    w.Write([]byte("Something bad has happened."))
+    return
+  }
+
+  log.Printf("Post: %v", string(out))
+
+  w.Write([]byte(out))
+}
+</code></pre>
+
+<p>Now, do a <code>go build</code> and run the generated file. If you go to <code>localhost:3000</code> you should be able to see the json posts from your db. Please make sure to run all the necessary imports to avoid errors.</p>
+
+<h2 id="handle-dependency-management">Handle dependency management</h2>
+
+<p>For the dependency management, I used godep. You just need to install <a href="https://github.com/tools/godep">godep</a> and run <code>godep save</code> to generate all the existing dependencies.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>I will update this post once I actually explored enough of testing Go.</p>
+
+<p>If you want to see the final simple-api-go for your reference, you can clone or fork <a href="https://github.com/jpibarra1130/simple-api-go">simple-api-go</a>.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#go-ref">go <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/04/24/Revisiting-Git-SVN" title="Revisiting Git SVN">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2014/07/20/Java-Spock-and-PowerMock" title="Java, Spock, and PowerMock">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Playing Around with Go")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
