@@ -12,6 +12,7 @@
     <!-- atom & rss feed -->
     <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
     <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    {% include JB/analytics %}
   </head>
 
   <body>
@@ -32,7 +33,6 @@
       {% include themes/bootstrap/footer.html %}
     </div>
 
-    {% include JB/analytics %}
     <script src="{{ ASSET_PATH }}/resources/jquery/jquery.min.js"></script>
     <script src="{{ ASSET_PATH }}/resources/bootstrap/js/bootstrap.min.js"></script>
   </body>

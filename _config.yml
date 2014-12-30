@@ -1,6 +1,7 @@
 # This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title
+safe: true
 
 include:
 - .nojekyll
@@ -94,8 +95,7 @@ JB :
     disqus :
       short_name : jpibarra1130
 
-  analytics:
-    provider: true
+  analytics: true
     provider: mixpanel
     mixpanel:
-        token: '7188011789865f45786394de33a26ed6'
+      token: '7188011789865f45786394de33a26ed6'
