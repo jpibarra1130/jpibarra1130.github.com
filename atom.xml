@@ -4,13 +4,22 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2014-12-29T22:45:36+08:00</updated>
+ <updated>2014-12-30T17:22:35+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Exploring Apache Spark</title>
+   <link href="http://paoloibarra.com/2015/01/02/Having-a-look-at-spark"/>
+   <updated>2015-01-02T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2015/01/02/Having-a-look-at-spark</id>
+   <content type="html">&lt;p&gt;I was looking at &lt;a href=&quot;https://spark.apache.org/&quot;&gt;Apache Spark&lt;/a&gt; a couple of days ago. If you are checking it out, I suggest you read&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Working with Multiple Storyboard in a UITabBarController using Swift</title>

@@ -25,7 +25,11 @@ http://paoloibarra.com/tags/postgresql/index.html
 http://paoloibarra.com/tags/postgres/index.html
 http://paoloibarra.com/tags/uicollectionview/index.html
 http://paoloibarra.com/tags/uitabbarcontroller/index.html
+http://paoloibarra.com/tags/spark/index.html
+http://paoloibarra.com/tags/bigdata/index.html
+http://paoloibarra.com/tags/apache/index.html
 
+http://paoloibarra.com/2015/01/02/Having-a-look-at-spark
 http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift
 http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update
 http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL

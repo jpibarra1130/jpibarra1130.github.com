@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>MySQL 2 Gem Installation Error</title>
-    <meta name="description" content="Fix the MySQL 2 Gem installation issue">
+    <title>Exploring Apache Spark</title>
+    <meta name="description" content="Exploring Apache Spark">
     <meta name="author" content="Juan Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,33 +45,17 @@
         
 <div class="page-header">
   
-    <h1 class="page-title">MySQL 2 Gem Installation Error </h1>
+    <h1 class="page-title">Exploring Apache Spark </h1>
   
 </div>
 
 <div class="row post-full">
   <div class="col-md12">
     <div class="summary">
-      <span class="date">January 26, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+      <span class="date">January 02, 2015</span> <span class="author">// Juan Paolo Ibarra</span>
     </div>
     <div class="content">
-      <p>I’ve encountered this error a few times before whenever I had a need to setup a new machine for my projects.</p>
-
-<pre><code>An error occurred while installing mysql2 (0.3.14), and Bundler cannot continue.
-Make sure that `gem install mysql2 -v '0.3.14'` succeeds before bundling.
-</code></pre>
-
-<p>Normally, specifying the MySQL lib folder during the installation is enough to solve the issue.</p>
-
-<pre><code>gem install mysql2 -v '0.3.14' -- --with-mysql-lib=/usr/lib/mysql/lib
-</code></pre>
-
-<p>The other week I encountered this again when I was deploying my application for the first time in my server. The solution above didn’t solve the issue because I still encountered it whenever I had to redeploy. What worked for me to permanently solve this is by installing the <em>libmysqlclient-dev</em> package in my server.</p>
-
-<pre><code>sudo apt-get install libmysqlclient-dev
-</code></pre>
-
-<p>Hopefully, I won’t have to search around google when I encounter this again to save myself (or you) a few minutes.</p>
+      <p>I was looking at <a href="https://spark.apache.org/">Apache Spark</a> a couple of days ago. If you are checking it out, I suggest you read</p>
 
     </div>
 
@@ -86,11 +70,11 @@ Make sure that `gem install mysql2 -v '0.3.14'` succeeds before bundling.
 
   
      
-    	<li><a href="/tags.html#sysadmin-ref">sysadmin <span>3</span></a></li>
+    	<li><a href="/tags.html#spark-ref">spark <span>1</span></a></li>
      
-    	<li><a href="/tags.html#ruby-ref">ruby <span>5</span></a></li>
+    	<li><a href="/tags.html#bigdata-ref">bigdata <span>1</span></a></li>
      
-    	<li><a href="/tags.html#mysql-ref">mysql <span>1</span></a></li>
+    	<li><a href="/tags.html#apache-ref">apache <span>1</span></a></li>
     
   
 
@@ -102,11 +86,11 @@ Make sure that `gem install mysql2 -v '0.3.14'` succeeds before bundling.
     <hr>
       <ul class="pagination">
       
-        <li class="prev"><a href="/2014/01/19/The-Pink-Notes-Is-Live" title="Thepinknotes.com is live!">&larr; Previous</a></li>
+        <li class="prev"><a href="/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift" title="Working with Multiple Storyboard in a UITabBarController using Swift">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/2014/03/14/Center-Pagination-Bootstrap" title="Centering Bootstrap Pagination">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     <hr>
@@ -135,7 +119,7 @@ Make sure that `gem install mysql2 -v '0.3.14'` succeeds before bundling.
 </div>
 
 <script type="text/javascript">
-  mpq.track("MySQL 2 Gem Installation Error")
+  mpq.track("Exploring Apache Spark")
 </script>
 
       </div>
