@@ -1,99 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</loc>
+    <loc>http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</loc>
     <lastmod>2014-12-29T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/11/25/Swift-UICollectionView-Immediate-Update</loc>
+    <loc>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</loc>
     <lastmod>2014-11-25T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</loc>
+    <loc>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</loc>
     <lastmod>2014-11-01T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/10/11/Image-Upload-To-RESTful-API-Swift</loc>
+    <loc>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</loc>
     <lastmod>2014-10-11T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</loc>
+    <loc>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</loc>
     <lastmod>2014-09-27T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/08/31/Java-Browser-Download-Dialog</loc>
+    <loc>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</loc>
     <lastmod>2014-08-31T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/07/20/Java-Spock-and-PowerMock</loc>
+    <loc>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</loc>
     <lastmod>2014-07-20T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/06/01/Playing-around-with-Go</loc>
+    <loc>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</loc>
     <lastmod>2014-06-01T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/24/Revisiting-Git-SVN</loc>
+    <loc>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</loc>
     <lastmod>2014-04-24T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/04/05/Retrieving-Vimeo-Id</loc>
+    <loc>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</loc>
     <lastmod>2014-04-05T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/03/14/Center-Pagination-Bootstrap</loc>
+    <loc>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</loc>
     <lastmod>2014-03-14T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/26/MySQL-2-Gem-Installation-Error</loc>
+    <loc>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</loc>
     <lastmod>2014-01-26T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/19/The-Pink-Notes-Is-Live</loc>
+    <loc>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</loc>
     <lastmod>2014-01-19T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/15/Ubuntu-Locale-Issue</loc>
+    <loc>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</loc>
     <lastmod>2014-01-15T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/12/Securing-My-Cloud-Server</loc>
+    <loc>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</loc>
     <lastmod>2014-01-12T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/08/Learning-Ruby-Throught-a-Book</loc>
+    <loc>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</loc>
     <lastmod>2014-01-08T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</loc>
+    <loc>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</loc>
     <lastmod>2014-01-05T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/</loc>
-    <lastmod>2014-12-30T18:39:13+08:00</lastmod>
+    <loc>http://paoloibarra.com/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>/404.html</loc>
-    <lastmod>2014-12-30T17:28:49+08:00</lastmod>
+    <loc>http://paoloibarra.com/tags/website/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/admin/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/ruby/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/sysadmin/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/ubuntu/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/happiness/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/mysql/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/css/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/git/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/go/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/java/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/spock/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/powermock/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/test/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/rails/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/paperclip/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/swift/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/ios/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/postgresql/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/postgres/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/uicollectionview/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/uitabbarcontroller/</loc>
+    <lastmod>2014-12-30T18:48:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/404.html</loc>
+    <lastmod>2014-12-30T18:39:14+08:00</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
