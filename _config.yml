@@ -95,7 +95,8 @@ JB :
     disqus :
       short_name : jpibarra1130
 
-  analytics: true
+  analytics:
+    provider: true
     provider: mixpanel
     mixpanel:
       token: '7188011789865f45786394de33a26ed6'
