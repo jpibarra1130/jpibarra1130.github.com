@@ -38,6 +38,7 @@ author :
   feedburner :
 
 production_url: http://paoloibarra.com
+url: http://paoloibarra.com
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
