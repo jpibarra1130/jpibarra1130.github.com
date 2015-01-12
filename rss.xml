@@ -5,10 +5,61 @@
         <description>Paolo Ibarra's Blog - Juan Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2014-12-30T18:48:23+08:00</lastBuildDate>
-        <pubDate>2014-12-30T18:48:23+08:00</pubDate>
+        <lastBuildDate>2015-01-12T06:33:13+01:00</lastBuildDate>
+        <pubDate>2015-01-12T06:33:13+01:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Some Notes and Errors Encountered After Trying Out Apache Spark</title>
+                <description>&lt;p&gt;I was playing around with &lt;a href=&quot;https://spark.apache.org/&quot;&gt;Apache Spark&lt;/a&gt; a couple of weeks back. For those of you who are not familiar with Apache Spark, they have a really good documentation which you should read &lt;a href=&quot;https://spark.apache.org/docs/latest/quick-start.html&quot;&gt;here&lt;/a&gt;. You should also check out &lt;a href=&quot;https://www.cs.berkeley.edu/~matei/papers/2012/nsdi_spark.pdf&quot;&gt;UC Berkeley’s paper&lt;/a&gt; on RDD which will help you gain a deeper understanding on how Spark works. Don’t be daunted by the paper, it’s actually a good read.&lt;/p&gt;
+
+&lt;p&gt;Here are a few things I jotted down while working on it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;to assign a name to master, you will need to create &lt;code&gt;conf/spark-env.sh&lt;/code&gt; and set that value for SPARK_MASTER. Basically, you just need to add this:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;SPARK_MASTER_IP=local.paolo.com&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You’ll be able to view the status of your cluster in in &lt;code&gt;http://localhost:8080/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I have also encountered a few errors when I tried running my application. Here’s a list of the errors I’ve stumbled on together with steps on how I fixed it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Initial job has not accepted any resources&lt;/em&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;Check your cluster UI to ensure that workers are registered and have sufficient memory. I realized that I only have two cores I could connect too, and Spark Shell was already using it up. You can either update your config, or shutdown the other application using the resources. &lt;a href=&quot;http://www.datastax.com/dev/blog/common-spark-troubleshooting&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;java.lang.IllegalStateException: unread block data&lt;/em&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;This is most likely caused by versioning issue. In my case, my Mac was running a different version of Scala (v2.11)compared to the one I downloaded (using Scala v2.10). To make this work, I just updated my Mac’s Scala version. I did this through:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code&gt;brew info scala&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;code&gt;brew search scala&lt;/code&gt; - to view the available taps&lt;/li&gt;
+          &lt;li&gt;&lt;code&gt;brew install homebrew/versions/scala210&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;If you encounter this: &lt;code&gt;bash: scala: command not found&lt;/code&gt; try running &lt;code&gt;brew link homebrew/versions/scala210&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;code&gt;scala -version&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;org.apache.spark.serializer.JavaDeserializationStream$$anon$1.resolveClass spark “Class not found”&lt;/em&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;I encountered this when I was trying to run my test application via eclipse. I have a running master in the background so I wanted my test to connect to it instead of spawining its own. To make this work I had to create a fat jar containing all the dependencies. Using Shade plugin from maven will help fix the akka issue too. &lt;a href=&quot;http://stackoverflow.com/questions/26892389/org-apache-spark-sparkexception-job-aborted-due-to-stage-failure-task-from-app&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;ERROR ContextCleaner: Error in cleaning thread java.lang.InterruptedException&lt;/em&gt;. This can be safely ignored. &lt;a href=&quot;http://apache-spark-user-list.1001560.n3.nabble.com/Error-in-run-spark-ContextCleaner-under-Spark-1-0-0-td8135.html&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hopefully, this will help someone out there who is also looking into Apache Spark.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark</link>
+                <guid>http://paoloibarra.com/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark</guid>
+                <pubDate>2015-01-12T00:00:00+01:00</pubDate>
+        </item>
 
         <item>
                 <title>Working with Multiple Storyboard in a UITabBarController using Swift</title>
@@ -63,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 </description>
                 <link>http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</link>
                 <guid>http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</guid>
-                <pubDate>2014-12-29T00:00:00+08:00</pubDate>
+                <pubDate>2014-12-29T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -83,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 </description>
                 <link>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</link>
                 <guid>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</guid>
-                <pubDate>2014-11-25T00:00:00+08:00</pubDate>
+                <pubDate>2014-11-25T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -134,7 +185,7 @@ test:
 </description>
                 <link>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</link>
                 <guid>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</guid>
-                <pubDate>2014-11-01T00:00:00+08:00</pubDate>
+                <pubDate>2014-11-01T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -178,7 +229,7 @@ task.resume() // this is needed to start the task
 </description>
                 <link>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</link>
                 <guid>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</guid>
-                <pubDate>2014-10-11T00:00:00+08:00</pubDate>
+                <pubDate>2014-10-11T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -259,7 +310,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</link>
                 <guid>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</guid>
-                <pubDate>2014-09-27T00:00:00+08:00</pubDate>
+                <pubDate>2014-09-27T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -276,7 +327,7 @@ response.flushBuffer();
 </description>
                 <link>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</link>
                 <guid>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</guid>
-                <pubDate>2014-08-31T00:00:00+08:00</pubDate>
+                <pubDate>2014-08-31T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -346,7 +397,7 @@ public class FlightFormSpec extends Specification {
 </description>
                 <link>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</link>
                 <guid>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</guid>
-                <pubDate>2014-07-20T00:00:00+08:00</pubDate>
+                <pubDate>2014-07-20T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -501,7 +552,7 @@ func GetPosts() []Post {
 </description>
                 <link>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</link>
                 <guid>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</guid>
-                <pubDate>2014-06-01T00:00:00+08:00</pubDate>
+                <pubDate>2014-06-01T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -593,7 +644,7 @@ git commit -m &quot;My first commit&quot;
 </description>
                 <link>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</link>
                 <guid>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</guid>
-                <pubDate>2014-04-24T00:00:00+08:00</pubDate>
+                <pubDate>2014-04-24T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -623,7 +674,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</link>
                 <guid>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</guid>
-                <pubDate>2014-04-05T00:00:00+08:00</pubDate>
+                <pubDate>2014-04-05T00:00:00+02:00</pubDate>
         </item>
 
         <item>
@@ -647,7 +698,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</link>
                 <guid>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</guid>
-                <pubDate>2014-03-14T00:00:00+08:00</pubDate>
+                <pubDate>2014-03-14T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -672,7 +723,7 @@ Make sure that `gem install mysql2 -v &#39;0.3.14&#39;` succeeds before bundling
 </description>
                 <link>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</link>
                 <guid>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</guid>
-                <pubDate>2014-01-26T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-26T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -699,7 +750,7 @@ sciences, and I decided that’s what I wanted to do.”&lt;/p&gt;
 </description>
                 <link>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</link>
                 <guid>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</guid>
-                <pubDate>2014-01-19T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-19T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -736,7 +787,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</link>
                 <guid>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</guid>
-                <pubDate>2014-01-15T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-15T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -810,7 +861,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</link>
                 <guid>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</guid>
-                <pubDate>2014-01-12T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-12T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -825,7 +876,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</link>
                 <guid>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</guid>
-                <pubDate>2014-01-08T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-08T00:00:00+01:00</pubDate>
         </item>
 
         <item>
@@ -838,7 +889,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</link>
                 <guid>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</guid>
-                <pubDate>2014-01-05T00:00:00+08:00</pubDate>
+                <pubDate>2014-01-05T00:00:00+01:00</pubDate>
         </item>
 
 
