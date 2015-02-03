@@ -2,7 +2,7 @@
 layout: post
 title: "Securing My Cloud Server"
 description: "How to secure a private cloud server"
-tags: [sysadmin]
+tags: [sysadmin, ubuntu, centos, security]
 ---
 
 I'm finally on the deployment stage of my app. I have been working on this application on and off for a few months now. I was hoping to deploy it on January 1 but an impromptu trip stopped me from doing so. But nevertheless, here I am and deploying it.
@@ -30,7 +30,7 @@ After creating a new user, my next stop was to edit the sshd_config.
 
 **Before I started editing, I created a backup of the sshd_config.** This is in the event that if something goes wrong then I can always revert back to the old config.
 
-    cp /etc/ssh/sshd_config > /etc/ssh/sshd_config.bak
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 
 After creating the backup, I started editing the file by disallowing users to directly ssh as root. I disabled this by changing *PermitRootLogin* to *no*
 
@@ -47,10 +47,15 @@ Another precaution I did was to to allow only certain users to access my server.
 After this, I enabled *RSAAuthentication* so that only those machines with keys specified in the user's authorized_keys file will be allowed to get in
 
     RSAAuthentication yes
+    PubkeyAuthentication yes
+    AuthorizedKeysFile  %h/.ssh/authorized_keys
+
+If you still can't login passwordless, you can check the sshd logs to see where the problem is. This is normally located at ```/var/log/audit/audit``` or ```/var/log/secure```.
+
 
 After applying these changes, I restarted ssh by running:
 
-    service ssh restart
+    /sbin/service ssh restart
 
 **Don't exit the terminal yet.** To confirm whether I configured everything correctly, I decided to test it out by opening a new terminal. This is to see whether I would be able to get in using the port I specified.
 
