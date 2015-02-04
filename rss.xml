@@ -5,10 +5,329 @@
         <description>Paolo Ibarra's Blog - Juan Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2015-01-12T06:33:13+01:00</lastBuildDate>
-        <pubDate>2015-01-12T06:33:13+01:00</pubDate>
+        <lastBuildDate>2015-02-04T08:21:29+08:00</lastBuildDate>
+        <pubDate>2015-02-04T08:21:29+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Deploying a Rails Application with Capistrano 3, RVM, Nginx and Unicorn</title>
+                <description>&lt;p&gt;If you are planning to deploy your Rails application using Capistrano 3, RVM, Unicorn, and Nginx then this is for you. You can follow these steps to help you automate your deployment to your cloud server. If you want to secure your server, you can read through &lt;a href=&quot;http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server/&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h2&gt;
+
+&lt;p&gt;Log in to your system and install RVM. RVM has a good installation guide which you can find in detail &lt;a href=&quot;https://rvm.io/rvm/install&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Or, you can just run this on your server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -sSL https://get.rvm.io | bash -s stable --ruby
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To verify&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rvm version
+
+rvm 1.25.14 (stable) by Wayne E. Seguin &amp;lt;wayneeseguin@gmail.com&amp;gt;, Michal Papis &amp;lt;mpapis@gmail.com&amp;gt; [https://rvm.io/]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;install-git&quot;&gt;Install Git&lt;/h2&gt;
+
+&lt;p&gt;For Ubuntu:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are running on CentOS&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To check whether it installed correctly&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git --version
+
+git version 1.8.3.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;setup-nginx&quot;&gt;Setup Nginx&lt;/h2&gt;
+
+&lt;p&gt;Nginx is a reverse proxy server. It basically serves all the client requests coming in to your server, and directs it to the appropriate backend server. In this case, your backend server would be Unicorn which hosts your Rails application.&lt;/p&gt;
+
+&lt;p&gt;Installing Nginx is simple with the package management tool. &lt;/p&gt;
+
+&lt;p&gt;For Ubuntu&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For CentOS&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you have this installed, you will need to add &lt;code&gt;default.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo vim /etc/nginx/conf.d/default.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add the following content. Make sure to edit it to match your configurations&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;upstream unicorn {
+  server unix:/tmp/unicorn.[APP_NAME].sock fail_timeout=0;
+}
+
+server {
+  listen 80 default deferred;
+  # server_name example.com;
+  root [APP_DIRECTORY]/[APP_NAME]/current/public; # e.g. /var/apps/rails_blog/current/public
+
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  location ~ ^/(robots.txt|sitemap.xml.gz)/ {
+    root [APP_DIRECTORY]/[APP_NAME]/current/public; # e.g. /var/apps/rails_blog/current/public
+  }
+
+  try_files $uri/index.html $uri @unicorn;
+  location @unicorn {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://unicorn;
+  }
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+}    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After adding this config, try to start nginx&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo service nginx start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can check whether nginx is running correctly&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ps aux|grep nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see nginx listed in the result.&lt;/p&gt;
+
+&lt;h2 id=&quot;setup-your-app&quot;&gt;Setup your App&lt;/h2&gt;
+
+&lt;h3 id=&quot;configure-unicorn-in-your-rails-application&quot;&gt;Configure Unicorn in your Rails application&lt;/h3&gt;
+
+&lt;p&gt;Add the &lt;code&gt;unicorn&lt;/code&gt; gem into your &lt;code&gt;Gemfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim Gemfile
+
+gem &#39;unicorn&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then add the unicorn configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim config/unicorn/production.rb
+
+root = &quot;[APP_DIRECTORY]/[APP_NAME]/current&quot; # e.g. /var/apps/rails_blog/current
+working_directory root
+
+pid &quot;#{root}/tmp/pids/unicorn.pid&quot;
+
+stderr_path &quot;#{root}/log/unicorn.log&quot;
+stdout_path &quot;#{root}/log/unicorn.log&quot;
+
+worker_processes 8 # update this with your preference
+timeout 30
+preload_app true
+
+listen &#39;/tmp/unicorn.[APP_NAME].sock&#39;, backlog: 64
+
+before_fork do |server, worker|
+  Signal.trap &#39;TERM&#39; do
+    puts &#39;Unicorn master intercepting TERM and sending myself QUIT instead&#39;
+    Process.kill &#39;QUIT&#39;, Process.pid
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  Signal.trap &#39;TERM&#39; do
+    puts &#39;Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT&#39;
+  end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
+
+# Force the bundler gemfile environment variable to
+# reference the capistrano &quot;current&quot; symlink
+before_exec do |_|
+  ENV[&#39;BUNDLE_GEMFILE&#39;] = File.join(root, &#39;Gemfile&#39;)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;add-capistrano-3-to-your-app&quot;&gt;Add Capistrano 3 to your app&lt;/h3&gt;
+
+&lt;p&gt;Add the gem&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim Gemfile
+
+group :development do
+  gem &#39;capistrano-rails&#39;
+  gem &#39;capistrano-rvm&#39;
+  gem &#39;capistrano3-unicorn&#39;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generate the necessary Capistrano files&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bundle exec cap install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Update the generated Capfile&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim Capfile
+
+require &#39;capistrano/setup&#39;
+require &#39;capistrano/deploy&#39;
+require &#39;capistrano/rvm&#39;
+require &#39;capistrano/bundler&#39;
+require &#39;capistrano/rails/assets&#39;
+require &#39;capistrano/rails/migrations&#39;
+require &#39;capistrano3/unicorn&#39;
+
+# Load custom tasks from `lib/capistrano/tasks&#39; if you have any defined
+Dir.glob(&#39;lib/capistrano/tasks/*.rake&#39;).each { |r| import r }    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Update deploy.rb&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim config/deploy.rb
+
+lock &#39;3.3.5&#39;
+
+set :application, [APP_NAME]
+set :repo_url, &#39;git@github.com:[GITHUB_ACCOUNT_NAME]/[APP_NAME].git&#39; # change this to your git server
+
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+
+set :use_sudo, false
+set :bundle_binstubs, nil
+set :linked_files, fetch(:linked_files, []).push(&#39;config/database.yml&#39;)
+set :linked_dirs, fetch(:linked_dirs, []).push(&#39;log&#39;, &#39;tmp/pids&#39;, &#39;tmp/cache&#39;, &#39;tmp/sockets&#39;, &#39;vendor/bundle&#39;, &#39;public/system&#39;)
+
+after &#39;deploy:publishing&#39;, &#39;deploy:restart&#39;
+
+namespace :deploy do
+  task :restart do
+    invoke &#39;unicorn:stop&#39;
+    invoke &#39;unicorn:reload&#39;
+  end
+
+  task :stop do
+    invoke &#39;unicorn:stop&#39;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Update capistrano production.rb&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim config/deploy/production.rb
+
+set :port, 22
+set :user, [username] # e.g. &#39;deploy&#39;
+set :deploy_via, :remote_cache
+set :use_sudo, false
+set :branch, [BRANCH_TO_DEPLOY] # e.g. &#39;master&#39;
+
+server [HOST_IP], # e.g. 192.xxx.xxx.xxx
+  roles: [:web, :app, :db],
+  port: fetch(:port),
+  user: fetch(:user),
+  primary: true
+
+set :deploy_to, &quot;[APP_DIRECTORY]/#{fetch(:application)}&quot; # e.g. &quot;/var/apps/rails_blog&quot;
+
+set :ssh_options, {
+  forward_agent: true,
+  auth_methods: %w(publickey),
+  user: &#39;deployer&#39;,
+}
+
+set :rails_env, :production
+set :conditionally_migrate, true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;setup-git-server&quot;&gt;Setup Git Server&lt;/h2&gt;
+
+&lt;p&gt;To make sure that the deployment script runs smoothly, you need to add your server’s pub key to your git server. &lt;/p&gt;
+
+&lt;p&gt;Generate your pub key if you have not done so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh-keygen -t rsa -C &quot;[EMAIL_ADDRESS]&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will generate a public key: &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Copy the content of this file onto your git server profile.&lt;/p&gt;
+
+&lt;h2 id=&quot;verify-deploy&quot;&gt;Verify deploy&lt;/h2&gt;
+
+&lt;p&gt;Once everything has been setup, try to verify everything by running this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cap production deploy:check
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If everything runs smoothly, then you are more or less set.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-application&quot;&gt;Deploy application&lt;/h2&gt;
+
+&lt;p&gt;To deploy this in production&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cap production deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should deploy your app in production. Once you access the IP address of your server on a browser, you should be greeted by your app’s home page.&lt;/p&gt;
+
+&lt;p&gt;Many thanks to &lt;a href=&quot;https://gist.github.com/ChuckJHardy/f44dda5f94c6bbdba9a4&quot;&gt;Chuck J Hardy&lt;/a&gt; for his guide which helped me tremendously.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn</link>
+                <guid>http://paoloibarra.com/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn</guid>
+                <pubDate>2015-02-01T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>SSH Authentication Issue</title>
+                <description>&lt;p&gt;Last week, I was setting up a passwordless ssh in one of our servers. I’ve already updated the necessary configuration in &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;When I checked the log&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo tail -f secure audit/audit.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I noticed this error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Authentication refused: bad ownership or modes for file /home/deployer/.ssh/authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After checking, I found out that this has something to do with the group permission on my ssh files. To fix this, I changed the ownership of the folder and file to my user account. &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod 700 ~/.ssh # owner can read and write
+$ chmod 600 ~/.ssh/authorized_keys # owner can read, write and execute
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Modifying the permission in the file fixed my issue. I was able to get in without having to key-in the password.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2015/01/28/SSH-Authentication-Issue</link>
+                <guid>http://paoloibarra.com/2015/01/28/SSH-Authentication-Issue</guid>
+                <pubDate>2015-01-28T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Some Notes and Errors Encountered After Trying Out Apache Spark</title>
@@ -58,7 +377,7 @@
 </description>
                 <link>http://paoloibarra.com/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark</link>
                 <guid>http://paoloibarra.com/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark</guid>
-                <pubDate>2015-01-12T00:00:00+01:00</pubDate>
+                <pubDate>2015-01-12T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -114,7 +433,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 </description>
                 <link>http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</link>
                 <guid>http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift</guid>
-                <pubDate>2014-12-29T00:00:00+01:00</pubDate>
+                <pubDate>2014-12-29T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -134,7 +453,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 </description>
                 <link>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</link>
                 <guid>http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update</guid>
-                <pubDate>2014-11-25T00:00:00+01:00</pubDate>
+                <pubDate>2014-11-25T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -185,7 +504,7 @@ test:
 </description>
                 <link>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</link>
                 <guid>http://paoloibarra.com/2014/11/01/Migrating-Rails-App-From-MySQL-to-PostgreSQL</guid>
-                <pubDate>2014-11-01T00:00:00+01:00</pubDate>
+                <pubDate>2014-11-01T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -229,7 +548,7 @@ task.resume() // this is needed to start the task
 </description>
                 <link>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</link>
                 <guid>http://paoloibarra.com/2014/10/11/Image-Upload-To-RESTful-API-Swift</guid>
-                <pubDate>2014-10-11T00:00:00+02:00</pubDate>
+                <pubDate>2014-10-11T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -310,7 +629,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</link>
                 <guid>http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip</guid>
-                <pubDate>2014-09-27T00:00:00+02:00</pubDate>
+                <pubDate>2014-09-27T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -327,7 +646,7 @@ response.flushBuffer();
 </description>
                 <link>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</link>
                 <guid>http://paoloibarra.com/2014/08/31/Java-Browser-Download-Dialog</guid>
-                <pubDate>2014-08-31T00:00:00+02:00</pubDate>
+                <pubDate>2014-08-31T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -397,7 +716,7 @@ public class FlightFormSpec extends Specification {
 </description>
                 <link>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</link>
                 <guid>http://paoloibarra.com/2014/07/20/Java-Spock-and-PowerMock</guid>
-                <pubDate>2014-07-20T00:00:00+02:00</pubDate>
+                <pubDate>2014-07-20T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -552,7 +871,7 @@ func GetPosts() []Post {
 </description>
                 <link>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</link>
                 <guid>http://paoloibarra.com/2014/06/01/Playing-around-with-Go</guid>
-                <pubDate>2014-06-01T00:00:00+02:00</pubDate>
+                <pubDate>2014-06-01T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -644,7 +963,7 @@ git commit -m &quot;My first commit&quot;
 </description>
                 <link>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</link>
                 <guid>http://paoloibarra.com/2014/04/24/Revisiting-Git-SVN</guid>
-                <pubDate>2014-04-24T00:00:00+02:00</pubDate>
+                <pubDate>2014-04-24T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -674,7 +993,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</link>
                 <guid>http://paoloibarra.com/2014/04/05/Retrieving-Vimeo-Id</guid>
-                <pubDate>2014-04-05T00:00:00+02:00</pubDate>
+                <pubDate>2014-04-05T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -698,7 +1017,7 @@ end
 </description>
                 <link>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</link>
                 <guid>http://paoloibarra.com/2014/03/14/Center-Pagination-Bootstrap</guid>
-                <pubDate>2014-03-14T00:00:00+01:00</pubDate>
+                <pubDate>2014-03-14T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -723,7 +1042,7 @@ Make sure that `gem install mysql2 -v &#39;0.3.14&#39;` succeeds before bundling
 </description>
                 <link>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</link>
                 <guid>http://paoloibarra.com/2014/01/26/MySQL-2-Gem-Installation-Error</guid>
-                <pubDate>2014-01-26T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-26T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -750,7 +1069,7 @@ sciences, and I decided that’s what I wanted to do.”&lt;/p&gt;
 </description>
                 <link>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</link>
                 <guid>http://paoloibarra.com/2014/01/19/The-Pink-Notes-Is-Live</guid>
-                <pubDate>2014-01-19T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-19T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -787,7 +1106,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</link>
                 <guid>http://paoloibarra.com/2014/01/15/Ubuntu-Locale-Issue</guid>
-                <pubDate>2014-01-15T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-15T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -819,7 +1138,7 @@ LANG=en_US.UTF-8
 
 &lt;p&gt;&lt;strong&gt;Before I started editing, I created a backup of the sshd_config.&lt;/strong&gt; This is in the event that if something goes wrong then I can always revert back to the old config.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;cp /etc/ssh/sshd_config &amp;gt; /etc/ssh/sshd_config.bak
+&lt;pre&gt;&lt;code&gt;cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After creating the backup, I started editing the file by disallowing users to directly ssh as root. I disabled this by changing &lt;em&gt;PermitRootLogin&lt;/em&gt; to &lt;em&gt;no&lt;/em&gt;&lt;/p&gt;
@@ -840,11 +1159,15 @@ LANG=en_US.UTF-8
 &lt;p&gt;After this, I enabled &lt;em&gt;RSAAuthentication&lt;/em&gt; so that only those machines with keys specified in the user’s authorized_keys file will be allowed to get in&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile  %h/.ssh/authorized_keys
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you still can’t login passwordless, you can check the sshd logs to see where the problem is. This is normally located at &lt;code&gt;/var/log/audit/audit&lt;/code&gt; or &lt;code&gt;/var/log/secure&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;After applying these changes, I restarted ssh by running:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;service ssh restart
+&lt;pre&gt;&lt;code&gt;/sbin/service ssh restart
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Don’t exit the terminal yet.&lt;/strong&gt; To confirm whether I configured everything correctly, I decided to test it out by opening a new terminal. This is to see whether I would be able to get in using the port I specified.&lt;/p&gt;
@@ -861,7 +1184,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</link>
                 <guid>http://paoloibarra.com/2014/01/12/Securing-My-Cloud-Server</guid>
-                <pubDate>2014-01-12T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-12T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -876,7 +1199,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</link>
                 <guid>http://paoloibarra.com/2014/01/08/Learning-Ruby-Throught-a-Book</guid>
-                <pubDate>2014-01-08T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-08T00:00:00+08:00</pubDate>
         </item>
 
         <item>
@@ -889,7 +1212,7 @@ LANG=en_US.UTF-8
 </description>
                 <link>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</link>
                 <guid>http://paoloibarra.com/2014/01/05/Privacy-Policy-And-Terms-of-Service-Source</guid>
-                <pubDate>2014-01-05T00:00:00+01:00</pubDate>
+                <pubDate>2014-01-05T00:00:00+08:00</pubDate>
         </item>
 
 

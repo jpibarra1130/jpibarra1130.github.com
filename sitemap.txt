@@ -8,6 +8,8 @@ http://paoloibarra.com/tags/admin/index.html
 http://paoloibarra.com/tags/ruby/index.html
 http://paoloibarra.com/tags/sysadmin/index.html
 http://paoloibarra.com/tags/ubuntu/index.html
+http://paoloibarra.com/tags/centos/index.html
+http://paoloibarra.com/tags/security/index.html
 http://paoloibarra.com/tags/happiness/index.html
 http://paoloibarra.com/tags/mysql/index.html
 http://paoloibarra.com/tags/css/index.html
@@ -30,7 +32,17 @@ http://paoloibarra.com/tags/spark/index.html
 http://paoloibarra.com/tags/apache/index.html
 http://paoloibarra.com/tags/apache%20spark/index.html
 http://paoloibarra.com/tags/notes/index.html
+http://paoloibarra.com/tags/ssh/index.html
+http://paoloibarra.com/tags/rsa%20authentication/index.html
+http://paoloibarra.com/tags/pubkey/index.html
+http://paoloibarra.com/tags/error/index.html
+http://paoloibarra.com/tags/capistrano%203/index.html
+http://paoloibarra.com/tags/nginx/index.html
+http://paoloibarra.com/tags/unicorn/index.html
+http://paoloibarra.com/tags/deploy/index.html
 
+http://paoloibarra.com/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn
+http://paoloibarra.com/2015/01/28/SSH-Authentication-Issue
 http://paoloibarra.com/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark
 http://paoloibarra.com/2014/12/29/Working-With-Multiple-Storyboards-UITabBarController-Swift
 http://paoloibarra.com/2014/11/25/Swift-UICollectionView-Immediate-Update

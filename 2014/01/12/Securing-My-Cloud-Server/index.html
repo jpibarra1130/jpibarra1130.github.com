@@ -82,7 +82,7 @@
 
 <p><strong>Before I started editing, I created a backup of the sshd_config.</strong> This is in the event that if something goes wrong then I can always revert back to the old config.</p>
 
-<pre><code>cp /etc/ssh/sshd_config &gt; /etc/ssh/sshd_config.bak
+<pre><code>cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 </code></pre>
 
 <p>After creating the backup, I started editing the file by disallowing users to directly ssh as root. I disabled this by changing <em>PermitRootLogin</em> to <em>no</em></p>
@@ -103,11 +103,15 @@
 <p>After this, I enabled <em>RSAAuthentication</em> so that only those machines with keys specified in the user’s authorized_keys file will be allowed to get in</p>
 
 <pre><code>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile  %h/.ssh/authorized_keys
 </code></pre>
+
+<p>If you still can’t login passwordless, you can check the sshd logs to see where the problem is. This is normally located at <code>/var/log/audit/audit</code> or <code>/var/log/secure</code>.</p>
 
 <p>After applying these changes, I restarted ssh by running:</p>
 
-<pre><code>service ssh restart
+<pre><code>/sbin/service ssh restart
 </code></pre>
 
 <p><strong>Don’t exit the terminal yet.</strong> To confirm whether I configured everything correctly, I decided to test it out by opening a new terminal. This is to see whether I would be able to get in using the port I specified.</p>
@@ -135,7 +139,13 @@
 
   
      
-    	<li><a href="/tags.html#sysadmin-ref">sysadmin <span>3</span></a></li>
+    	<li><a href="/tags.html#sysadmin-ref">sysadmin <span>4</span></a></li>
+     
+    	<li><a href="/tags.html#ubuntu-ref">ubuntu <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#centos-ref">centos <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#security-ref">security <span>1</span></a></li>
     
   
 
