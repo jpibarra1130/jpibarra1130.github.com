@@ -4,7 +4,7 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2015-02-04T08:21:29+08:00</updated>
+ <updated>2015-03-18T21:28:28+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
@@ -526,17 +526,18 @@ request.addValue(&quot;application/json&quot;, forHTTPHeaderField: &quot;Accept&
 
 &lt;p&gt;To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var imageData = UIImagePNGRepresentation(image)
+&lt;pre&gt;&lt;code&gt;var imageData = UIImageJPEGRepresentation(image)
 var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After doing this, I’ve put the encoded image into a Dictionary in the appropriate parameter. I serialized it into a JSON representation which I assigned to the HTTPBody.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var params = [&quot;image&quot;:[ &quot;content_type&quot;: &quot;image/jpeg&quot;, &quot;filename&quot;:&quot;test.jpg&quot;, &quot;file_data&quot;: base64String]]
+&lt;pre&gt;&lt;code&gt;var err: NSError? = nil
+var params = [&quot;image&quot;:[ &quot;content_type&quot;: &quot;image/jpeg&quot;, &quot;filename&quot;:&quot;test.jpg&quot;, &quot;file_data&quot;: base64String]]
 request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(0), error: &amp;amp;err)!
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I used the shared session object to create a task to send the request.&lt;/p&gt;
+&lt;p&gt;I used the shared session object to create a task to send the request. I created a request model that I can convert to a MutableURLRequest. You can see how it looks like &lt;a href=&quot;https://gist.github.com/jpibarra1130/f163e0e07a3417983059&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var session = NSURLSession.sharedSession()
 var task = session.dataTaskWithRequest(request.toMutableURLRequest(), completionHandler: { data, response, error -&amp;gt; Void in
@@ -550,6 +551,8 @@ task.resume() // this is needed to start the task
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After the request has completed, the block I passed via the completionHandler will be executed. From there, I was able to evaluate the response. So that’s how I was able to send the image taken from my phone’s camera to the server.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;UPDATE: I modified the post to use UIImageJPEGRepresentation instead of UIImagePNGRepresentation as suggested by Paul Senzee. I also added more detail to make the sample code clearer.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </content>
  </entry>
  

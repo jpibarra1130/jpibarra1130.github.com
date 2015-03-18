@@ -67,17 +67,18 @@ request.addValue("application/json", forHTTPHeaderField: "Accept")
 
 <p>To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:</p>
 
-<pre><code>var imageData = UIImagePNGRepresentation(image)
+<pre><code>var imageData = UIImageJPEGRepresentation(image)
 var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
 </code></pre>
 
 <p>After doing this, I’ve put the encoded image into a Dictionary in the appropriate parameter. I serialized it into a JSON representation which I assigned to the HTTPBody.</p>
 
-<pre><code>var params = ["image":[ "content_type": "image/jpeg", "filename":"test.jpg", "file_data": base64String]]
+<pre><code>var err: NSError? = nil
+var params = ["image":[ "content_type": "image/jpeg", "filename":"test.jpg", "file_data": base64String]]
 request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(0), error: &amp;err)!
 </code></pre>
 
-<p>I used the shared session object to create a task to send the request.</p>
+<p>I used the shared session object to create a task to send the request. I created a request model that I can convert to a MutableURLRequest. You can see how it looks like <a href="https://gist.github.com/jpibarra1130/f163e0e07a3417983059">here</a>.</p>
 
 <pre><code>var session = NSURLSession.sharedSession()
 var task = session.dataTaskWithRequest(request.toMutableURLRequest(), completionHandler: { data, response, error -&gt; Void in
@@ -91,6 +92,8 @@ task.resume() // this is needed to start the task
 </code></pre>
 
 <p>After the request has completed, the block I passed via the completionHandler will be executed. From there, I was able to evaluate the response. So that’s how I was able to send the image taken from my phone’s camera to the server.</p>
+
+<p><strong><em>UPDATE: I modified the post to use UIImageJPEGRepresentation instead of UIImagePNGRepresentation as suggested by Paul Senzee. I also added more detail to make the sample code clearer.</em></strong></p>
 
     </div>
 
