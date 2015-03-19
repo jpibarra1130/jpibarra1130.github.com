@@ -5,10 +5,122 @@
         <description>Paolo Ibarra's Blog - Juan Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2015-03-18T21:28:28+08:00</lastBuildDate>
-        <pubDate>2015-03-18T21:28:28+08:00</pubDate>
+        <lastBuildDate>2015-03-19T16:35:02+08:00</lastBuildDate>
+        <pubDate>2015-03-19T16:35:02+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Sorting in Elastic for String Fields</title>
+                <description>&lt;p&gt;I encountered this issue with elasticsearch while I was trying to implement the sorting feature for one of my projects. The problem is that the sorting is not working as how I expected it for my string fields. &lt;/p&gt;
+
+&lt;p&gt;This is how the sorting problem looks like. Say you have this data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[
+  {
+    &quot;name&quot;: &quot;Juan Andres&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Jasmin Mae&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Jorge&quot;
+  }
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I do a regular sort via the &lt;code&gt;name&lt;/code&gt; field in &lt;code&gt;ASC&lt;/code&gt; order with a sample request like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &quot;sort&quot;: [
+    {
+      &quot;name&quot;: &quot;asc&quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I get this result:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Juan Andres&quot;
+    },
+    &quot;sort&quot;: [&quot;Andres&quot;]
+  },
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Jasmin Mae&quot;
+    },
+    &quot;sort&quot;: [&quot;Jasmin&quot;]
+  },
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Jorge&quot;
+    },
+    &quot;sort&quot;: [&quot;Jorge&quot;]
+  }
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is not the sorting I want to happen. The reason why this is happening is because my field &lt;code&gt;name&lt;/code&gt; is being &lt;code&gt;analyzed&lt;/code&gt;. Elasticsearch uses the tokens to do the sorting. This is actually &lt;a href=&quot;http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html&quot;&gt;not advisable&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I can just change the string index to &lt;code&gt;not_analyzed&lt;/code&gt; but I need it for my full-text search. &lt;/p&gt;
+
+&lt;p&gt;To make this work, I need to make a field both &lt;code&gt;analyzed&lt;/code&gt; and &lt;code&gt;not_analyzed&lt;/code&gt;. This can be done by using the &lt;code&gt;fields&lt;/code&gt; property. &lt;code&gt;Fields&lt;/code&gt; is a newer version of &lt;code&gt;multi-field&lt;/code&gt;. Your property will basically have two parts - one tokenized and one unanalyzed. Since you have both, you can use the &lt;code&gt;not_analyzed&lt;/code&gt; part for sorting, and the &lt;code&gt;analyzed&lt;/code&gt; part for the full-text search. You can read more about it &lt;a href=&quot;http://www.elastic.co/guide/en/elasticsearch/reference/current/_multi_fields.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I modified my type-mapping for the field to this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&quot;name&quot; :   {
+  &quot;type&quot;: &quot;string&quot;,
+  &quot;fields&quot;: {
+      &quot;raw&quot;:   { &quot;type&quot;: &quot;string&quot;, &quot;index&quot;: &quot;not_analyzed&quot; }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once I had &lt;code&gt;name&lt;/code&gt; configured to this, I was able to sort it properly. I needed to indicate the sort field to &lt;code&gt;name.raw&lt;/code&gt; instead of just plain &lt;code&gt;name&lt;/code&gt;. My new sort request looks like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &quot;sort&quot;: [
+    {
+      &quot;name.raw&quot;: &quot;asc&quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once I ran the command above, I get the correct sorted list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Jasmin Mae&quot;
+    },
+    &quot;sort&quot;: [&quot;Jasmin Mae&quot;]
+  },
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Jorge&quot;
+    },
+    &quot;sort&quot;: [&quot;Jorge&quot;]
+  },
+  {
+    &quot;_source&quot;: {
+      &quot;name&quot;: &quot;Juan Andres&quot;
+    },
+    &quot;sort&quot;: [&quot;Juan Andres&quot;]
+  } 
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The sorting criteria becomes the &lt;code&gt;not_analyzed&lt;/code&gt; version of the field.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2015/03/19/Sorting-in-Elastic-for-String-Fields</link>
+                <guid>http://paoloibarra.com/2015/03/19/Sorting-in-Elastic-for-String-Fields</guid>
+                <pubDate>2015-03-19T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Deploying a Rails Application with Capistrano 3, RVM, Nginx and Unicorn</title>

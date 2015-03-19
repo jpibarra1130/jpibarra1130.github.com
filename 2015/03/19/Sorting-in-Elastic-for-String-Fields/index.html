@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sorting in Elastic for String Fields</title>
+    <meta name="description" content="Sotring in elastic elasticsearch for string fields using multifield">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Sorting in Elastic for String Fields </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">March 19, 2015</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I encountered this issue with elasticsearch while I was trying to implement the sorting feature for one of my projects. The problem is that the sorting is not working as how I expected it for my string fields. </p>
+
+<p>This is how the sorting problem looks like. Say you have this data.</p>
+
+<pre><code>[
+  {
+    "name": "Juan Andres"
+  },
+  {
+    "name": "Jasmin Mae"
+  },
+  {
+    "name": "Jorge"
+  }
+]
+</code></pre>
+
+<p>When I do a regular sort via the <code>name</code> field in <code>ASC</code> order with a sample request like below:</p>
+
+<pre><code>{
+  "sort": [
+    {
+      "name": "asc"
+    }
+  ]
+}
+</code></pre>
+
+<p>I get this result:</p>
+
+<pre><code>[
+  {
+    "_source": {
+      "name": "Juan Andres"
+    },
+    "sort": ["Andres"]
+  },
+  {
+    "_source": {
+      "name": "Jasmin Mae"
+    },
+    "sort": ["Jasmin"]
+  },
+  {
+    "_source": {
+      "name": "Jorge"
+    },
+    "sort": ["Jorge"]
+  }
+]
+</code></pre>
+
+<p>This is not the sorting I want to happen. The reason why this is happening is because my field <code>name</code> is being <code>analyzed</code>. Elasticsearch uses the tokens to do the sorting. This is actually <a href="http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html">not advisable</a>.</p>
+
+<p>I can just change the string index to <code>not_analyzed</code> but I need it for my full-text search. </p>
+
+<p>To make this work, I need to make a field both <code>analyzed</code> and <code>not_analyzed</code>. This can be done by using the <code>fields</code> property. <code>Fields</code> is a newer version of <code>multi-field</code>. Your property will basically have two parts - one tokenized and one unanalyzed. Since you have both, you can use the <code>not_analyzed</code> part for sorting, and the <code>analyzed</code> part for the full-text search. You can read more about it <a href="http://www.elastic.co/guide/en/elasticsearch/reference/current/_multi_fields.html">here</a>.</p>
+
+<p>I modified my type-mapping for the field to this:</p>
+
+<pre><code>"name" :   {
+  "type": "string",
+  "fields": {
+      "raw":   { "type": "string", "index": "not_analyzed" }
+  }
+}
+</code></pre>
+
+<p>Once I had <code>name</code> configured to this, I was able to sort it properly. I needed to indicate the sort field to <code>name.raw</code> instead of just plain <code>name</code>. My new sort request looks like below:</p>
+
+<pre><code>{
+  "sort": [
+    {
+      "name.raw": "asc"
+    }
+  ]
+}
+</code></pre>
+
+<p>Once I ran the command above, I get the correct sorted list.</p>
+
+<pre><code>[
+  {
+    "_source": {
+      "name": "Jasmin Mae"
+    },
+    "sort": ["Jasmin Mae"]
+  },
+  {
+    "_source": {
+      "name": "Jorge"
+    },
+    "sort": ["Jorge"]
+  },
+  {
+    "_source": {
+      "name": "Juan Andres"
+    },
+    "sort": ["Juan Andres"]
+  } 
+]
+</code></pre>
+
+<p>The sorting criteria becomes the <code>not_analyzed</code> version of the field.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#elastic-ref">elastic <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#elasticsearch-ref">elasticsearch <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#nosql-ref">nosql <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#sorting-ref">sorting <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#elastic-ref">elastic <span>2</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn" title="Deploying a Rails Application with Capistrano 3, RVM, Nginx and Unicorn">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Sorting in Elastic for String Fields")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

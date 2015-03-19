@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://paoloibarra.com/2015/03/19/Sorting-in-Elastic-for-String-Fields</loc>
+    <lastmod>2015-03-19T00:00:00+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn</loc>
     <lastmod>2015-02-01T00:00:00+08:00</lastmod>
     <priority>0.8</priority>
@@ -102,13 +107,13 @@
   </url>
   <url>
     <loc>http://paoloibarra.com/</loc>
-    <lastmod>2015-03-18T21:28:28+08:00</lastmod>
+    <lastmod>2015-03-19T16:35:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://paoloibarra.com/404.html</loc>
-    <lastmod>2015-02-04T08:21:30+08:00</lastmod>
+    <lastmod>2015-03-19T16:31:34+08:00</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
