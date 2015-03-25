@@ -16,7 +16,7 @@ To send the request, I used NSMutableURLRequest to handle the JSON request
 
 To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:
 
-    var imageData = UIImageJPEGRepresentation(image)
+    var imageData = UIImageJPEGRepresentation(image, 0.9)
     var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
 
 After doing this, I've put the encoded image into a Dictionary in the appropriate parameter. I serialized it into a JSON representation which I assigned to the HTTPBody.
