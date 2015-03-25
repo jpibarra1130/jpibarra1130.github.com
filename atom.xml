@@ -4,7 +4,7 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2015-03-19T16:35:02+08:00</updated>
+ <updated>2015-03-26T07:36:55+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
@@ -638,7 +638,7 @@ request.addValue(&quot;application/json&quot;, forHTTPHeaderField: &quot;Accept&
 
 &lt;p&gt;To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var imageData = UIImageJPEGRepresentation(image)
+&lt;pre&gt;&lt;code&gt;var imageData = UIImageJPEGRepresentation(image, 0.9)
 var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
 &lt;/code&gt;&lt;/pre&gt;
 

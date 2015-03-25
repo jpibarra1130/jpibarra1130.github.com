@@ -67,7 +67,7 @@ request.addValue("application/json", forHTTPHeaderField: "Accept")
 
 <p>To prepare the HTTPBody, I had to encode the image to a Base64 string. This is done through the following:</p>
 
-<pre><code>var imageData = UIImageJPEGRepresentation(image)
+<pre><code>var imageData = UIImageJPEGRepresentation(image, 0.9)
 var base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!) // encode the image
 </code></pre>
 
