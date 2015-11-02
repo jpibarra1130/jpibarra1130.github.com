@@ -44,7 +44,18 @@ http://paoloibarra.com/tags/elastic/index.html
 http://paoloibarra.com/tags/elasticsearch/index.html
 http://paoloibarra.com/tags/nosql/index.html
 http://paoloibarra.com/tags/sorting/index.html
+http://paoloibarra.com/tags/mac/index.html
+http://paoloibarra.com/tags/virtualenv/index.html
+http://paoloibarra.com/tags/python/index.html
+http://paoloibarra.com/tags/python3/index.html
+http://paoloibarra.com/tags/rvm/index.html
+http://paoloibarra.com/tags/bundle/index.html
+http://paoloibarra.com/tags/bundler/index.html
+http://paoloibarra.com/tags/ssl%20issue/index.html
+http://paoloibarra.com/tags/ssl/index.html
 
+http://paoloibarra.com/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos
+http://paoloibarra.com/2015/10/31/Installing-virtualenvwrapper-MacOs
 http://paoloibarra.com/2015/03/19/Sorting-in-Elastic-for-String-Fields
 http://paoloibarra.com/2015/02/01/Deploying-Rails-Application-with-Capistrano-3-RVM-Nginx-and-Unicorn
 http://paoloibarra.com/2015/01/28/SSH-Authentication-Issue

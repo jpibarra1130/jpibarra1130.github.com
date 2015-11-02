@@ -4,13 +4,112 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2015-03-26T07:36:55+08:00</updated>
+ <updated>2015-11-02T12:20:02+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Juan Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>SSL Error on bundle install in Ruby for RVM Users</title>
+   <link href="http://paoloibarra.com/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos"/>
+   <updated>2015-11-02T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos</id>
+   <content type="html">&lt;p&gt;I encountered a weird error the other day when I tried to run a &lt;code&gt;bundle install&lt;/code&gt; command in one of my Ruby on Rails project. The error looks like this:&lt;/p&gt;
+
+&lt;p&gt;[!] There was an error parsing &lt;code&gt;Gemfile&lt;/code&gt;: SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed. Bundler cannot continue.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     #  from &amp;lt;repository&amp;gt;:5
+     #  -------------------------------------------
+     #  require &#39;open-uri&#39;
+     &amp;gt;  versions = JSON.parse(open(&#39;https://pages.github.com/versions.json&#39;).read)
+     #
+     #  -------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I stumbled upon this &lt;a href=&quot;https://gist.github.com/luislavena/f064211759ee0f806c88&quot;&gt;issue&lt;/a&gt; while I was looking for the solution. Unfortunately, that didn’t work for me. I saw another solution that worked for my case in &lt;a href=&quot;https://stackoverflow.com/questions/19150017/ssl-error-when-installing-rubygems-unable-to-pull-data-from-https-rubygems-o/27298259&quot;&gt;stackoverflow&lt;/a&gt;. This is really helpful if you are using RVM in your Mac OS.&lt;/p&gt;
+
+&lt;p&gt;What I did to make it work is to simply do the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ rvm get stable
+    $ sudo rvm osx-ssl-certs update all
+    $ rvm rubygems latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After this, I could start running &lt;code&gt;bundle install&lt;/code&gt; properly again.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Installing virtualenvwrapper in MacOS</title>
+   <link href="http://paoloibarra.com/2015/10/31/Installing-virtualenvwrapper-MacOs"/>
+   <updated>2015-10-31T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2015/10/31/Installing-virtualenvwrapper-MacOs</id>
+   <content type="html">&lt;p&gt;I’m about to use Python in one of my projects. Because of this, I’ve been reading about some of the technologies commonly used together with Python. One of these is &lt;code&gt;virtualenv&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://docs.python-guide.org/en/latest/dev/virtualenvs/&quot;&gt;&lt;strong&gt;&lt;em&gt;virtualenv&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt; is something similar to Ruby’s &lt;a href=&quot;https://rvm.io/&quot;&gt;RVM&lt;/a&gt;. In a nutshell, it is used to isolate the different dependencies used by your projects so they don’t interfere with each other. I decided to use &lt;a href=&quot;https://virtualenvwrapper.readthedocs.org/en/latest/&quot;&gt;&lt;strong&gt;&lt;em&gt;virtualenvwrapper&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;. This is a wrapper for &lt;code&gt;virtualenv&lt;/code&gt; to make operations like deleting, copying, creating a virtual environment simpler.&lt;/p&gt;
+
+&lt;p&gt;I currently have two installations of Python - Python 2.7 and Python 3.5. I wanted to install this via Python 3.&lt;/p&gt;
+
+&lt;p&gt;I was following this &lt;a href=&quot;http://www.simononsoftware.com/virtualenv-tutorial-part-2/&quot;&gt;tutorial&lt;/a&gt; to help me get started. These are the steps I did to install virtualenvwrapper on my Mac OS machine.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;pip3 install virtualenvwrapper&lt;/li&gt;
+  &lt;li&gt;mkdir ~/.virtualenvs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need to set the &lt;code&gt;WORKON_HOME&lt;/code&gt; variable needed by &lt;code&gt;virtualenv&lt;/code&gt; to work. In my case, since I’m putting it in ~/.virtualenvs, I added this in my &lt;code&gt;~/.bash_profile&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export WORKON_HOME=$HOME/.virtualenvs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You need to source the virtualenv wrapper script to activate it. If you’re not sure where it is, you can simply use the &lt;code&gt;which&lt;/code&gt; command like &lt;code&gt;which virtualenvwrapper_lazy.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper_lazy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I’m using iTerm2 and my terminal crashes, so instead of using the lazy script, I just use the virtualenvwrapper script. I replaced the above line to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper_lazy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To check whether virtualenv works for you, you can try to create your own virtual environment&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkvirtualenv test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And if it succeeds, you have successfully install virtualenvwrapper in your machine.&lt;/p&gt;
+
+&lt;p&gt;Just to add on this, I encountered an additional issue where I’m getting this error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/bin/python: No module named virtualenvwrapper
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I managed to fix it thanks to &lt;a href=&quot;http://stackoverflow.com/questions/23997403/installed-virtualenv-and-virtualenvwrapper-python-says-no-module-named-virtuale&quot;&gt;this thread in Stackoverflow&lt;/a&gt;. I had to set some additional variables so that the script would work correctly.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export VIRTUALENVWRAPPER_SCRIPT=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=&#39;--no-site-packages&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After setting this up, my final &lt;code&gt;.bash_profile&lt;/code&gt; looks something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$DEV_PATH/workspace
+export VIRTUALENVWRAPPER_SCRIPT=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=&#39;--no-site-packages&#39;
+
+source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you’re not sure what to put in some of the variables there, you can simply use &lt;code&gt;which&lt;/code&gt;. Hope this helps!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Sorting in Elastic for String Fields</title>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SSL Error on bundle install in Ruby for RVM Users</title>
+    <meta name="description" content="SSL Error on bundle install in Ruby for RVM Users">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">SSL Error on bundle install in Ruby for RVM Users </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">November 02, 2015</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I encountered a weird error the other day when I tried to run a <code>bundle install</code> command in one of my Ruby on Rails project. The error looks like this:</p>
+
+<p>[!] There was an error parsing <code>Gemfile</code>: SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed. Bundler cannot continue.</p>
+
+<pre><code>     #  from &lt;repository&gt;:5
+     #  -------------------------------------------
+     #  require 'open-uri'
+     &gt;  versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+     #
+     #  -------------------------------------------
+</code></pre>
+
+<p>I stumbled upon this <a href="https://gist.github.com/luislavena/f064211759ee0f806c88">issue</a> while I was looking for the solution. Unfortunately, that didn’t work for me. I saw another solution that worked for my case in <a href="https://stackoverflow.com/questions/19150017/ssl-error-when-installing-rubygems-unable-to-pull-data-from-https-rubygems-o/27298259">stackoverflow</a>. This is really helpful if you are using RVM in your Mac OS.</p>
+
+<p>What I did to make it work is to simply do the following:</p>
+
+<pre><code>    $ rvm get stable
+    $ sudo rvm osx-ssl-certs update all
+    $ rvm rubygems latest
+</code></pre>
+
+<p>After this, I could start running <code>bundle install</code> properly again.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#ruby-ref">ruby <span>7</span></a></li>
+     
+    	<li><a href="/tags.html#rvm-ref">rvm <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#bundle-ref">bundle <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#bundler-ref">bundler <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#ssl issue-ref">ssl issue <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#ssl-ref">ssl <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2015/10/31/Installing-virtualenvwrapper-MacOs" title="Installing virtualenvwrapper in MacOS">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("SSL Error on bundle install in Ruby for RVM Users")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Installing virtualenvwrapper in MacOS</title>
+    <meta name="description" content="Installing virtualenvwrapper in mac os">
+    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  
+    <h1 class="page-title">Installing virtualenvwrapper in MacOS </h1>
+  
+</div>
+
+<div class="row post-full">
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">October 31, 2015</span> <span class="author">// Juan Paolo Ibarra</span>
+    </div>
+    <div class="content">
+      <p>I’m about to use Python in one of my projects. Because of this, I’ve been reading about some of the technologies commonly used together with Python. One of these is <code>virtualenv</code>.</p>
+
+<p><a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/"><strong><em>virtualenv</em></strong></a> is something similar to Ruby’s <a href="https://rvm.io/">RVM</a>. In a nutshell, it is used to isolate the different dependencies used by your projects so they don’t interfere with each other. I decided to use <a href="https://virtualenvwrapper.readthedocs.org/en/latest/"><strong><em>virtualenvwrapper</em></strong></a>. This is a wrapper for <code>virtualenv</code> to make operations like deleting, copying, creating a virtual environment simpler.</p>
+
+<p>I currently have two installations of Python - Python 2.7 and Python 3.5. I wanted to install this via Python 3.</p>
+
+<p>I was following this <a href="http://www.simononsoftware.com/virtualenv-tutorial-part-2/">tutorial</a> to help me get started. These are the steps I did to install virtualenvwrapper on my Mac OS machine.</p>
+
+<ul>
+  <li>pip3 install virtualenvwrapper</li>
+  <li>mkdir ~/.virtualenvs</li>
+</ul>
+
+<p>We need to set the <code>WORKON_HOME</code> variable needed by <code>virtualenv</code> to work. In my case, since I’m putting it in ~/.virtualenvs, I added this in my <code>~/.bash_profile</code></p>
+
+<pre><code>export WORKON_HOME=$HOME/.virtualenvs
+</code></pre>
+
+<p>You need to source the virtualenv wrapper script to activate it. If you’re not sure where it is, you can simply use the <code>which</code> command like <code>which virtualenvwrapper_lazy.sh</code></p>
+
+<pre><code>source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper_lazy.sh
+</code></pre>
+
+<p>I’m using iTerm2 and my terminal crashes, so instead of using the lazy script, I just use the virtualenvwrapper script. I replaced the above line to:</p>
+
+<pre><code>source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper_lazy.sh
+</code></pre>
+
+<p>To check whether virtualenv works for you, you can try to create your own virtual environment</p>
+
+<pre><code>mkvirtualenv test
+</code></pre>
+
+<p>And if it succeeds, you have successfully install virtualenvwrapper in your machine.</p>
+
+<p>Just to add on this, I encountered an additional issue where I’m getting this error:</p>
+
+<pre><code>/usr/bin/python: No module named virtualenvwrapper
+</code></pre>
+
+<p>I managed to fix it thanks to <a href="http://stackoverflow.com/questions/23997403/installed-virtualenv-and-virtualenvwrapper-python-says-no-module-named-virtuale">this thread in Stackoverflow</a>. I had to set some additional variables so that the script would work correctly.</p>
+
+<pre><code>export VIRTUALENVWRAPPER_SCRIPT=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+</code></pre>
+
+<p>After setting this up, my final <code>.bash_profile</code> looks something like this:</p>
+
+<pre><code>export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$DEV_PATH/workspace
+export VIRTUALENVWRAPPER_SCRIPT=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
+source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+</code></pre>
+
+<p>If you’re not sure what to put in some of the variables there, you can simply use <code>which</code>. Hope this helps!</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#mac-ref">mac <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#virtualenv-ref">virtualenv <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#virtualenv-ref">virtualenv <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#python-ref">python <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#python3-ref">python3 <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2015/03/19/Sorting-in-Elastic-for-String-Fields" title="Sorting in Elastic for String Fields">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos" title="SSL Error on bundle install in Ruby for RVM Users">Next &rarr;</a></li>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Installing virtualenvwrapper in MacOS")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
