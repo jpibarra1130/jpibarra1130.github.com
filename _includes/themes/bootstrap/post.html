@@ -1,9 +1,11 @@
 {% include themes/bootstrap/header.html %}
 
 <div class="row post-full">
+  <h1 class="page-title">{{ page.title }} {% if page.tagline %} <span>{{ page.tagline }}</span>{% endif %}</h1>
+
   <div class="col-md12">
     <div class="summary">
-      <span class="date">{{ page.date | date: "%B %d, %Y" }}</span> <span class="author">// {{ site.author.name }}</span>
+      <span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
     </div>
     <div class="content">
       {{ content }}

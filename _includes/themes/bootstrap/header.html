@@ -1,15 +1,11 @@
 <div class="page-header">
-  {% if page.path contains '_posts' %}
-    <h1 class="page-title">{{ page.title }} {% if page.tagline %} <span>{{ page.tagline }}</span>{% endif %}</h1>
-  {% else %}
-    <div class='header-logo'>
-      <div class="left">
-        <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
-      </div>
-
-      <div class="right">
-          {% include themes/bootstrap/social_media.html %}      
-      </div>
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
     </div>
-  {% endif %}
+
+    <div class="right">
+        {% include themes/bootstrap/social_media.html %}      
+    </div>
+  </div>
 </div>
