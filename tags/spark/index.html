@@ -66,6 +66,8 @@
     })
 
     $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
         mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
         setTimeout(cb, 500);
     })
