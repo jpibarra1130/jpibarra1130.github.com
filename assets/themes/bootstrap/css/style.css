@@ -145,6 +145,10 @@ body {
   color: white;
 }
 
+.header-logo {
+  padding-bottom: 50px;
+}
+
 .header {
   max-width: 550px;
   margin:auto;
@@ -186,6 +190,16 @@ body {
   color: #FF8A9E;
 }
 
+@media (max-width: 480px) {
+  .logo {
+    font-size: 2.2em;  
+  }
+
+  .fa-3x {
+    font-size: 2.2em;
+  }
+}
+
 .logo > span {
   font-family: "Code Bold";
   color: black;
@@ -199,6 +213,23 @@ body {
   font-weight: bold;
   font-size: .8em;
 }
+
+.right {
+  float: right;
+}
+
+.socialmedia {
+  padding-top: 7px;
+}
+
+.socialmedia a {
+  padding-left: 7px;
+}
+
+.left {
+  float: left;
+}
+
 
 @font-face {
   font-family: 'Code Light';
