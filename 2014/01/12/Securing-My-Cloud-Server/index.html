@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Securing My Cloud Server</title>
     <meta name="description" content="How to secure a private cloud server">
-    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="author" content="Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,15 +48,50 @@
       <div class="container">
         
 <div class="page-header">
-  
-    <h1 class="page-title">Securing My Cloud Server </h1>
-  
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
 </div>
 
 <div class="row post-full">
+  <h1 class="page-title">Securing My Cloud Server </h1>
+
   <div class="col-md12">
     <div class="summary">
-      <span class="date">January 12, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+      <span class="date">January 12, 2014</span>
     </div>
     <div class="content">
       <p>I’m finally on the deployment stage of my app. I have been working on this application on and off for a few months now. I was hoping to deploy it on January 1 but an impromptu trip stopped me from doing so. But nevertheless, here I am and deploying it.</p>
@@ -205,7 +240,7 @@ AuthorizedKeysFile  %h/.ssh/authorized_keys
   <div class="container">
     <div class="row">
       <hr>
-      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
       </p>
     </div>
   </div>

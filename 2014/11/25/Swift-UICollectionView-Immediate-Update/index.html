@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Using Swift to Immediately Update UICollectionView with API Result</title>
     <meta name="description" content="Using Swift to Immediately Update UICollectionView with API Result">
-    <meta name="author" content="Juan Paolo Ibarra">
+    <meta name="author" content="Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,15 +48,50 @@
       <div class="container">
         
 <div class="page-header">
-  
-    <h1 class="page-title">Using Swift to Immediately Update UICollectionView with API Result </h1>
-  
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
 </div>
 
 <div class="row post-full">
+  <h1 class="page-title">Using Swift to Immediately Update UICollectionView with API Result </h1>
+
   <div class="col-md12">
     <div class="summary">
-      <span class="date">November 25, 2014</span> <span class="author">// Juan Paolo Ibarra</span>
+      <span class="date">November 25, 2014</span>
     </div>
     <div class="content">
       <p>I was puzzled a few days ago when the UICollectionView I was looking at didn’t automatically get updated even after calling <code>reloadData()</code>. After much googling, I found this post in <a href="http://stackoverflow.com/questions/14804359/uicollectionview-doesnt-update-immediately-when-calling-reloaddata-but-randoml">stackoverflow</a> which explained what caused it.</p>
@@ -145,7 +180,7 @@
   <div class="container">
     <div class="row">
       <hr>
-      <p>&copy; 2014 Juan Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
       </p>
     </div>
   </div>
