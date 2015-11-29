@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Download and Save Image into Model using django-imagekit and Python 3</title>
+    <meta name="description" content="Download and Save Image into Model using django-imagekit and Python 3">
+    <meta name="author" content="Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/pygments.css" rel="stylesheet">
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="row post-full">
+  <h1 class="page-title">Download and Save Image into Model using django-imagekit and Python 3 </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">November 29, 2015</span>
+    </div>
+    <div class="content">
+      <p>I am currently working on a project where I need my model to have an avatar. I am using Python 3 and Django for this project. The thing is, I needed some data for this project. So I decided to create a script that will read the data from Wikipedia’s API and save it in my database.</p>
+
+<p>I am currently using <a href="https://github.com/matthewwithanm/django-imagekit">django-imagekit</a> to handle the image processing for my model’s avatar. My model looks something like this:</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">imagekit.models</span> <span class="kn">import</span> <span class="n">ImageSpecField</span>
+<span class="kn">from</span> <span class="nn">imagekit.processors</span> <span class="kn">import</span> <span class="n">ResizeToFill</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">avatar</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;avatars&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">avatar_thumbnail</span> <span class="o">=</span> <span class="n">ImageSpecField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">&#39;avatar&#39;</span><span class="p">,</span>
+                                      <span class="n">processors</span><span class="o">=</span><span class="p">[</span><span class="n">ResizeToFill</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">)],</span>
+                                      <span class="n">format</span><span class="o">=</span><span class="s">&#39;JPEG&#39;</span><span class="p">,</span>
+                                      <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;quality&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">})</span></code></pre></div>
+
+<p>With Wikipedia’s API, I can somehow get the image URL for the article I’m looking for. My problem was how would I be able to save the image from the image URL. It took me a while to do this. The closest I found was this answer from <a href="http://stackoverflow.com/a/6566011/2264354">Stackoverflow</a>. I had to modify it because I am using Python 3 in my project.</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.core.files.base</span> <span class="kn">import</span> <span class="n">ContentFile</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="n">img_url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="c"># img_url is simply the image URL</span>
+
+<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">person</span><span class="o">.</span><span class="n">avatar</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;image.jpg&quot;</span><span class="p">,</span> <span class="n">ContentFile</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()),</span> <span class="n">save</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">person</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></code></pre></div>
+
+<p>I streamed the image using the builtin <a href="https://docs.python.org/3/library/io.html#binary-i-o"><code>BytesIO</code></a> object in Python 3 and put it onto Django’s <a href="https://docs.djangoproject.com/en/1.8/ref/files/file/#the-contentfile-class"><code>ContentFile</code></a> before finally saving it in the Person object.</p>
+
+<p>This worked well for me. I am not sure whether there’s a better way of doing this but if there is, I would love to know!</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#python3-ref">python3 <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#python-ref">python <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#django-imagekit-ref">django-imagekit <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#save image-ref">save image <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos" title="SSL Error on bundle install in Ruby for RVM Users">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Download and Save Image into Model using django-imagekit and Python 3")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>
+

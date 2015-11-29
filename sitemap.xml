@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://paoloibarra.com/2015/11/29/Saving-Image-from-URL-to-Django-Imagekit-Python3</loc>
+    <lastmod>2015-11-29T00:00:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos</loc>
     <lastmod>2015-11-02T00:00:00+08:00</lastmod>
   </url>
@@ -246,7 +250,13 @@
     <loc>http://paoloibarra.com/tags/ssl/</loc>
   </url>
   <url>
+    <loc>http://paoloibarra.com/tags/django-imagekit/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/save%20image/</loc>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/404.html</loc>
-    <lastmod>2015-11-04T10:42:04+08:00</lastmod>
+    <lastmod>2015-11-04T14:23:02+08:00</lastmod>
   </url>
 </urlset>
