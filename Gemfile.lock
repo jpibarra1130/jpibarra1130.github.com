@@ -129,6 +129,7 @@ DEPENDENCIES
   github-pages (= 39)
   jekyll-sitemap
   json
+  pygments.rb (~> 0.6.3)
 
 BUNDLED WITH
    1.10.6
