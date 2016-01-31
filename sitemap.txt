@@ -55,7 +55,9 @@ http://paoloibarra.com/tags/ssl%20issue/index.html
 http://paoloibarra.com/tags/ssl/index.html
 http://paoloibarra.com/tags/django-imagekit/index.html
 http://paoloibarra.com/tags/save%20image/index.html
+http://paoloibarra.com/tags/roundup/index.html
 
+http://paoloibarra.com/2016/01/31/January-2016-Roundup
 http://paoloibarra.com/2015/11/29/Saving-Image-from-URL-to-Django-Imagekit-Python3
 http://paoloibarra.com/2015/11/02/SSL-error-on-bundle-install-ruby-rvm-macos
 http://paoloibarra.com/2015/10/31/Installing-virtualenvwrapper-MacOs

@@ -5,10 +5,70 @@
         <description>Paolo Ibarra's Blog - Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2015-11-29T21:22:20+08:00</lastBuildDate>
-        <pubDate>2015-11-29T21:22:20+08:00</pubDate>
+        <lastBuildDate>2016-01-31T13:09:14+08:00</lastBuildDate>
+        <pubDate>2016-01-31T13:09:14+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>January 2016 Roundup</title>
+                <description>&lt;p&gt;January flew by so fast! Just like that, the first month of 2016 is over. Before this year started, I told myself that I’m going to try to make my free time in 2016 as productive as I can. I thought that a good way to check whether I am on track is to try and blog what I’ve done at the end of each month.&lt;/p&gt;
+
+&lt;p&gt;So today, I will just go through some things I have been busy with this January.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://queeralley.com&quot;&gt;queeralley.com&lt;/a&gt; - Released
+    &lt;ul&gt;
+      &lt;li&gt;This has been a project that I’ve been working on and off in the past year. I decided to stop procrastinating and to just release it live.&lt;/li&gt;
+      &lt;li&gt;This is a simple events list website. I currently get the events from Facebook’s Open Graph API.&lt;/li&gt;
+      &lt;li&gt;Technologies I’m using:
+        &lt;ul&gt;
+          &lt;li&gt;Ruby on Rails&lt;/li&gt;
+          &lt;li&gt;Postgres&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Created a Facebook Group: &lt;a href=&quot;https://www.facebook.com/groups/BookTradeSG/&quot;&gt;BookTrade SG&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;I love reading books. I do have a kindle but there are still times that I prefer reading a good old book over a kindle. But sadly, books are expensive. That’s why I thought that maybe trading books with people might be a good option for me to get access to more books without burning a hole in my pocket (and reduce clutter in my place in the process too). After all, that’s what I’ve been doing with my friends so I can get access to more books. I initially wanted to create a website for it. But honestly, getting traction is hard. That’s why I decided to just create a Facebook group for it. If I end up needing to create one in the future, I don’t know. But for now, I’ll just keep posting my old books there in the hopes that people will be willing to trade books with me.&lt;/li&gt;
+      &lt;li&gt;Current members: 91&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Started learning about React
+    &lt;ul&gt;
+      &lt;li&gt;I decided to enroll myself in a &lt;a href=&quot;https://www.udemy.com/learn-and-understand-reactjs/&quot;&gt;course&lt;/a&gt; to help me brush up on my Frontend development skills. I decided to focus on React as suggested by one of my friends. So far, I’m 50% done in the course and I’m hoping that I can start a new project using React.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Books:
+    &lt;ul&gt;
+      &lt;li&gt;Finished: &lt;a href=&quot;http://www.amazon.com/How-Stop-Worrying-Start-Living/dp/0671733354&quot;&gt;How to Stop Worrying and Start Living by Dale Carnegie&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Currently Reading:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.goodreads.com/book/show/28634.Immortality&quot;&gt;Immortality by Milan Kundera&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.goodreads.com/book/show/4865.How_to_Win_Friends_and_Influence_People&quot;&gt;How to Win Friends and Influence People by Dale Carnegie &lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gym:
+    &lt;ul&gt;
+      &lt;li&gt;I went to the gym 16x this month&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tech Talks:
+    &lt;ul&gt;
+      &lt;li&gt;Attended: 1 (PyData)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I think that January has been quite productive for me. I am hoping that February is going to be as productive (if not, more). I already have a few things I want done in February, and I’m hoping that I manage to kick off some of these things by February.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2016/01/31/January-2016-Roundup</link>
+                <guid>http://paoloibarra.com/2016/01/31/January-2016-Roundup</guid>
+                <pubDate>2016-01-31T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Download and Save Image into Model using django-imagekit and Python 3</title>
