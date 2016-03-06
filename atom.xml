@@ -4,13 +4,82 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2016-01-31T13:09:14+08:00</updated>
+ <updated>2016-03-06T11:33:21+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>February 2016 Roundup</title>
+   <link href="http://paoloibarra.com/2016/03/06/February-2016-Roundup"/>
+   <updated>2016-03-06T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2016/03/06/February-2016-Roundup</id>
+   <content type="html">&lt;p&gt;February is gone. So, what happened?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Finished the course in &lt;a href=&quot;https://www.udemy.com/learn-and-understand-reactjs/&quot;&gt;Udemy&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;I find this an efficient way of learning. I managed to understand some of the tools in a short amount of time. I’ve committed the projects taught in the course in &lt;a href=&quot;https://github.com/jpibarra1130/udemy-react&quot;&gt;Github&lt;/a&gt;. Some of the tools I learned so far include:
+        &lt;ul&gt;
+          &lt;li&gt;Reflux&lt;/li&gt;
+          &lt;li&gt;ReactJs&lt;/li&gt;
+          &lt;li&gt;Gulp&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Books:
+    &lt;ul&gt;
+      &lt;li&gt;Finished:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.goodreads.com/book/show/4865.How_to_Win_Friends_and_Influence_People&quot;&gt;How to Win Friends and Influence People by Dale Carnegie &lt;/a&gt;
+            &lt;ul&gt;
+              &lt;li&gt;My partner has been telling me to read this book for months now. I finally decided to pick this up and start reading it. I actually ended up liking it more than I expected. It gave me a couple of ideas on how to interact with people more effectively. I would recommend this as a primer for people who want to improve their interpersonal skills.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.goodreads.com/book/show/28634.Immortality&quot;&gt;Immortality by Milan Kundera&lt;/a&gt;
+            &lt;ul&gt;
+              &lt;li&gt;This book was lent to me by one of my colleagues after we chatted about Milan Kundera at our Christmas Party. I have only read one book of Milan Kundera before (&lt;a href=&quot;http://www.amazon.com/Unbearable-Lightness-Being-Milan-Kundera/dp/0060932139&quot;&gt;Unbearable Lightness of Being&lt;/a&gt;). I have always liked novels/books that make me question or think about aspects of life in general. And this book is one of them. It explores immortality as the title suggest. It talks about the things we left behind, of how we are remembered, of how we want to be remembered or whether we want to be remembered at all. This book is just full of &lt;a href=&quot;https://www.goodreads.com/work/quotes/2776625-nesmrtelnost&quot;&gt;beautifully written passages&lt;/a&gt; that sometimes I would just scribble it in my notes. I wouldn’t say this is a light read, and it took me a while to get used to the shift in characters. But overall, I like it and I recommend this to anyone who’s up for an insightful book.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Currently Reading:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Rework-Jason-Fried/dp/0307463745&quot;&gt;Rework by Jason Fried&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Started a new project
+    &lt;ul&gt;
+      &lt;li&gt;I’m currently working on a new website. The backend is written in Python, using Django and Postgres. The frontend is using React. Hopefully, I get to deploy this in March. I’ll probably write a small blog entry on why I decided to create this.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gym:
+    &lt;ul&gt;
+      &lt;li&gt;I went to the gym 14x this month&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tech Talks:
+    &lt;ul&gt;
+      &lt;li&gt;Attended:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/events/1675715702672325/&quot;&gt;Front End TL;DR&lt;/a&gt;
+            &lt;ul&gt;
+              &lt;li&gt;This is my first time attending this meetup, and I like the concept. It’s not your regular meetup where you invite people to come up and talk about pre-arranged topics. You go there with your laptop, form groups, and decide on a front end technology you want to explore with your group. The rest of the time is dedicated to just exploring this technology. At the end of the meetup, you go up and present. I find this approach good. It’s more interactive, and dynamic. And this inspires discussion between people. Unfortunately, I won’t be able to attend the next meetup because I’ll be out of town. I will definitely attend another one once I’m back.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>January 2016 Roundup</title>
