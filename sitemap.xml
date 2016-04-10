@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker</loc>
+    <lastmod>2016-04-10T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/2016/04/10/March-2016-Roundup</loc>
+    <lastmod>2016-04-10T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/2016/03/07/Converting-Existing-Python-App-To-Using-Docker</loc>
+    <lastmod>2016-03-07T00:00:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/2016/03/06/February-2016-Roundup</loc>
     <lastmod>2016-03-06T00:00:00+08:00</lastmod>
   </url>
@@ -267,7 +279,19 @@
     <loc>http://paoloibarra.com/tags/roundup/</loc>
   </url>
   <url>
+    <loc>http://paoloibarra.com/tags/django/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/docker/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/existing%20django%20to%20docker/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/PostgreSQL/</loc>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/404.html</loc>
-    <lastmod>2016-01-31T13:09:16+08:00</lastmod>
+    <lastmod>2016-04-10T15:42:04+08:00</lastmod>
   </url>
 </urlset>

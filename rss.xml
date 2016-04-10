@@ -5,10 +5,94 @@
         <description>Paolo Ibarra's Blog - Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2016-03-06T11:33:21+08:00</lastBuildDate>
-        <pubDate>2016-03-06T11:33:21+08:00</pubDate>
+        <lastBuildDate>2016-04-10T15:46:35+08:00</lastBuildDate>
+        <pubDate>2016-04-10T15:46:35+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Adding a Seed File to Populate Dockerized PostgreSQL</title>
+                <description>&lt;p&gt;I was trying to figure out how to seed my PostgreSQL database in my dockerized application. It’s actually very straightforward. You can simply put all your &lt;code&gt;*.sql &lt;/code&gt; file inside &lt;code&gt;/docker-entrypoint-initdb.d/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In my &lt;code&gt;docker-compose.yml&lt;/code&gt;, I linked my &lt;code&gt;db/seed.sql&lt;/code&gt; file inside my docker PostgreSQL image through the &lt;code&gt;volumes&lt;/code&gt; tag. It looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;postgres:
+  image: postgres:latest
+  volumes_from:
+    - data
+  volumes:
+    - ./db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+  ports:
+    - &quot;5432:5432&quot;
+  env_file: .env
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The file &lt;code&gt;seed.sql&lt;/code&gt; is then used to populate PostgreSQL.&lt;/p&gt;
+
+&lt;p&gt;Docs &lt;a href=&quot;https://hub.docker.com/_/postgres/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker</link>
+                <guid>http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker</guid>
+                <pubDate>2016-04-10T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>March 2016 Roundup</title>
+                <description>&lt;p&gt;Here’s the roundup for March.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Began looking into &lt;a href=&quot;https://www.udemy.com/ios9-swift/&quot;&gt;iOS development&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Dockerized my local project thanks to this &lt;a href=&quot;https://realpython.com/blog/python/django-development-with-docker-compose-and-machine/&quot;&gt;article from the Real Python&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Books:
+    &lt;ul&gt;
+      &lt;li&gt;Finished
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Rework-Jason-Fried/dp/0307463745&quot;&gt;Rework by Jason Fried&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Currently Reading:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;http://www.goodreads.com/book/show/11468377-thinking-fast-and-slow&quot;&gt;Thinking, Fast and Slow by Daniel Kahneman&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Travel:
+    &lt;ul&gt;
+      &lt;li&gt;I had to fly to UK for work last March. I took some time off to visit London and meet up with a couple of my friends. I stayed in Edinburgh for roughly 2 weeks. I had a great time in both cities. I went at the right time. It was still cold but not too much. And the sun was mostly out (which apparently was a rarity according to the people I talked to - so I guess I’m lucky).
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/media/set/?set=a.10205975575092937.1073741851.1367047016&amp;amp;type=1&amp;amp;l=cfdd93b61f&quot;&gt;London, England&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/media/set/?set=a.10205998572747864.1073741852.1367047016&amp;amp;type=1&amp;amp;l=168b6f748c&quot;&gt;Edinburgh, Scotland&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gym:
+    &lt;ul&gt;
+      &lt;li&gt;I went to the gym 9x this month&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>http://paoloibarra.com/2016/04/10/March-2016-Roundup</link>
+                <guid>http://paoloibarra.com/2016/04/10/March-2016-Roundup</guid>
+                <pubDate>2016-04-10T00:00:00+08:00</pubDate>
+        </item>
+
+        <item>
+                <title>Converting an Existing Django App To Use Docker</title>
+                <description>&lt;p&gt;I wrote a simple API using Python and Django to feed data for the project I am working on. I was thinking of tinkering with Docker for some time now. I’ve used it in some of my work projects but I haven’t really set one up. I thought that I would try dockerizing the existing project that I have just to try it out.&lt;/p&gt;
+
+&lt;p&gt;But where to start?&lt;/p&gt;
+
+&lt;p&gt;After searching the internet for a good tutorial for this, I ended up following this &lt;a href=&quot;https://realpython.com/blog/python/django-development-with-docker-compose-and-machine/&quot;&gt;article from the Real Python&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I used it as a reference to convert my project.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2016/03/07/Converting-Existing-Python-App-To-Using-Docker</link>
+                <guid>http://paoloibarra.com/2016/03/07/Converting-Existing-Python-App-To-Using-Docker</guid>
+                <pubDate>2016-03-07T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>February 2016 Roundup</title>

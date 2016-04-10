@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    
+    <title>Adding a Seed File to Populate Dockerized PostgreSQL</title>
+    <meta name="description" content="Adding a seed file to populate PostgreSQL Docker">
     <meta name="author" content="Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -39,13 +39,16 @@
 
   <body>
     
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
 
     <div id="wrap">
       <div class="container">
         
-<div class="row-fluid">
-  <div class="span12 post-summary">
-    <div class="page-header">
+<div class="page-header">
   <div class='header-logo'>
     <div class="left">
       <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
@@ -84,209 +87,94 @@
   </div>
 </div>
 
+<div class="row post-full">
+  <h1 class="page-title">Adding a Seed File to Populate Dockerized PostgreSQL </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">April 10, 2016</span>
+    </div>
+    <div class="content">
+      <p>I was trying to figure out how to seed my PostgreSQL database in my dockerized application. It’s actually very straightforward. You can simply put all your <code>*.sql </code> file inside <code>/docker-entrypoint-initdb.d/</code>.</p>
+
+<p>In my <code>docker-compose.yml</code>, I linked my <code>db/seed.sql</code> file inside my docker PostgreSQL image through the <code>volumes</code> tag. It looks like this:</p>
+
+<pre><code>postgres:
+  image: postgres:latest
+  volumes_from:
+    - data
+  volumes:
+    - ./db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+  ports:
+    - "5432:5432"
+  env_file: .env
+</code></pre>
+
+<p>The file <code>seed.sql</code> is then used to populate PostgreSQL.</p>
+
+<p>Docs <a href="https://hub.docker.com/_/postgres/">here</a>.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#docker-ref">docker <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#PostgreSQL-ref">PostgreSQL <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2016/04/10/March-2016-Roundup" title="March 2016 Roundup">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
     
 
-    <ul>
-      
 
-        
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-          
-        
-      
 
-        
 
-          
-        
-      
 
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-            <li>
-              <p class='post-summary-title'>
-  <a href="/2015/01/28/SSH-Authentication-Issue">SSH Authentication Issue</a>
-</p>
-
-<span>January 28, 2015</span>
-<p>
-  
-    <a href="/tags/ssh"><span class="tag">ssh</span></a>
-  
-    <a href="/tags/rsa authentication"><span class="tag">rsa authentication</span></a>
-  
-    <a href="/tags/pubkey"><span class="tag">pubkey</span></a>
-  
-    <a href="/tags/error"><span class="tag">error</span></a>
-  
-</p>
-            </li>
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-    </ul>
   </div>
 </div>
 
 <script type="text/javascript">
-  mpq.track("Home")
+  mpq.track("Adding a Seed File to Populate Dockerized PostgreSQL")
 </script>
 
       </div>
