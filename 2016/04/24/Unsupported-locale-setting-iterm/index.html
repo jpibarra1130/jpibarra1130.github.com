@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    
+    <title>'Unsupported locale setting' when using iTerm</title>
+    <meta name="description" content="'Unsupported locale setting' when using iTerm">
     <meta name="author" content="Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -39,13 +39,16 @@
 
   <body>
     
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
 
     <div id="wrap">
       <div class="container">
         
-<div class="row-fluid">
-  <div class="span12 post-summary">
-    <div class="page-header">
+<div class="page-header">
   <div class='header-logo'>
     <div class="left">
       <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
@@ -84,223 +87,93 @@
   </div>
 </div>
 
+<div class="row post-full">
+  <h1 class="page-title">'Unsupported locale setting' when using iTerm </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">April 24, 2016</span>
+    </div>
+    <div class="content">
+      <p>While I was on one of our servers last week, I encountered this issue:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>env/bin/pip freeze
+  Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+    File <span class="s2">&quot;env/bin/pip&quot;</span>, line 11, in &lt;module&gt;
+      sys.exit<span class="o">(</span>main<span class="o">())</span>
+    File <span class="s2">&quot;/opt/DummyProject/env/lib/python2.7/site-packages/pip/__init__.py&quot;</span>, line 215, in main
+      locale.setlocale<span class="o">(</span>locale.LC_ALL, <span class="s1">&#39;&#39;</span><span class="o">)</span>
+    File <span class="s2">&quot;/opt/DummyProject/env/lib/python2.7/locale.py&quot;</span>, line 539, in setlocale
+      <span class="k">return</span> _setlocale<span class="o">(</span>category, locale<span class="o">)</span>
+  locale.Error: unsupported locale setting</code></pre></div>
+
+<p>I checked the server and the locale setting is properly setup there. The weird thing is, I was the only one encountering this in my team. After a little googling, I found out that this was because of my locale setting was getting imported. I just needed to disable this in my iTerm to prevent it from happening. To do this:</p>
+
+<p><img src="/assets/images/2016-04-24-locale-iterm.png" alt="Iterm Locale" /></p>
+
+<p>That’s it. It’s working after that.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#locale-ref">locale <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#iterm-ref">iterm <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2016/04/24/Hardening-Nginx-SSL-Config-on-Server" title="Hardening NGINX SSL Config on the Cloud Server">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
     
 
-    <ul>
-      
 
-        
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-          
-        
-      
 
-        
 
-          
-        
-      
 
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-            <li>
-              <p class='post-summary-title'>
-  <a href="/2015/01/12/Notes-and-Errors-Encountered-After-Trying-Out-Apache-Spark">Some Notes and Errors Encountered After Trying Out Apache Spark</a>
-</p>
-
-<span>January 12, 2015</span>
-<p>
-  
-    <a href="/tags/errors"><span class="tag">errors</span></a>
-  
-    <a href="/tags/spark"><span class="tag">spark</span></a>
-  
-    <a href="/tags/apache"><span class="tag">apache</span></a>
-  
-    <a href="/tags/apache spark"><span class="tag">apache spark</span></a>
-  
-    <a href="/tags/notes"><span class="tag">notes</span></a>
-  
-</p>
-            </li>
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-
-        
-
-          
-        
-      
-    </ul>
   </div>
 </div>
 
 <script type="text/javascript">
-  mpq.track("Home")
+  mpq.track("'Unsupported locale setting' when using iTerm")
 </script>
 
       </div>

@@ -4,13 +4,38 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2016-04-24T09:59:14+08:00</updated>
+ <updated>2016-04-24T10:23:53+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>'Unsupported locale setting' when using iTerm</title>
+   <link href="http://paoloibarra.com/2016/04/24/Unsupported-locale-setting-iterm"/>
+   <updated>2016-04-24T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2016/04/24/Unsupported-locale-setting-iterm</id>
+   <content type="html">&lt;p&gt;While I was on one of our servers last week, I encountered this issue:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;env/bin/pip freeze
+  Traceback &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;most recent call last&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;:
+    File &lt;span class=&quot;s2&quot;&gt;&amp;quot;env/bin/pip&amp;quot;&lt;/span&gt;, line 11, in &amp;lt;module&amp;gt;
+      sys.exit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;main&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+    File &lt;span class=&quot;s2&quot;&gt;&amp;quot;/opt/DummyProject/env/lib/python2.7/site-packages/pip/__init__.py&amp;quot;&lt;/span&gt;, line 215, in main
+      locale.setlocale&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;locale.LC_ALL, &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    File &lt;span class=&quot;s2&quot;&gt;&amp;quot;/opt/DummyProject/env/lib/python2.7/locale.py&amp;quot;&lt;/span&gt;, line 539, in setlocale
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; _setlocale&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;category, locale&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  locale.Error: unsupported locale setting&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I checked the server and the locale setting is properly setup there. The weird thing is, I was the only one encountering this in my team. After a little googling, I found out that this was because of my locale setting was getting imported. I just needed to disable this in my iTerm to prevent it from happening. To do this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-04-24-locale-iterm.png&quot; alt=&quot;Iterm Locale&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it. It’s working after that.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Hardening NGINX SSL Config on the Cloud Server</title>
