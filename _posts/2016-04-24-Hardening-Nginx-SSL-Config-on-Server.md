@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hardening NGINX SSL Config on the Cloud Server"
-description: "Hardeining the NGINX SSL configuration on my VPS/cloud server"
+description: "Hardening the NGINX SSL configuration on my VPS/cloud server"
 tags: ["nginx", "https", "ssl", "poodle", "sslchecker", "rapidssl", "ssl certificate"]
 ---
 
