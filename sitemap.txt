@@ -60,7 +60,13 @@ http://paoloibarra.com/tags/django/index.html
 http://paoloibarra.com/tags/docker/index.html
 http://paoloibarra.com/tags/existing%20django%20to%20docker/index.html
 http://paoloibarra.com/tags/PostgreSQL/index.html
+http://paoloibarra.com/tags/https/index.html
+http://paoloibarra.com/tags/poodle/index.html
+http://paoloibarra.com/tags/sslchecker/index.html
+http://paoloibarra.com/tags/rapidssl/index.html
+http://paoloibarra.com/tags/ssl%20certificate/index.html
 
+http://paoloibarra.com/2016/04/24/Hardening-Nginx-SSL-Config-on-Server
 http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker
 http://paoloibarra.com/2016/04/10/March-2016-Roundup
 http://paoloibarra.com/2016/03/07/Converting-Existing-Python-App-To-Using-Docker

@@ -4,6 +4,10 @@ body {
   /* The html and body elements cannot have any padding or margin. */
 }
 
+strong {
+  font-family: 'Segoe Bold'
+}
+
 /* Custom container */
 .container {
   max-width: 900px; }
@@ -193,7 +197,7 @@ body {
 
 @media (max-width: 480px) {
   .logo {
-    font-size: 2.2em;  
+    font-size: 2.2em;
   }
 
   .fa-3x {
@@ -245,6 +249,11 @@ body {
 @font-face {
   font-family: 'Segoe UI';
   src: url("/assets/themes/bootstrap/fonts/segoe_ui_light.ttf");
+}
+
+@font-face {
+  font-family: 'Segoe Bold';
+  src: url("/assets/themes/bootstrap/fonts/segoe_ui_bold.ttf");
 }
 
 body {

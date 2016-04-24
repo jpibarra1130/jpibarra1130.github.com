@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hardening NGINX SSL Config on the Cloud Server</title>
+    <meta name="description" content="Hardeining the NGINX SSL configuration on my VPS/cloud server">
+    <meta name="author" content="Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/pygments.css" rel="stylesheet">
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="row post-full">
+  <h1 class="page-title">Hardening NGINX SSL Config on the Cloud Server </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">April 24, 2016</span>
+    </div>
+    <div class="content">
+      <p>I tried running <a href="https://thepinknotes.com">thepinknotes.com</a> in <a href="https://www.ssllabs.com/ssltest/analyze.html">Qualys SSL Labs SSL Server Test</a> and found out that there were a couple of issues on my SSL configurations. I was only supposed to take a look but one thing led to another and decided to try and increase my score to <code>A</code>.</p>
+
+<p>Here are the things that I changed in my configurations in order for me to accomplish that goal:</p>
+
+<ol>
+  <li>
+    <p><strong>Corrected the SSL certificate order</strong></p>
+
+    <p>I bought a COMODO certificate from <a href="https://namecheap.com">namecheap.com</a> a couple of months ago and tried to set it up. I didn’t realize that I concatenated the certificates wrongly (noob). To fix this, I recreated my certificate by concatenating it in the right order.</p>
+
+    <p><code>cat your_site_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &gt; final.crt</code></p>
+
+    <p>I uploaded this new certificate in my server and restarted NGINX.</p>
+  </li>
+  <li>
+    <p><strong>Enabling ssl-session-cache</strong></p>
+
+    <p>This came up in the analysis report from ssl labs.</p>
+
+    <pre><code> Session resumption (caching) No (IDs assigned but not accepted)
+</code></pre>
+
+    <p>This means that for every request a user makes, the SSL handshake will need to be re-established. This can be pretty costly. This can be reduced by caching the session.</p>
+
+    <p>To enable it, you simply need to add this in <code>/etc/nginx/nginx.conf</code>:</p>
+
+    <p><code>ssl_session_cache shared:ssl_session_cache:10m;</code></p>
+
+    <p>This means that NGINX will share the session cache between workers. This will be stored for 10 minutes. For more information, you can check out this <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_cache">link</a>.</p>
+
+    <p>For further reading:</p>
+
+    <ul>
+      <li><a href="http://serverfault.com/questions/695258/when-shoud-i-use-ssl-session-cache-paramter-in-nginx-ssl-settings">When shoud I use ssl_session_cache paramter in nginx ssl settings?</a></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Guarding against POODLE attack</strong></p>
+
+    <p><a href="https://en.wikipedia.org/wiki/POODLE">POODLE attack</a> exploits SSLv3 to reveal encrypted data. This is fairly easy to guard against. In NGINX, you need to add this line in <code>/etc/nginx/nginx.conf</code>’s <code>http</code> block.</p>
+
+    <p><code>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</code></p>
+
+    <p>This will only enable the specified <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols">SSL protocols</a>.</p>
+  </li>
+  <li>
+    <p><strong>Strengthening the DH Key Exchange</strong></p>
+
+    <p>I saw this comment in my analysis report:</p>
+
+    <pre><code> This server supports weak Diffie-Hellman (DH) key exchange parameters.
+</code></pre>
+
+    <p>NGINX uses the default key given by OpenSSL as input to <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#General_overview">Diffie-Hellman Key Exchange</a>.</p>
+
+    <p>This default key is using <code>1024</code> numbits. To increase the strength of this key, I generated a new one using <code>4096</code> bits. If you don’t specify <code>numbits</code> it will default to <code>2048</code> bits.</p>
+
+    <p><code>
+ $ cd /etc/ssl/private/
+ $ openssl dhparam -out dhparam.pem 4096
+</code></p>
+
+    <p>This will generate <code>dhparam.crt</code></p>
+
+    <p>I used this new dhparam and configured it in NGINX by adding this in <code>/etc/nginx/nginx.conf</code>’s <code>http</code> block.</p>
+
+    <p><code>ssl_dhparam /etc/ssl/private/dhparams.pem</code></p>
+  </li>
+  <li>
+    <p><strong>HSTS</strong></p>
+
+    <p>Because my website needs only to communicate in HTTPS, I have enabled <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>.</p>
+
+    <p>To do this, I added this in the <code>server</code> block for <a href="https://thepinknotes.com">thepinknotes.com</a> in my NGINX config.</p>
+
+    <p><code>add_header Strict-Transport-Security max-age=15768000;</code></p>
+  </li>
+  <li>
+    <p><strong>Cipher configuration</strong></p>
+
+    <p>I have also modified my cipher configuration for stricter rules in regards to the cipher used. I added this in <code>/etc/nginx/nginx.conf</code>’s <code>http</code> block.</p>
+
+    <p><code>ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";</code></p>
+
+    <p>I have also set the configuration to prefer using the server cipher over the client’s. To configure this, I have added this in the <code>http</code> block.</p>
+
+    <p><code>ssl_prefer_server_ciphers on;</code></p>
+  </li>
+</ol>
+
+<p>After doing these changes, I managed to get an <code>A+</code> on my SSL analysis. That’s been a fun Saturday fiddling about my SSL configuration and reading up on some of these concepts. The final outcome :-)</p>
+
+<p><img src="/assets/images/2016-04-24-ssl-rating.png" alt="SSL Analysis Report" /></p>
+
+<p>If you want to read more, I suggest you read this <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html">blog</a>. It has more detailed information on some of the vulnerabilities.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#nginx-ref">nginx <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#https-ref">https <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#ssl-ref">ssl <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#poodle-ref">poodle <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#sslchecker-ref">sslchecker <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#rapidssl-ref">rapidssl <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#ssl certificate-ref">ssl certificate <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2016/04/10/Seed-PostgreSQL-DB-Docker" title="Adding a Seed File to Populate Dockerized PostgreSQL">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Hardening NGINX SSL Config on the Cloud Server")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>
+

@@ -5,10 +5,113 @@
         <description>Paolo Ibarra's Blog - Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2016-04-10T15:46:35+08:00</lastBuildDate>
-        <pubDate>2016-04-10T15:46:35+08:00</pubDate>
+        <lastBuildDate>2016-04-24T09:59:14+08:00</lastBuildDate>
+        <pubDate>2016-04-24T09:59:14+08:00</pubDate>
         <ttl>1800</ttl>
 
+
+        <item>
+                <title>Hardening NGINX SSL Config on the Cloud Server</title>
+                <description>&lt;p&gt;I tried running &lt;a href=&quot;https://thepinknotes.com&quot;&gt;thepinknotes.com&lt;/a&gt; in &lt;a href=&quot;https://www.ssllabs.com/ssltest/analyze.html&quot;&gt;Qualys SSL Labs SSL Server Test&lt;/a&gt; and found out that there were a couple of issues on my SSL configurations. I was only supposed to take a look but one thing led to another and decided to try and increase my score to &lt;code&gt;A&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here are the things that I changed in my configurations in order for me to accomplish that goal:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Corrected the SSL certificate order&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;I bought a COMODO certificate from &lt;a href=&quot;https://namecheap.com&quot;&gt;namecheap.com&lt;/a&gt; a couple of months ago and tried to set it up. I didn’t realize that I concatenated the certificates wrongly (noob). To fix this, I recreated my certificate by concatenating it in the right order.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;cat your_site_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &amp;gt; final.crt&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;I uploaded this new certificate in my server and restarted NGINX.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Enabling ssl-session-cache&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;This came up in the analysis report from ssl labs.&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; Session resumption (caching) No (IDs assigned but not accepted)
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;This means that for every request a user makes, the SSL handshake will need to be re-established. This can be pretty costly. This can be reduced by caching the session.&lt;/p&gt;
+
+    &lt;p&gt;To enable it, you simply need to add this in &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;ssl_session_cache shared:ssl_session_cache:10m;&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;This means that NGINX will share the session cache between workers. This will be stored for 10 minutes. For more information, you can check out this &lt;a href=&quot;http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_cache&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;For further reading:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://serverfault.com/questions/695258/when-shoud-i-use-ssl-session-cache-paramter-in-nginx-ssl-settings&quot;&gt;When shoud I use ssl_session_cache paramter in nginx ssl settings?&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Guarding against POODLE attack&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/POODLE&quot;&gt;POODLE attack&lt;/a&gt; exploits SSLv3 to reveal encrypted data. This is fairly easy to guard against. In NGINX, you need to add this line in &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;’s &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;ssl_protocols TLSv1 TLSv1.1 TLSv1.2;&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;This will only enable the specified &lt;a href=&quot;http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols&quot;&gt;SSL protocols&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Strengthening the DH Key Exchange&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;I saw this comment in my analysis report:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; This server supports weak Diffie-Hellman (DH) key exchange parameters.
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;NGINX uses the default key given by OpenSSL as input to &lt;a href=&quot;https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#General_overview&quot;&gt;Diffie-Hellman Key Exchange&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;This default key is using &lt;code&gt;1024&lt;/code&gt; numbits. To increase the strength of this key, I generated a new one using &lt;code&gt;4096&lt;/code&gt; bits. If you don’t specify &lt;code&gt;numbits&lt;/code&gt; it will default to &lt;code&gt;2048&lt;/code&gt; bits.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;
+ $ cd /etc/ssl/private/
+ $ openssl dhparam -out dhparam.pem 4096
+&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;This will generate &lt;code&gt;dhparam.crt&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;I used this new dhparam and configured it in NGINX by adding this in &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;’s &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;ssl_dhparam /etc/ssl/private/dhparams.pem&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;HSTS&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Because my website needs only to communicate in HTTPS, I have enabled &lt;a href=&quot;https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security&quot;&gt;HSTS&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;To do this, I added this in the &lt;code&gt;server&lt;/code&gt; block for &lt;a href=&quot;https://thepinknotes.com&quot;&gt;thepinknotes.com&lt;/a&gt; in my NGINX config.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;add_header Strict-Transport-Security max-age=15768000;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Cipher configuration&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;I have also modified my cipher configuration for stricter rules in regards to the cipher used. I added this in &lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;’s &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;ssl_ciphers &quot;EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4&quot;;&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;I have also set the configuration to prefer using the server cipher over the client’s. To configure this, I have added this in the &lt;code&gt;http&lt;/code&gt; block.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;ssl_prefer_server_ciphers on;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After doing these changes, I managed to get an &lt;code&gt;A+&lt;/code&gt; on my SSL analysis. That’s been a fun Saturday fiddling about my SSL configuration and reading up on some of these concepts. The final outcome :-)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-04-24-ssl-rating.png&quot; alt=&quot;SSL Analysis Report&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want to read more, I suggest you read this &lt;a href=&quot;https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html&quot;&gt;blog&lt;/a&gt;. It has more detailed information on some of the vulnerabilities.&lt;/p&gt;
+</description>
+                <link>http://paoloibarra.com/2016/04/24/Hardening-Nginx-SSL-Config-on-Server</link>
+                <guid>http://paoloibarra.com/2016/04/24/Hardening-Nginx-SSL-Config-on-Server</guid>
+                <pubDate>2016-04-24T00:00:00+08:00</pubDate>
+        </item>
 
         <item>
                 <title>Adding a Seed File to Populate Dockerized PostgreSQL</title>

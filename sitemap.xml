@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://paoloibarra.com/2016/04/24/Hardening-Nginx-SSL-Config-on-Server</loc>
+    <lastmod>2016-04-24T00:00:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/2016/04/10/Seed-PostgreSQL-DB-Docker</loc>
     <lastmod>2016-04-10T00:00:00+08:00</lastmod>
   </url>
@@ -291,7 +295,22 @@
     <loc>http://paoloibarra.com/tags/PostgreSQL/</loc>
   </url>
   <url>
+    <loc>http://paoloibarra.com/tags/https/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/poodle/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/sslchecker/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/rapidssl/</loc>
+  </url>
+  <url>
+    <loc>http://paoloibarra.com/tags/ssl%20certificate/</loc>
+  </url>
+  <url>
     <loc>http://paoloibarra.com/404.html</loc>
-    <lastmod>2016-04-10T15:42:04+08:00</lastmod>
+    <lastmod>2016-04-10T15:46:37+08:00</lastmod>
   </url>
 </urlset>
