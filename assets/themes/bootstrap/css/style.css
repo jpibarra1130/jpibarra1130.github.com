@@ -225,10 +225,19 @@ strong {
 
 .socialmedia {
   padding-top: 7px;
+  font-size: 1em;
+
+  @media (max-width: 480px) {
+    padding-top: none;
+  }
 }
 
 .socialmedia a {
-  padding-left: 7px;
+  font-size: 1em;
+
+  @media (max-width: 480px) {
+    padding-left: none;
+  }
 }
 
 .left {
