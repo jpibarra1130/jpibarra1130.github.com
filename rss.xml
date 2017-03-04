@@ -5,8 +5,8 @@
         <description>Paolo Ibarra's Blog - Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2017-03-04T22:08:57+08:00</lastBuildDate>
-        <pubDate>2017-03-04T22:08:57+08:00</pubDate>
+        <lastBuildDate>2017-03-04T22:09:46+08:00</lastBuildDate>
+        <pubDate>2017-03-04T22:09:46+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -59,15 +59,6 @@
                 <link>http://paoloibarra.com/2017/03/04/Enabling-cron-in-docker</link>
                 <guid>http://paoloibarra.com/2017/03/04/Enabling-cron-in-docker</guid>
                 <pubDate>2017-03-04T00:00:00+08:00</pubDate>
-        </item>
-
-        <item>
-                <title>Understanding Nested Aggregation in Elasticsearch</title>
-                <description>&lt;p&gt;I was working on a task at work where I had to aggregate a nested &lt;/p&gt;
-</description>
-                <link>http://paoloibarra.com/2016/07/23/Nested-Aggregation-Elasticsearch</link>
-                <guid>http://paoloibarra.com/2016/07/23/Nested-Aggregation-Elasticsearch</guid>
-                <pubDate>2016-07-23T00:00:00+08:00</pubDate>
         </item>
 
         <item>
