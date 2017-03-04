@@ -4,13 +4,73 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2016-04-24T10:36:14+08:00</updated>
+ <updated>2017-03-04T22:08:57+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Enabling Cron In Your Docker Container</title>
+   <link href="http://paoloibarra.com/2017/03/04/Enabling-cron-in-docker"/>
+   <updated>2017-03-04T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2017/03/04/Enabling-cron-in-docker</id>
+   <content type="html">&lt;p&gt;I was working on a task a couple of days ago where I needed to enable cron in my docker container. I was using a slimmed down image of ubuntu which does not have &lt;code&gt;cron&lt;/code&gt; included out-of-the-box. I had to install a couple of things to make &lt;code&gt;cron&lt;/code&gt; work on my docker container.&lt;/p&gt;
+
+&lt;p&gt;I modified my &lt;code&gt;Dockerfile&lt;/code&gt; to look like something below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  RUN apt-get install -y sudo # needed this because I didn&#39;t have sudo installed yet
+  RUN apt-get install -y cron # this is to install cron
+  RUN apt-get install -y rsyslog # for logging cron
+  RUN echo &quot;cron.* /var/log/cron.log&quot; &amp;gt;&amp;gt; /etc/rsyslog.conf # to enable cron logs via rsyslog
+
+  RUN echo &quot;&amp;lt;username&amp;gt; ALL=(ALL) NOPASSWD: ALL&quot; &amp;gt;&amp;gt; /etc/sudoers # I need sudo rights for the user I have in my docker container
+
+  ENTRYPOINT exec /usr/local/config/run.sh # bashscript entrypoint - you can put it wherever you want as long as it&#39;s available in the image
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I needed to run a couple of commands that’s why I used a bash script to serve as my container’s &lt;code&gt;ENTRYPOINT&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;My &lt;code&gt;run.sh&lt;/code&gt; looks like this:
+      #!/bin/bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  expected_env=&#39;prod&#39; # what is the environment you want the cron to work
+
+  if [ $ENV == $expected_env ]; then
+    echo &quot;Setup cron&quot;
+    sudo service rsyslog start
+
+    crontab -u &amp;lt;username&amp;gt; &amp;lt;path_to_crontab_file&amp;gt; # crontab -u paoloibarra /usr/local/config/crontab
+    sudo service cron start
+  else
+    echo &quot;Skip cron: environment is $ENV&quot;
+  fi
+
+  # ... other things you need to start your app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I’ve added a checker in my script because I only wanted rsyslog, and cron to run on production.&lt;/p&gt;
+
+&lt;p&gt;My crontab file looks like this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  */1 * * * * echo &quot;job every minute&quot; # please make sure that you have one empty line after this
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This should make cron work on your docker image. Please note that if you want this to work on &lt;code&gt;docker-compose&lt;/code&gt;, you just need to pass in ENV as prod, or remove the restriction for the environment in the &lt;code&gt;ENTRYPOINT&lt;/code&gt; script.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Understanding Nested Aggregation in Elasticsearch</title>
+   <link href="http://paoloibarra.com/2016/07/23/Nested-Aggregation-Elasticsearch"/>
+   <updated>2016-07-23T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2016/07/23/Nested-Aggregation-Elasticsearch</id>
+   <content type="html">&lt;p&gt;I was working on a task at work where I had to aggregate a nested &lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>'Unsupported locale setting' when using iTerm</title>

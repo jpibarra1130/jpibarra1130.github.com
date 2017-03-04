@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>'Unsupported locale setting' when using iTerm</title>
-    <meta name="description" content="'Unsupported locale setting' when using iTerm">
+    <title>Enabling Cron In Your Docker Container</title>
+    <meta name="description" content="How to enable cron in your Docker Container">
     <meta name="author" content="Paolo Ibarra">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -88,30 +88,56 @@
 </div>
 
 <div class="row post-full">
-  <h1 class="page-title">'Unsupported locale setting' when using iTerm </h1>
+  <h1 class="page-title">Enabling Cron In Your Docker Container </h1>
 
   <div class="col-md12">
     <div class="summary">
-      <span class="date">April 24, 2016</span>
+      <span class="date">March 04, 2017</span>
     </div>
     <div class="content">
-      <p>While I was on one of our servers last week, I encountered this issue:</p>
+      <p>I was working on a task a couple of days ago where I needed to enable cron in my docker container. I was using a slimmed down image of ubuntu which does not have <code>cron</code> included out-of-the-box. I had to install a couple of things to make <code>cron</code> work on my docker container.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>env/bin/pip freeze
-  Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
-    File <span class="s2">&quot;env/bin/pip&quot;</span>, line 11, in &lt;module&gt;
-      sys.exit<span class="o">(</span>main<span class="o">())</span>
-    File <span class="s2">&quot;/opt/DummyProject/env/lib/python2.7/site-packages/pip/__init__.py&quot;</span>, line 215, in main
-      locale.setlocale<span class="o">(</span>locale.LC_ALL, <span class="s1">&#39;&#39;</span><span class="o">)</span>
-    File <span class="s2">&quot;/opt/DummyProject/env/lib/python2.7/locale.py&quot;</span>, line 539, in setlocale
-      <span class="k">return</span> _setlocale<span class="o">(</span>category, locale<span class="o">)</span>
-  locale.Error: unsupported locale setting</code></pre></div>
+<p>I modified my <code>Dockerfile</code> to look like something below:</p>
 
-<p>I checked the server and the locale setting is properly setup there. The weird thing is, I was the only one encountering this in my team. After a little googling, I found out that this was because of my locale setting was getting imported. I just needed to disable this in my iTerm to prevent it from happening. To do this:</p>
+<pre><code>  RUN apt-get install -y sudo # needed this because I didn't have sudo installed yet
+  RUN apt-get install -y cron # this is to install cron
+  RUN apt-get install -y rsyslog # for logging cron
+  RUN echo "cron.* /var/log/cron.log" &gt;&gt; /etc/rsyslog.conf # to enable cron logs via rsyslog
 
-<p><img src="/assets/images/2016-04-24-locale-iterm.png" alt="Iterm Locale" /></p>
+  RUN echo "&lt;username&gt; ALL=(ALL) NOPASSWD: ALL" &gt;&gt; /etc/sudoers # I need sudo rights for the user I have in my docker container
 
-<p>That’s it. It’s working after that.</p>
+  ENTRYPOINT exec /usr/local/config/run.sh # bashscript entrypoint - you can put it wherever you want as long as it's available in the image
+</code></pre>
+
+<p>I needed to run a couple of commands that’s why I used a bash script to serve as my container’s <code>ENTRYPOINT</code>.</p>
+
+<p>My <code>run.sh</code> looks like this:
+      #!/bin/bash</p>
+
+<pre><code>  expected_env='prod' # what is the environment you want the cron to work
+
+  if [ $ENV == $expected_env ]; then
+    echo "Setup cron"
+    sudo service rsyslog start
+
+    crontab -u &lt;username&gt; &lt;path_to_crontab_file&gt; # crontab -u paoloibarra /usr/local/config/crontab
+    sudo service cron start
+  else
+    echo "Skip cron: environment is $ENV"
+  fi
+
+  # ... other things you need to start your app
+</code></pre>
+
+<p>I’ve added a checker in my script because I only wanted rsyslog, and cron to run on production.</p>
+
+<p>My crontab file looks like this.</p>
+
+<pre><code>  */1 * * * * echo "job every minute" # please make sure that you have one empty line after this
+</code></pre>
+
+<p>This should make cron work on your docker image. Please note that if you want this to work on <code>docker-compose</code>, you just need to pass in ENV as prod, or remove the restriction for the environment in the <code>ENTRYPOINT</code> script.</p>
+
 
     </div>
 
@@ -126,9 +152,9 @@
 
   
      
-    	<li><a href="/tags.html#locale-ref">locale <span>1</span></a></li>
+    	<li><a href="/tags.html#cron-ref">cron <span>1</span></a></li>
      
-    	<li><a href="/tags.html#iterm-ref">iterm <span>1</span></a></li>
+    	<li><a href="/tags.html#docker-ref">docker <span>3</span></a></li>
     
   
 
@@ -140,11 +166,11 @@
     <hr>
       <ul class="pagination">
       
-        <li class="prev"><a href="/2016/04/24/Hardening-Nginx-SSL-Config-on-Server" title="Hardening NGINX SSL Config on the Cloud Server">&larr; Previous</a></li>
+        <li class="prev"><a href="/2016/07/23/Nested-Aggregation-Elasticsearch" title="Understanding Nested Aggregation in Elasticsearch">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/2016/07/23/Nested-Aggregation-Elasticsearch" title="Understanding Nested Aggregation in Elasticsearch">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     <hr>
@@ -173,7 +199,7 @@
 </div>
 
 <script type="text/javascript">
-  mpq.track("'Unsupported locale setting' when using iTerm")
+  mpq.track("Enabling Cron In Your Docker Container")
 </script>
 
       </div>
