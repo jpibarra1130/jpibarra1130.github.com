@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Linking Your EC2 Instance To Your NameCheap Domain</title>
+    <meta name="description" content="How to link your Namecheap Domain">
+    <meta name="author" content="Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/pygments.css" rel="stylesheet">
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="row post-full">
+  <h1 class="page-title">Linking Your EC2 Instance To Your NameCheap Domain </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">March 11, 2017</span>
+    </div>
+    <div class="content">
+      <p>I currently have a simple Wordpress blog deployed in AWS. I already bought a domain name from namecheap.com, and I wanted to link this domain name to our Wordpress blog in EC2.</p>
+
+<p>This was surprisingly very easy. The key is to setup a Route53 from a Hosted Zone, and link the DNS Servers in your Namecheap’s domain name settings page.</p>
+
+<p><strong>Steps:</strong></p>
+
+<ol>
+  <li>Log-in to your AWS Console</li>
+  <li>
+    <p>Associate an Elastic IP to your EC2 instance (if you haven’t yet). You need this so that the IP you configured wouldn’t change when you stop/restart your EC2 instance.</p>
+
+    <p>a. Navigate to Services &gt; EC2 &gt; Elastic IPs, and click on the <code>Allocate new address</code></p>
+
+    <p><img src="/assets/images/2017-03-11-route53-elastic-ips-a.png" alt="" /></p>
+
+    <p>b. Associate your new Elastic IP to an EC2 instance</p>
+
+    <p><img src="/assets/images/2017-03-11-route53-elastic-ips-b1.png" alt="" /></p>
+
+    <p><img src="/assets/images/2017-03-11-route53-elastic-ips-b2.png" alt="" /></p>
+
+    <p><img src="/assets/images/2017-03-11-route53-elastic-ips-b3.png" alt="" />     </p>
+
+    <p>c. Take note of your Elastic IP because we’ll configure this to our Route53 later.</p>
+  </li>
+  <li>
+    <p>Navigate to Services &gt; Route53 &gt; Hosted zones.</p>
+
+    <p>a. Create a Public Hosted Zone</p>
+
+    <p><img src="/assets/images/2017-03-11-route53.png" alt="" /></p>
+
+    <p>b. Create 2 A record sets: one for www, and another one for empty</p>
+
+    <p><img src="/assets/images/2017-03-11-route53-b1.png" alt="" /></p>
+
+    <p><img src="/assets/images/2017-03-11-route53-b2.png" alt="" /></p>
+
+    <p><img src="/assets/images/2017-03-11-route53-b3.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Go to Namecheap.com, and navigate to your domain name’s settings page.</p>
+
+    <p>a. Copy over the DNS Servers from your Hosted Zone in AWS, into your NameCheap DNS Servers.</p>
+
+    <p><img src="/assets/images/2017-03-11-namecheap-a.png" alt="" /></p>
+
+    <p><img src="/assets/images/2017-03-11-namecheap-b.png" alt="" /></p>
+
+    <p><strong>NOTE: Please don’t include the <code>.</code> at the end of the DNS servers when you copy it over to Namecheap.com</strong></p>
+  </li>
+</ol>
+
+<p>–</p>
+
+<p>And you’re all set. Don’t worry if it doesn’t work right away. It took my change a day before it was propagated.</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#namecheap-ref">namecheap <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#route53-ref">route53 <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#aws-ref">aws <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2017/03/04/Enabling-cron-in-docker" title="Enabling Cron In Your Docker Container">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Linking Your EC2 Instance To Your NameCheap Domain")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>
+

@@ -4,13 +4,77 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2017-03-04T22:09:46+08:00</updated>
+ <updated>2017-03-11T18:04:33+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Paolo Ibarra</name>
    <email>juanpaolo.ibarra@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Linking Your EC2 Instance To Your NameCheap Domain</title>
+   <link href="http://paoloibarra.com/2017/03/11/Route53-To-NameCheap-Domain"/>
+   <updated>2017-03-11T00:00:00+08:00</updated>
+   <id>http://paoloibarra.com/2017/03/11/Route53-To-NameCheap-Domain</id>
+   <content type="html">&lt;p&gt;I currently have a simple Wordpress blog deployed in AWS. I already bought a domain name from namecheap.com, and I wanted to link this domain name to our Wordpress blog in EC2.&lt;/p&gt;
+
+&lt;p&gt;This was surprisingly very easy. The key is to setup a Route53 from a Hosted Zone, and link the DNS Servers in your Namecheap’s domain name settings page.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Steps:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Log-in to your AWS Console&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Associate an Elastic IP to your EC2 instance (if you haven’t yet). You need this so that the IP you configured wouldn’t change when you stop/restart your EC2 instance.&lt;/p&gt;
+
+    &lt;p&gt;a. Navigate to Services &amp;gt; EC2 &amp;gt; Elastic IPs, and click on the &lt;code&gt;Allocate new address&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-elastic-ips-a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;b. Associate your new Elastic IP to an EC2 instance&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-elastic-ips-b1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-elastic-ips-b2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-elastic-ips-b3.png&quot; alt=&quot;&quot; /&gt;     &lt;/p&gt;
+
+    &lt;p&gt;c. Take note of your Elastic IP because we’ll configure this to our Route53 later.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Navigate to Services &amp;gt; Route53 &amp;gt; Hosted zones.&lt;/p&gt;
+
+    &lt;p&gt;a. Create a Public Hosted Zone&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;b. Create 2 A record sets: one for www, and another one for empty&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-b1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-b2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-route53-b3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to Namecheap.com, and navigate to your domain name’s settings page.&lt;/p&gt;
+
+    &lt;p&gt;a. Copy over the DNS Servers from your Hosted Zone in AWS, into your NameCheap DNS Servers.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-namecheap-a.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/2017-03-11-namecheap-b.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;NOTE: Please don’t include the &lt;code&gt;.&lt;/code&gt; at the end of the DNS servers when you copy it over to Namecheap.com&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;–&lt;/p&gt;
+
+&lt;p&gt;And you’re all set. Don’t worry if it doesn’t work right away. It took my change a day before it was propagated.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Enabling Cron In Your Docker Container</title>
