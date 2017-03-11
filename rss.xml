@@ -5,13 +5,13 @@
         <description>Paolo Ibarra's Blog - Paolo Ibarra</description>
         <link>http://paoloibarra.com</link>
         <link>http://paoloibarra.com</link>
-        <lastBuildDate>2017-03-11T18:04:33+08:00</lastBuildDate>
-        <pubDate>2017-03-11T18:04:33+08:00</pubDate>
+        <lastBuildDate>2017-03-11T18:06:51+08:00</lastBuildDate>
+        <pubDate>2017-03-11T18:06:51+08:00</pubDate>
         <ttl>1800</ttl>
 
 
         <item>
-                <title>Linking Your EC2 Instance To Your NameCheap Domain</title>
+                <title>Linking Your EC2 Instance To Your Namecheap Domain Name</title>
                 <description>&lt;p&gt;I currently have a simple Wordpress blog deployed in AWS. I already bought a domain name from namecheap.com, and I wanted to link this domain name to our Wordpress blog in EC2.&lt;/p&gt;
 
 &lt;p&gt;This was surprisingly very easy. The key is to setup a Route53 from a Hosted Zone, and link the DNS Servers in your Namecheap’s domain name settings page.&lt;/p&gt;

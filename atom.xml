@@ -4,7 +4,7 @@
  <title>Paolo Ibarra's Blog</title>
  <link href="http://paoloibarra.com/" rel="self"/>
  <link href="http://paoloibarra.com"/>
- <updated>2017-03-11T18:04:33+08:00</updated>
+ <updated>2017-03-11T18:06:51+08:00</updated>
  <id>http://paoloibarra.com</id>
  <author>
    <name>Paolo Ibarra</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Linking Your EC2 Instance To Your NameCheap Domain</title>
+   <title>Linking Your EC2 Instance To Your Namecheap Domain Name</title>
    <link href="http://paoloibarra.com/2017/03/11/Route53-To-NameCheap-Domain"/>
    <updated>2017-03-11T00:00:00+08:00</updated>
    <id>http://paoloibarra.com/2017/03/11/Route53-To-NameCheap-Domain</id>
