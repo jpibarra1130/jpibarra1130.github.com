@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Linking Your EC2 Instance To Your NameCheap Domain"
-description: "How to link your Namecheap Domain"
+title: "Linking Your EC2 Instance To Your Namecheap Domain Name"
+description: "How to link your Namecheap domain name to your EC2 instance in AWS"
 tags: ["namecheap", "route53", "aws"]
 ---
 
