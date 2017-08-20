@@ -72,6 +72,7 @@ http://paoloibarra.com/tags/namecheap/index.html
 http://paoloibarra.com/tags/route53/index.html
 http://paoloibarra.com/tags/aws/index.html
 
+http://paoloibarra.com/2017/08/10/Having-your-own-alerts-playbook
 http://paoloibarra.com/2017/03/11/Route53-To-NameCheap-Domain
 http://paoloibarra.com/2017/03/04/Enabling-cron-in-docker
 http://paoloibarra.com/2016/04/24/Unsupported-locale-setting-iterm
