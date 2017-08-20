@@ -1,45 +1,232 @@
-<p>Our squad has a rotating green flag person who is in charge of handling issues in our services when an alert gets triggered. The problem is it’s not that simple to know everything when your squad is handling multiple services. A suggestion from one of my squadmates was to introduce an Alerts Playbook.</p>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Adding an Alerts Playbook</title>
+    <meta name="description" content="Why it's important to have a squad alerts playbook.">
+    <meta name="author" content="Paolo Ibarra">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/assets/themes/bootstrap/css/pygments.css" rel="stylesheet">
+
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- atom & rss feed -->
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    
+
+
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "7188011789865f45786394de33a26ed6"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+</script>
+
+
+
+  </head>
+
+  <body>
+    
+      <div class="home">
+        <a href="/">Home</a>
+      </div>
+      <br>
+    
+
+    <div id="wrap">
+      <div class="container">
+        
+<div class="page-header">
+  <div class='header-logo'>
+    <div class="left">
+      <a href="/"><div class="logo">PAOLO<span>IBARRA</span></div></a>
+    </div>
+
+    <div class="right">
+        <div class="socialmedia">
+
+  <a id="twitter" class="twitter" href="https://twitter.com/paolo_ibarra" target="_blank"><i class="fa fa-twitter fa-3x"></i></a>
+  <a id="linkedin" class="linkedin" href="https://www.linkedin.com/in/paoloibarra" target="_blank"><i class="fa fa-linkedin fa-3x"></i></a>
+
+  <script type="text/javascript">
+    $("#twitter").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("Twitter Link", { "Domain": "twitter.com" });
+        setTimeout(cb, 500);
+    })
+
+    $("#linkedin").click(function(event) {
+        var cb = generate_callback($(this));
+        event.preventDefault();
+        mpq.track("LinkedIn Link", { "Domain": "linkedin.com" });
+        setTimeout(cb, 500);
+    })
+        
+    function generate_callback(a) {
+        return function() {
+            window.open(a.attr("href"), '_blank');
+        }
+    }
+  </script>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="row post-full">
+  <h1 class="page-title">Adding an Alerts Playbook </h1>
+
+  <div class="col-md12">
+    <div class="summary">
+      <span class="date">August 10, 2017</span>
+    </div>
+    <div class="content">
+      <p>Each week, we have someone on our squad assigned to be the green flag. This person is in charge of handling issues in our services while the rest of the squad is focused on working on our delivery for the sprint. The problem is our squad handles multiple services, and sometimes, it becomes challenging for the green flag to fix an issue on a service he or she hardly touches.</p>
+
+<p>A suggestion from one of my squad-mates to help solve this was to start having an Alerts Playbook.</p>
 
 <p><strong><em>What is an Alerts Playbook?</em></strong></p>
 
-<p>This is just a knowledge base for our squad to check what to do when an alert gets triggered. It’s basically a wiki page for every alert that pops up on our notification. Each alert page has the following details:</p>
+<p>This is a section on our wiki which contains information on the alerts that show up on our notification. It has a page for every alert that we have on our system. Each alert page has the following details:</p>
 
 <ul>
-  <li>Title
-    <ul>
-      <li>name of the alerts. I like to put in the exact message that shows up on our alert notification.</li>
-    </ul>
+  <li>
+    <p>Alert Message</p>
+
+    <p>This is typically the message that shows up on our alerts channel.
+Severity
+The classification of the alert. Is it a critical issue that has to be fixed ASAP or an error that can wait until we are back in the office?</p>
   </li>
-  <li>Severity
-    <ul>
-      <li>critical / error. Critical is an issue that has to be fixed ASAP. Error is something that can wait until we are in the office.</li>
-    </ul>
+  <li>
+    <p>Where is this triggered?</p>
+
+    <p>I would normally link the particular code that triggered the alert in this section. As a developer, I find it easier to understand the alert by looking at the particular code that triggered it.</p>
   </li>
-  <li>Where is this triggered
-    <ul>
-      <li>This is where we would normally link the particular code that triggered this alert. As a green flag, I find it easier to read the code that triggered the alert so I know what caused it.</li>
-    </ul>
+  <li>
+    <p>Impact</p>
+
+    <p>A description of what the impact of the issue is to the users of our services.</p>
   </li>
-  <li>What the impact is
-    <ul>
-      <li>a description of what impact is to our users/services when this alert gets triggered.</li>
-    </ul>
-  </li>
-  <li>How to investigate and fix
-    <ul>
-      <li>Contains some steps or information that will help the person reading the playbook to debug or fix the problem. I would normally put in details like where is the log located, or which server to check out.</li>
-    </ul>
+  <li>
+    <p>How to investigate and fix?</p>
+
+    <p>This contains relevant information that will help the person reading the playbook to debug or fix the issue. I would put in details like where is the log located, or which server to check out. If I’m faced with an issue, I hate having to go on a hunt for the server information so having this info on hand saves me some time.</p>
   </li>
 </ul>
 
-<p>The process is simple. If you are going to add an alert to our system, you will have to create this page, and fill in all the details above. I would normally ask one of my squadmates to read through one that I just added to see whether it’s easy enough to understand. I also try to make it as concise as possible. </p>
+<p>The process is simple. If you are going to add an alert to the system, you will have to create this page, and put in the relevant details. Ideally, we would ask one of our squad-mates to read through the page we have just added to see whether it is understandable.</p>
 
-<p>Some benefits I noticed by adding this:</p>
+<p>Some benefits I noticed by adding this</p>
 
 <ul>
-  <li>I only add necessary alerts. One of the things that had bogged our squad was the number of alerts popping up on our notification. Putting too many alerts can result to alert fatigue. By filling in those details on the wiki, I become more critical of the alerts that I’m adding to our system. I ask myself whether it really is necessary to have that alert.</li>
-  <li>I get the confidence to know where to look and what to do when I’m on green flag and an alert gets triggered. It’s good to know that when something bad happens, I can immediately act on the issue. When an issue happens, you’d definitely want to be fixing it as soon as you can.</li>
-  <li>Knowledge is shared. This is the most important bit for me. If I’m on green flag, there is no excuse for me to relay the task to another teammate. It gives me a certain level of autonomy to solve the issue on my own.</li>
+  <li>
+    <p>I only add necessary alerts. One of the things that had bogged our squad before was the number of alerts popping up on our notification. Putting too many alerts can result to alert fatigue. By filling in those details on the wiki, I become more critical of the alerts that I’m adding to our system. I ask myself whether it really is necessary to have that alert.</p>
+  </li>
+  <li>
+    <p>I get the confidence to know that I have a place to check out when something bad happens and I am the one who’s supposed to fix it.</p>
+  </li>
+  <li>
+    <p>Knowledge is shared. I am able to impart some of the things that only I used to know with the rest of the squad by documenting it here. And if I am not around, I know that my squad-mates will be able to solve the issues I used to solve by myself.</p>
+  </li>
 </ul>
 
-<p>This is a simple addition to our process which helped us a lot. Do you have any lightweight process you’ve done on your squad? Let me know! I would love to hear them.</p>
+<p>So there you have it. A simple tweak we added in our process to help boost the effectiveness of our squad. Hope this helps!</p>
+
+    </div>
+
+  
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="/tags.html#playbook-ref">playbook <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#alerts-ref">alerts <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#alerts playbook-ref">alerts playbook <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#process-ref">process <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+  
+
+    <hr>
+      <ul class="pagination">
+      
+        <li class="prev"><a href="/2017/03/11/Route53-To-NameCheap-Domain" title="Linking Your EC2 Instance To Your Namecheap Domain Name">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jpibarra1130'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  mpq.track("Adding an Alerts Playbook")
+</script>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <footer class="footer">
+  <div class="container">
+    <div class="row">
+      <hr>
+      <p>&copy; 2014 Paolo Ibarra with help from <a href="http://github.com/dbtek/jekyll-bootstrap-3" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap-3</a> and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a>
+      </p>
+    </div>
+  </div>
+</footer>
+    </div>
+  </body>
+</html>
+
